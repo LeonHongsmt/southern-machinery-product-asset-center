@@ -210,6 +210,73 @@ input {
   align-items: start;
 }
 
+.asset-center-main {
+  display: grid;
+  gap: 18px;
+}
+
+.featured-landing-panel {
+  padding: 22px;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.featured-landing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.featured-landing-card {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.84);
+  display: grid;
+  gap: 12px;
+}
+
+.featured-landing-model,
+.featured-landing-meta {
+  margin: 0;
+  color: var(--muted);
+}
+
+.featured-landing-model {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.featured-landing-title {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.5rem;
+  color: var(--steel);
+}
+
+.featured-landing-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.featured-landing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.featured-landing-action {
+  width: fit-content;
+}
+
 .list-panel,
 .detail-panel {
   padding: 22px;
@@ -302,6 +369,11 @@ input {
   padding: 0;
   box-shadow: 0 12px 30px rgba(17, 34, 49, 0.08);
   transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:focus-visible {
+  outline: 2px solid rgba(217, 111, 33, 0.34);
+  outline-offset: 2px;
 }
 
 .product-card.active {
@@ -460,6 +532,28 @@ input {
   margin: 12px 0 0;
   font-size: 0.93rem;
   line-height: 1.55;
+}
+
+.product-card-actions {
+  margin-top: 14px;
+}
+
+.product-card-action-link {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(32, 56, 76, 0.18);
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--steel);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.product-card-action-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(217, 111, 33, 0.32);
+  background: rgba(255, 249, 243, 0.96);
 }
 
 .review-note {
@@ -939,7 +1033,7 @@ input {
 
 .landing-summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
 }
 
@@ -991,6 +1085,37 @@ input {
   margin-top: 18px;
 }
 
+.landing-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.landing-fact-card {
+  min-height: 110px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.landing-fact-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.landing-fact-card strong {
+  color: var(--steel);
+  line-height: 1.45;
+}
+
 .landing-list-grid {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
@@ -1011,7 +1136,7 @@ input {
 }
 
 .landing-assets-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .landing-resource-column {
@@ -1063,6 +1188,12 @@ input {
 
 .landing-asset-visual {
   margin-top: 18px;
+}
+
+.landing-internal-note {
+  margin: 18px 0 0;
+  color: var(--steel-soft);
+  line-height: 1.65;
 }
 
 .landing-cta-band {

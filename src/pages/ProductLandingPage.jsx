@@ -2,12 +2,11 @@ import React from "react";
 
 import { LandingHero } from "../components/LandingHero.jsx";
 import { LandingSection } from "../components/LandingSection.jsx";
-
-function normalizeModelValue(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
-}
+import {
+  formatModelFromSlug,
+  normalizeModel
+} from "../utils/modelNormalize.js";
+import { getProductLandingContent } from "../utils/productLandingContent.js";
 
 function uniqueStrings(values) {
   return Array.from(
@@ -29,32 +28,20 @@ function formatDisplayModel(slug, assets) {
     return assetModel;
   }
 
-  const cleaned = String(slug || "")
-    .trim()
-    .replace(/^\/+|\/+$/g, "");
-
-  if (!cleaned) {
-    return "Product";
-  }
-
-  return cleaned
-    .split("-")
-    .filter(Boolean)
-    .map((segment) => segment.toUpperCase())
-    .join("-");
+  return formatModelFromSlug(slug);
 }
 
-function buildLandingMailtoLink(model, type) {
+function buildLandingMailtoLink(title, type) {
   const subjectText =
     type === "quotation"
-      ? `Quotation Request for ${model} Radial Insertion Machine`
-      : `Inquiry about ${model} Radial Insertion Machine`;
+      ? `Quotation Request for ${title}`
+      : `Inquiry about ${title}`;
   const subject = encodeURIComponent(subjectText);
   const body = encodeURIComponent(
     [
       "Hello Southern Machinery team,",
       "",
-      `I would like to discuss the ${model} Radial Insertion Machine.`,
+      `I would like to discuss ${title}.`,
       "",
       "Please share the next step."
     ].join("\n")
@@ -136,55 +123,49 @@ export function ProductLandingPage({
   onBackToAssetCenter
 }) {
   const h = React.createElement;
-  const modelToken = normalizeModelValue(productSlug);
+  const modelToken = normalizeModel(productSlug);
+  const unknownModelToken = normalizeModel("unknown_model");
   const allMatchingAssets = Array.isArray(assets)
-    ? assets.filter((asset) => normalizeModelValue(asset.product_model) === modelToken)
+    ? assets.filter(
+        (asset) =>
+          modelToken !== unknownModelToken &&
+          normalizeModel(asset.product_model) === modelToken &&
+          normalizeModel(asset.product_model) !== unknownModelToken
+      )
     : [];
-  const customerVisibleAssets = allMatchingAssets.filter(
-    (asset) => asset.visibility !== "hidden"
+  const publicAssets = allMatchingAssets.filter(
+    (asset) => String(asset.visibility || "public").trim().toLowerCase() === "public"
   );
-  const displayAssets = customerVisibleAssets.length
-    ? customerVisibleAssets
-    : allMatchingAssets;
-  const displayModel = formatDisplayModel(productSlug, displayAssets);
-  const landingTitle =
-    modelToken === "s3000"
-      ? "S-3000 Radial Insertion Machine"
-      : `${displayModel} Product Landing Page`;
-  const landingSubtitle =
-    modelToken === "s3000"
-      ? "Automated THT radial component insertion solution for EMS and PCB assembly production."
-      : "Product information generated from available Southern Machinery public file assets.";
-  const overviewText =
-    modelToken === "s3000"
-      ? "The S-3000 is presented in the available product assets as a radial insertion solution for THT PCB assembly and EMS production environments. Specific speed, accuracy, dimension, and configuration details are to be confirmed from official document."
-      : `${displayModel} product information is available through the current asset dataset. Detailed commercial and technical specifications are to be confirmed from official document.`;
+  const excludedAssets = allMatchingAssets.filter(
+    (asset) => String(asset.visibility || "public").trim().toLowerCase() !== "public"
+  );
+  const displayAssets = publicAssets;
+  const displayModel = formatDisplayModel(productSlug, allMatchingAssets);
+  const primaryProductName =
+    displayAssets.find((asset) => asset?.product_name)?.product_name ||
+    allMatchingAssets.find((asset) => asset?.product_name)?.product_name ||
+    "To be confirmed";
+  const categories = uniqueStrings(displayAssets.map((asset) => asset.category));
   const previewImage = uniqueStrings(
     displayAssets.flatMap((asset) =>
       Array.isArray(asset.image_links) ? asset.image_links : []
     )
   )[0] || "";
   const pdfLinks = flattenLinks(displayAssets, "pdf_links");
+  const imageLinks = flattenLinks(displayAssets, "image_links");
   const documentLinks = flattenLinks(displayAssets, "manual_links");
   const sourceUrls = uniqueStrings(displayAssets.map((asset) => asset.source_url));
+  const landingContent = getProductLandingContent({
+    productSlug,
+    displayModel,
+    productName: primaryProductName
+  });
+  const displayProductName = landingContent.productName || primaryProductName;
   const assetSummary = [
-    { label: "Visible assets", value: displayAssets.length },
+    { label: "Public assets", value: displayAssets.length },
+    { label: "Image links", value: imageLinks.length },
     { label: "Document links", value: documentLinks.length },
     { label: "PDF links", value: pdfLinks.length }
-  ];
-  const benefitItems = [
-    "Supports automated radial component insertion",
-    "Helps improve THT assembly consistency",
-    "Suitable for EMS production workflows",
-    "Reduces repetitive manual insertion work",
-    "Can be reviewed with available product documents"
-  ];
-  const applicationItems = [
-    "EMS factories",
-    "THT PCB assembly",
-    "Smart electronics production",
-    "Automotive electronics control boards",
-    "Industrial electronics PCB assembly"
   ];
 
   if (loading) {
@@ -215,6 +196,37 @@ export function ProductLandingPage({
     );
   }
 
+  if (!allMatchingAssets.length) {
+    return h(
+      "main",
+      { className: "landing-page" },
+      h(
+        "div",
+        { className: "landing-topbar" },
+        h(
+          "button",
+          {
+            type: "button",
+            className: "landing-backlink",
+            onClick: onBackToAssetCenter
+          },
+          "Back to Asset Center"
+        )
+      ),
+      h(
+        "section",
+        { className: "landing-loading" },
+        h("p", { className: "landing-eyebrow" }, "Product Landing Page"),
+        h("h1", null, "Product assets to be confirmed"),
+        h(
+          "p",
+          null,
+          `No customer-visible product assets are currently mapped to ${formatModelFromSlug(productSlug)}. Please return to the asset center and review available files.`
+        )
+      )
+    );
+  }
+
   return h(
     "main",
     { className: "landing-page" },
@@ -233,27 +245,48 @@ export function ProductLandingPage({
     ),
     h(LandingHero, {
       model: displayModel,
-      title: landingTitle,
-      subtitle: landingSubtitle,
-      introduction:
-        "This landing page is generated from currently available public Southern Machinery file assets. Positioning and document access can be reviewed here while final commercial details remain to be confirmed from official document.",
+      title: landingContent.title,
+      subtitle: landingContent.subtitle,
+      introduction: landingContent.introduction,
       previewImage,
       assetSummary,
-      onRequestQuotation: (event) => openMailto(event, displayModel, "quotation"),
-      onSendInquiry: (event) => openMailto(event, displayModel, "inquiry"),
+      onRequestQuotation: (event) => openMailto(event, landingContent.title, "quotation"),
+      onSendInquiry: (event) => openMailto(event, landingContent.title, "inquiry"),
       onViewDocuments: scrollToAssets
     }),
     h(
       "div",
       { className: "landing-content" },
-      h(LandingSection, {
-        eyebrow: "Product Overview",
-        title:
-          modelToken === "s3000"
-            ? "Radial insertion support for THT assembly workflows"
-            : "Product overview from available public assets",
-        description: overviewText
-      }),
+      h(
+        LandingSection,
+        {
+          eyebrow: "Product Overview",
+          title: landingContent.overviewTitle,
+          description: landingContent.overviewText
+        },
+        h(
+          "div",
+          { className: "landing-facts-grid" },
+          h(
+            "div",
+            { className: "landing-fact-card" },
+            h("span", { className: "landing-fact-label" }, "Product Model"),
+            h("strong", null, displayModel)
+          ),
+          h(
+            "div",
+            { className: "landing-fact-card" },
+            h("span", { className: "landing-fact-label" }, "Product Name"),
+            h("strong", null, displayProductName || "To be confirmed from official document")
+          ),
+          h(
+            "div",
+            { className: "landing-fact-card" },
+            h("span", { className: "landing-fact-label" }, "Category"),
+            h("strong", null, categories.length ? categories.join(", ") : "To be confirmed from official document")
+          )
+        )
+      ),
       h(
         LandingSection,
         {
@@ -265,7 +298,7 @@ export function ProductLandingPage({
         h(
           "div",
           { className: "landing-list-grid" },
-          ...benefitItems.map((item) =>
+          ...landingContent.keyBenefits.map((item) =>
             h(
               "div",
               { className: "landing-list-card", key: item },
@@ -285,7 +318,7 @@ export function ProductLandingPage({
         h(
           "div",
           { className: "landing-list-grid" },
-          ...applicationItems.map((item) =>
+          ...landingContent.applications.map((item) =>
             h(
               "div",
               { className: "landing-list-card", key: item },
@@ -301,12 +334,13 @@ export function ProductLandingPage({
           eyebrow: "Available Assets",
           title: `Public file assets currently linked to ${displayModel}`,
           description:
-            "The current customer-facing view uses customer-visible product records from the asset dataset. Hidden records are excluded from this landing page."
+            "The current customer-facing view uses only public product records from the asset dataset. Internal review and hidden records are excluded from this landing page."
         },
         h(
           "div",
           { className: "landing-assets-grid" },
           renderResourceColumn("PDF Links", pdfLinks, "Download PDF", "pdf"),
+          renderResourceColumn("Image Links", imageLinks, "Open Image", "image"),
           renderResourceColumn(
             "Manual / Document Links",
             documentLinks,
@@ -326,7 +360,14 @@ export function ProductLandingPage({
                 h("span", { className: "landing-placeholder-kicker" }, "Product Visual"),
                 h("strong", null, "Image to be confirmed")
               )
-        )
+        ),
+        excludedAssets.length
+          ? h(
+              "p",
+              { className: "landing-internal-note" },
+              "Additional internal review assets may exist but are excluded from this customer-facing page."
+            )
+          : null
       ),
       h(
         LandingSection,
@@ -359,7 +400,7 @@ export function ProductLandingPage({
             {
               type: "button",
               className: "primary-action",
-              onClick: (event) => openMailto(event, displayModel, "quotation")
+              onClick: (event) => openMailto(event, landingContent.title, "quotation")
             },
             "Request Quotation"
           ),
@@ -368,7 +409,7 @@ export function ProductLandingPage({
             {
               type: "button",
               className: "secondary-action",
-              onClick: (event) => openMailto(event, displayModel, "inquiry")
+              onClick: (event) => openMailto(event, landingContent.title, "inquiry")
             },
             "Send Inquiry"
           )

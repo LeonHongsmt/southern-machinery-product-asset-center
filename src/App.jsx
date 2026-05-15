@@ -3,6 +3,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ProductList } from "./pages/ProductList.jsx";
 import { ProductDetail } from "./pages/ProductDetail.jsx";
 import { ProductLandingPage } from "./pages/ProductLandingPage.jsx";
+import {
+  buildProductHash,
+  buildProductSlug,
+  formatModelFromSlug
+} from "./utils/modelNormalize.js";
+import {
+  FEATURED_LANDING_PAGES,
+  getFeaturedLandingPageBySlug
+} from "./utils/productLandingContent.js";
 
 const ASSET_CENTER_HASH = "#/";
 const ASSET_CENTER_ALT_HASH = "#/asset-center";
@@ -21,12 +30,6 @@ function normalizeSearchText(value) {
     .replace(/[^a-z0-9]/g, "");
 }
 
-function normalizeModelToken(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
-}
-
 function buildSearchIndex(asset) {
   return [
     asset.product_model,
@@ -38,32 +41,6 @@ function buildSearchIndex(asset) {
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
-}
-
-function buildLandingHashFromModel(model) {
-  const slug = String(model || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-  return slug ? `${PRODUCT_ROUTE_PREFIX}${slug}` : ASSET_CENTER_HASH;
-}
-
-function formatDisplayModelFromSlug(slug) {
-  const cleaned = String(slug || "")
-    .trim()
-    .replace(/^\/+|\/+$/g, "");
-
-  if (!cleaned) {
-    return "Product";
-  }
-
-  return cleaned
-    .split("-")
-    .filter(Boolean)
-    .map((segment) => segment.toUpperCase())
-    .join("-");
 }
 
 function parseHashRoute() {
@@ -202,9 +179,10 @@ export function App() {
       return;
     }
 
+    const featuredLandingPage = getFeaturedLandingPageBySlug(route.productSlug);
     document.title =
       route.view === "product-landing"
-        ? `${formatDisplayModelFromSlug(route.productSlug)} | Southern Machinery`
+        ? `${featuredLandingPage?.title || formatModelFromSlug(route.productSlug)} | Southern Machinery`
         : "Southern Machinery Product Asset Center";
   }, [route]);
 
@@ -375,6 +353,20 @@ export function App() {
   ];
   const inquiryLink = buildMailtoLink(selectedAsset, "inquiry");
   const quotationLink = buildMailtoLink(selectedAsset, "quotation");
+  const featuredLandingPages = useMemo(() => {
+    return FEATURED_LANDING_PAGES.map((entry) => {
+      const token = buildProductSlug(entry.model);
+      const publicAssets = assets.filter((asset) => {
+        const visibility = getVisibilityStatus(asset);
+        return buildProductSlug(asset.product_model) === token && visibility === "public";
+      });
+
+      return {
+        ...entry,
+        publicAssetCount: publicAssets.length
+      };
+    });
+  }, [assets]);
   const footer = React.createElement(
     "footer",
     { className: "site-footer" },
@@ -501,7 +493,56 @@ export function App() {
     ),
     React.createElement(
       "main",
-      { className: "workspace" },
+      { className: "asset-center-main" },
+      React.createElement(
+        "section",
+        { className: "featured-landing-panel" },
+        React.createElement("p", { className: "section-label" }, "Featured Landing Pages"),
+        React.createElement("h2", { className: "section-title" }, "Customer-facing product page templates"),
+        React.createElement(
+          "p",
+          { className: "section-text" },
+          "Use these entry points to preview customer-visible landing pages generated from public Southern Machinery assets."
+        ),
+        React.createElement(
+          "div",
+          { className: "featured-landing-grid" },
+          ...featuredLandingPages.map((entry) =>
+            React.createElement(
+              "article",
+              {
+                className: "featured-landing-card",
+                key: entry.slug
+              },
+              React.createElement("p", { className: "featured-landing-model" }, entry.model),
+              React.createElement("h3", { className: "featured-landing-title" }, entry.title),
+              React.createElement(
+                "p",
+                { className: "featured-landing-text" },
+                entry.subtitle
+              ),
+              React.createElement(
+                "div",
+                { className: "featured-landing-meta" },
+                React.createElement("span", null, `${entry.publicAssetCount} public asset${entry.publicAssetCount === 1 ? "" : "s"}`),
+                React.createElement("span", null, entry.slug)
+              ),
+              React.createElement(
+                "button",
+                {
+                  type: "button",
+                  className: "secondary-action featured-landing-action",
+                  onClick: (event) => navigateToHash(event, buildProductHash(entry.model))
+                },
+                `View ${entry.model} Landing Page`
+              )
+            )
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "workspace" },
       React.createElement(ProductList, {
         assets: filteredAssets,
         totalAssets: assets.length,
@@ -519,7 +560,7 @@ export function App() {
         relatedImageByModel,
         onSelect: (asset) => setSelectedKey(assetKey(asset)),
         onOpenLandingPage: (asset) =>
-          navigateToHash(null, buildLandingHashFromModel(asset?.product_model)),
+          navigateToHash(null, buildProductHash(asset?.product_model)),
         selectedKey
       }),
       React.createElement(ProductDetail, {
@@ -528,6 +569,7 @@ export function App() {
         loading: status.loading,
         error: status.error
       }),
+      ),
       footer
     )
   );
