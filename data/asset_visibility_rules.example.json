@@ -1,0 +1,23 @@
+[
+  {
+    "rule_id": "VIS-001",
+    "match_type": "file_name_contains",
+    "match_value": "chatbot",
+    "visibility": "hidden",
+    "reason": "Internal tool page, not suitable for customer-facing display"
+  },
+  {
+    "rule_id": "VIS-002",
+    "match_type": "file_name_contains",
+    "match_value": "3D",
+    "visibility": "internal_review",
+    "reason": "3D proposal or demo document requires sales review before customer use"
+  },
+  {
+    "rule_id": "VIS-003",
+    "match_type": "file_type_equals",
+    "match_value": "audio",
+    "visibility": "hidden",
+    "reason": "Audio files should not be shown in the product asset center by default"
+  }
+]
