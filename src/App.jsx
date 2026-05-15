@@ -5,6 +5,8 @@ import { ProductDetail } from "./pages/ProductDetail.jsx";
 import { ProductLandingPage } from "./pages/ProductLandingPage.jsx";
 
 const ASSET_CENTER_HASH = "#/";
+const ASSET_CENTER_ALT_HASH = "#/asset-center";
+const PRODUCT_ROUTE_PREFIX = "#/products/";
 const S3000_LANDING_HASH = "#/products/s-3000";
 
 function assetKey(asset) {
@@ -16,6 +18,12 @@ function normalizeSearchText(value) {
     .toLowerCase()
     .trim()
     .replace(/\s+/g, " ")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function normalizeModelToken(value) {
+  return String(value || "")
+    .toLowerCase()
     .replace(/[^a-z0-9]/g, "");
 }
 
@@ -32,13 +40,71 @@ function buildSearchIndex(asset) {
     .toLowerCase();
 }
 
-function getCurrentViewFromHash() {
-  if (typeof window === "undefined") {
-    return "asset-center";
+function buildLandingHashFromModel(model) {
+  const slug = String(model || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return slug ? `${PRODUCT_ROUTE_PREFIX}${slug}` : ASSET_CENTER_HASH;
+}
+
+function formatDisplayModelFromSlug(slug) {
+  const cleaned = String(slug || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "");
+
+  if (!cleaned) {
+    return "Product";
   }
 
-  const hash = String(window.location.hash || "").trim().toLowerCase();
-  return hash.startsWith(S3000_LANDING_HASH) ? "s-3000-landing" : "asset-center";
+  return cleaned
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => segment.toUpperCase())
+    .join("-");
+}
+
+function parseHashRoute() {
+  if (typeof window === "undefined") {
+    return {
+      view: "asset-center",
+      productSlug: ""
+    };
+  }
+
+  const hash = decodeURIComponent(String(window.location.hash || "").trim());
+  const normalizedHash = hash.toLowerCase();
+
+  if (
+    !normalizedHash ||
+    normalizedHash === "#" ||
+    normalizedHash === ASSET_CENTER_HASH ||
+    normalizedHash === ASSET_CENTER_ALT_HASH
+  ) {
+    return {
+      view: "asset-center",
+      productSlug: ""
+    };
+  }
+
+  if (normalizedHash.startsWith(PRODUCT_ROUTE_PREFIX)) {
+    const slug = normalizedHash
+      .slice(PRODUCT_ROUTE_PREFIX.length)
+      .split(/[?#]/)[0]
+      .replace(/^\/+|\/+$/g, "");
+
+    return {
+      view: slug ? "product-landing" : "asset-center",
+      productSlug: slug
+    };
+  }
+
+  return {
+    view: "asset-center",
+    productSlug: ""
+  };
 }
 
 function countLinks(assets, key) {
@@ -112,22 +178,22 @@ export function App() {
   const [reviewFilter, setReviewFilter] = useState("all");
   const [visibilityFilter, setVisibilityFilter] = useState("customer-visible");
   const [categoryFilter, setCategoryFilter] = useState("all");
-  const [currentView, setCurrentView] = useState(getCurrentViewFromHash);
+  const [route, setRoute] = useState(parseHashRoute);
   const [status, setStatus] = useState({
     loading: true,
     error: ""
   });
 
   useEffect(() => {
-    function syncHashView() {
-      setCurrentView(getCurrentViewFromHash());
+    function syncHashRoute() {
+      setRoute(parseHashRoute());
     }
 
-    syncHashView();
-    window.addEventListener("hashchange", syncHashView);
+    syncHashRoute();
+    window.addEventListener("hashchange", syncHashRoute);
 
     return () => {
-      window.removeEventListener("hashchange", syncHashView);
+      window.removeEventListener("hashchange", syncHashRoute);
     };
   }, []);
 
@@ -137,10 +203,10 @@ export function App() {
     }
 
     document.title =
-      currentView === "s-3000-landing"
-        ? "S-3000 Radial Insertion Machine | Southern Machinery"
+      route.view === "product-landing"
+        ? `${formatDisplayModelFromSlug(route.productSlug)} | Southern Machinery`
         : "Southern Machinery Product Asset Center";
-  }, [currentView]);
+  }, [route]);
 
   useEffect(() => {
     let active = true;
@@ -349,12 +415,13 @@ export function App() {
     )
   );
 
-  if (currentView === "s-3000-landing") {
+  if (route.view === "product-landing") {
     return React.createElement(
       "div",
       { className: "app-shell" },
       React.createElement(ProductLandingPage, {
         assets,
+        productSlug: route.productSlug,
         loading: status.loading,
         error: status.error,
         onBackToAssetCenter: (event) => navigateToHash(event, ASSET_CENTER_HASH)
@@ -451,6 +518,8 @@ export function App() {
         categoryOptions,
         relatedImageByModel,
         onSelect: (asset) => setSelectedKey(assetKey(asset)),
+        onOpenLandingPage: (asset) =>
+          navigateToHash(null, buildLandingHashFromModel(asset?.product_model)),
         selectedKey
       }),
       React.createElement(ProductDetail, {

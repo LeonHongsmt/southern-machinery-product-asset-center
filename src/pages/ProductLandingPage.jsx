@@ -23,17 +23,38 @@ function flattenLinks(assets, key) {
   );
 }
 
-function buildLandingMailtoLink(type) {
+function formatDisplayModel(slug, assets) {
+  const assetModel = assets.find((asset) => asset?.product_model)?.product_model;
+  if (assetModel) {
+    return assetModel;
+  }
+
+  const cleaned = String(slug || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "");
+
+  if (!cleaned) {
+    return "Product";
+  }
+
+  return cleaned
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => segment.toUpperCase())
+    .join("-");
+}
+
+function buildLandingMailtoLink(model, type) {
   const subjectText =
     type === "quotation"
-      ? "Quotation Request for S-3000 Radial Insertion Machine"
-      : "Inquiry about S-3000 Radial Insertion Machine";
+      ? `Quotation Request for ${model} Radial Insertion Machine`
+      : `Inquiry about ${model} Radial Insertion Machine`;
   const subject = encodeURIComponent(subjectText);
   const body = encodeURIComponent(
     [
       "Hello Southern Machinery team,",
       "",
-      "I would like to discuss the S-3000 Radial Insertion Machine.",
+      `I would like to discuss the ${model} Radial Insertion Machine.`,
       "",
       "Please share the next step."
     ].join("\n")
@@ -42,12 +63,12 @@ function buildLandingMailtoLink(type) {
   return `mailto:info@smthelp.com?subject=${subject}&body=${body}`;
 }
 
-function openMailto(event, type) {
+function openMailto(event, model, type) {
   event.preventDefault();
   event.stopPropagation();
 
   if (typeof window !== "undefined") {
-    window.location.href = buildLandingMailtoLink(type);
+    window.location.href = buildLandingMailtoLink(model, type);
   }
 }
 
@@ -107,26 +128,47 @@ function renderResourceColumn(title, links, label, type) {
   );
 }
 
-export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter }) {
+export function ProductLandingPage({
+  assets,
+  productSlug,
+  loading,
+  error,
+  onBackToAssetCenter
+}) {
   const h = React.createElement;
-  const modelToken = "s3000";
+  const modelToken = normalizeModelValue(productSlug);
   const allMatchingAssets = Array.isArray(assets)
     ? assets.filter((asset) => normalizeModelValue(asset.product_model) === modelToken)
     : [];
-  const publicAssets = allMatchingAssets.filter((asset) => asset.visibility === "public");
-  const customerVisibleAssets = publicAssets.length
-    ? publicAssets
-    : allMatchingAssets.filter((asset) => asset.visibility !== "hidden");
+  const customerVisibleAssets = allMatchingAssets.filter(
+    (asset) => asset.visibility !== "hidden"
+  );
+  const displayAssets = customerVisibleAssets.length
+    ? customerVisibleAssets
+    : allMatchingAssets;
+  const displayModel = formatDisplayModel(productSlug, displayAssets);
+  const landingTitle =
+    modelToken === "s3000"
+      ? "S-3000 Radial Insertion Machine"
+      : `${displayModel} Product Landing Page`;
+  const landingSubtitle =
+    modelToken === "s3000"
+      ? "Automated THT radial component insertion solution for EMS and PCB assembly production."
+      : "Product information generated from available Southern Machinery public file assets.";
+  const overviewText =
+    modelToken === "s3000"
+      ? "The S-3000 is presented in the available product assets as a radial insertion solution for THT PCB assembly and EMS production environments. Specific speed, accuracy, dimension, and configuration details are to be confirmed from official document."
+      : `${displayModel} product information is available through the current asset dataset. Detailed commercial and technical specifications are to be confirmed from official document.`;
   const previewImage = uniqueStrings(
-    customerVisibleAssets.flatMap((asset) =>
+    displayAssets.flatMap((asset) =>
       Array.isArray(asset.image_links) ? asset.image_links : []
     )
   )[0] || "";
-  const pdfLinks = flattenLinks(customerVisibleAssets, "pdf_links");
-  const documentLinks = flattenLinks(customerVisibleAssets, "manual_links");
-  const sourceUrls = uniqueStrings(customerVisibleAssets.map((asset) => asset.source_url));
+  const pdfLinks = flattenLinks(displayAssets, "pdf_links");
+  const documentLinks = flattenLinks(displayAssets, "manual_links");
+  const sourceUrls = uniqueStrings(displayAssets.map((asset) => asset.source_url));
   const assetSummary = [
-    { label: "Visible assets", value: customerVisibleAssets.length },
+    { label: "Visible assets", value: displayAssets.length },
     { label: "Document links", value: documentLinks.length },
     { label: "PDF links", value: pdfLinks.length }
   ];
@@ -153,7 +195,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
         "section",
         { className: "landing-loading" },
         h("p", { className: "landing-eyebrow" }, "Loading"),
-        h("h1", null, "Preparing the S-3000 landing page"),
+        h("h1", null, `Preparing the ${displayModel} landing page`),
         h("p", null, "Please wait while product assets are loaded.")
       )
     );
@@ -167,7 +209,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
         "section",
         { className: "landing-loading" },
         h("p", { className: "landing-eyebrow" }, "Unavailable"),
-        h("h1", null, "Unable to load S-3000 assets"),
+        h("h1", null, `Unable to load ${displayModel} assets`),
         h("p", null, error)
       )
     );
@@ -190,16 +232,15 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
       )
     ),
     h(LandingHero, {
-      model: "S-3000",
-      title: "S-3000 Radial Insertion Machine",
-      subtitle:
-        "Automated THT radial component insertion solution for EMS and PCB assembly production.",
+      model: displayModel,
+      title: landingTitle,
+      subtitle: landingSubtitle,
       introduction:
-        "The S-3000 landing page is generated from currently available public Southern Machinery file assets. Positioning and document access can be reviewed here while final commercial details remain to be confirmed from official document.",
+        "This landing page is generated from currently available public Southern Machinery file assets. Positioning and document access can be reviewed here while final commercial details remain to be confirmed from official document.",
       previewImage,
       assetSummary,
-      onRequestQuotation: (event) => openMailto(event, "quotation"),
-      onSendInquiry: (event) => openMailto(event, "inquiry"),
+      onRequestQuotation: (event) => openMailto(event, displayModel, "quotation"),
+      onSendInquiry: (event) => openMailto(event, displayModel, "inquiry"),
       onViewDocuments: scrollToAssets
     }),
     h(
@@ -207,15 +248,17 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
       { className: "landing-content" },
       h(LandingSection, {
         eyebrow: "Product Overview",
-        title: "Radial insertion support for THT assembly workflows",
-        description:
-          "The S-3000 is presented in the available product assets as a radial insertion solution for THT PCB assembly and EMS production environments. Specific speed, accuracy, dimension, and configuration details are to be confirmed from official document."
+        title:
+          modelToken === "s3000"
+            ? "Radial insertion support for THT assembly workflows"
+            : "Product overview from available public assets",
+        description: overviewText
       }),
       h(
         LandingSection,
         {
           eyebrow: "Key Benefits",
-          title: "Practical reasons to review the S-3000",
+          title: "Practical reasons to review this product",
           description:
             "The current asset set supports a conservative, document-backed positioning without introducing unconfirmed technical claims."
         },
@@ -256,9 +299,9 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
         {
           id: "landing-assets",
           eyebrow: "Available Assets",
-          title: "Public file assets currently linked to S-3000",
+          title: `Public file assets currently linked to ${displayModel}`,
           description:
-            "The current customer-facing view uses customer-visible S-3000 records from the asset dataset. Hidden records are excluded from this landing page."
+            "The current customer-facing view uses customer-visible product records from the asset dataset. Hidden records are excluded from this landing page."
         },
         h(
           "div",
@@ -276,7 +319,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
           "div",
           { className: "landing-asset-visual" },
           previewImage
-            ? h("img", { src: previewImage, alt: "S-3000 asset preview" })
+            ? h("img", { src: previewImage, alt: `${displayModel} asset preview` })
             : h(
                 "div",
                 { className: "landing-image-placeholder compact" },
@@ -305,7 +348,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
           h(
             "p",
             null,
-            "Use the contact actions below to request quotation guidance or ask for the latest official document set for the S-3000."
+            `Use the contact actions below to request quotation guidance or ask for the latest official document set for ${displayModel}.`
           )
         ),
         h(
@@ -316,7 +359,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
             {
               type: "button",
               className: "primary-action",
-              onClick: (event) => openMailto(event, "quotation")
+              onClick: (event) => openMailto(event, displayModel, "quotation")
             },
             "Request Quotation"
           ),
@@ -325,7 +368,7 @@ export function ProductLandingPage({ assets, loading, error, onBackToAssetCenter
             {
               type: "button",
               className: "secondary-action",
-              onClick: (event) => openMailto(event, "inquiry")
+              onClick: (event) => openMailto(event, displayModel, "inquiry")
             },
             "Send Inquiry"
           )

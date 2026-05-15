@@ -22,6 +22,7 @@ export function ProductList({
   categoryOptions,
   relatedImageByModel,
   onSelect,
+  onOpenLandingPage,
   selectedKey
 }) {
   const h = React.createElement;
@@ -165,7 +166,8 @@ export function ProductList({
               asset,
               active: assetKey(asset) === selectedKey,
               relatedImageUrl: relatedImageByModel[asset.product_model] || "",
-              onSelect
+              onSelect,
+              onOpenLandingPage
             })
           )
         )

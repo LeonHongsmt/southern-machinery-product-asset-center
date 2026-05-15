@@ -6,6 +6,12 @@ function getPrimaryImage(asset) {
     : "";
 }
 
+function normalizeModelToken(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
 function getAssetPlaceholder(asset) {
   if (asset.file_type === "pdf") {
     return "PDF Document";
@@ -22,11 +28,19 @@ function getAssetPlaceholder(asset) {
   return "Image to be confirmed";
 }
 
-export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
+export function ProductCard({
+  asset,
+  active,
+  onSelect,
+  relatedImageUrl,
+  onOpenLandingPage
+}) {
   const h = React.createElement;
   const primaryImage = getPrimaryImage(asset);
   const needsManualReview = asset.product_model === "unknown_model";
   const visibility = String(asset.visibility || "public").trim().toLowerCase();
+  const normalizedModel = normalizeModelToken(asset.product_model);
+  const supportsLandingPage = normalizedModel === "s3000";
   const canUseRelatedImage =
     !primaryImage &&
     asset.file_type !== "image" &&
@@ -35,12 +49,34 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
   const previewImage = primaryImage || (canUseRelatedImage ? relatedImageUrl : "");
   const placeholderLabel = getAssetPlaceholder(asset);
 
+  function handleCardSelect() {
+    onSelect(asset);
+  }
+
+  function handleCardKeyDown(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleCardSelect();
+    }
+  }
+
+  function handleOpenLandingPage(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (typeof onOpenLandingPage === "function") {
+      onOpenLandingPage(asset);
+    }
+  }
+
   return h(
-    "button",
+    "div",
     {
-      type: "button",
       className: `product-card${active ? " active" : ""}`,
-      onClick: () => onSelect(asset)
+      role: "button",
+      tabIndex: 0,
+      onClick: handleCardSelect,
+      onKeyDown: handleCardKeyDown
     },
     h(
       "div",
@@ -162,7 +198,22 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
           : visibility === "internal_review"
             ? "Asset is available for internal review before customer-facing publication."
             : "Sample asset is available for detail review."
-      )
+      ),
+      supportsLandingPage
+        ? h(
+            "div",
+            { className: "product-card-actions" },
+            h(
+              "button",
+              {
+                type: "button",
+                className: "product-card-action-link",
+                onClick: handleOpenLandingPage
+              },
+              "View Landing Page"
+            )
+          )
+        : null
     )
   );
 }
