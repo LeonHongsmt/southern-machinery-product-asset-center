@@ -1,15 +1,11 @@
 import React from "react";
 
+import { getFeaturedLandingPageByModel } from "../utils/productLandingContent.js";
+
 function getPrimaryImage(asset) {
   return Array.isArray(asset.image_links) && asset.image_links.length
     ? asset.image_links[0]
     : "";
-}
-
-function normalizeModelToken(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
 }
 
 function getAssetPlaceholder(asset) {
@@ -39,8 +35,8 @@ export function ProductCard({
   const primaryImage = getPrimaryImage(asset);
   const needsManualReview = asset.product_model === "unknown_model";
   const visibility = String(asset.visibility || "public").trim().toLowerCase();
-  const normalizedModel = normalizeModelToken(asset.product_model);
-  const supportsLandingPage = normalizedModel === "s3000";
+  const featuredLandingPage = getFeaturedLandingPageByModel(asset.product_model);
+  const supportsLandingPage = Boolean(featuredLandingPage);
   const canUseRelatedImage =
     !primaryImage &&
     asset.file_type !== "image" &&
@@ -210,9 +206,9 @@ export function ProductCard({
                 className: "product-card-action-link",
                 onClick: handleOpenLandingPage
               },
-              "View Landing Page"
-            )
+            "View Landing Page"
           )
+        )
         : null
     )
   );
