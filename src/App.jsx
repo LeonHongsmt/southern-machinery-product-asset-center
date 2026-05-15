@@ -2,6 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import { ProductList } from "./pages/ProductList.jsx";
 import { ProductDetail } from "./pages/ProductDetail.jsx";
+import { ProductLandingPage } from "./pages/ProductLandingPage.jsx";
+
+const ASSET_CENTER_HASH = "#/";
+const S3000_LANDING_HASH = "#/products/s-3000";
 
 function assetKey(asset) {
   return `${asset.product_model}::${asset.category}::${asset.file_name}::${asset.source_url}`;
@@ -26,6 +30,15 @@ function buildSearchIndex(asset) {
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
+}
+
+function getCurrentViewFromHash() {
+  if (typeof window === "undefined") {
+    return "asset-center";
+  }
+
+  const hash = String(window.location.hash || "").trim().toLowerCase();
+  return hash.startsWith(S3000_LANDING_HASH) ? "s-3000-landing" : "asset-center";
 }
 
 function countLinks(assets, key) {
@@ -80,6 +93,17 @@ function openMailtoLink(event, mailtoLink) {
   }
 }
 
+function navigateToHash(event, targetHash) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  if (typeof window !== "undefined") {
+    window.location.hash = targetHash;
+  }
+}
+
 export function App() {
   const [assets, setAssets] = useState([]);
   const [search, setSearch] = useState("");
@@ -88,10 +112,35 @@ export function App() {
   const [reviewFilter, setReviewFilter] = useState("all");
   const [visibilityFilter, setVisibilityFilter] = useState("customer-visible");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [currentView, setCurrentView] = useState(getCurrentViewFromHash);
   const [status, setStatus] = useState({
     loading: true,
     error: ""
   });
+
+  useEffect(() => {
+    function syncHashView() {
+      setCurrentView(getCurrentViewFromHash());
+    }
+
+    syncHashView();
+    window.addEventListener("hashchange", syncHashView);
+
+    return () => {
+      window.removeEventListener("hashchange", syncHashView);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    document.title =
+      currentView === "s-3000-landing"
+        ? "S-3000 Radial Insertion Machine | Southern Machinery"
+        : "Southern Machinery Product Asset Center";
+  }, [currentView]);
 
   useEffect(() => {
     let active = true;
@@ -260,6 +309,59 @@ export function App() {
   ];
   const inquiryLink = buildMailtoLink(selectedAsset, "inquiry");
   const quotationLink = buildMailtoLink(selectedAsset, "quotation");
+  const footer = React.createElement(
+    "footer",
+    { className: "site-footer" },
+    React.createElement(
+      "div",
+      { className: "site-footer-brand" },
+      React.createElement("strong", null, "Southern Machinery"),
+      React.createElement(
+        "p",
+        null,
+        "Product asset records are generated from public file samples and require final sales review before customer use."
+      ),
+      React.createElement(
+        "p",
+        { className: "site-footer-note" },
+        "Visibility labels are for internal sales and marketing review. Final customer-facing use should be confirmed by the Southern Machinery team."
+      )
+    ),
+    React.createElement(
+      "div",
+      { className: "site-footer-links" },
+      React.createElement(
+        "a",
+        {
+          href: "https://www.smthelp.com",
+          target: "_blank",
+          rel: "noreferrer"
+        },
+        "Website: www.smthelp.com"
+      ),
+      React.createElement(
+        "a",
+        {
+          href: "mailto:info@smthelp.com"
+        },
+        "Email: info@smthelp.com"
+      )
+    )
+  );
+
+  if (currentView === "s-3000-landing") {
+    return React.createElement(
+      "div",
+      { className: "app-shell" },
+      React.createElement(ProductLandingPage, {
+        assets,
+        loading: status.loading,
+        error: status.error,
+        onBackToAssetCenter: (event) => navigateToHash(event, ASSET_CENTER_HASH)
+      }),
+      footer
+    );
+  }
 
   return React.createElement(
     "div",
@@ -305,6 +407,15 @@ export function App() {
               onClick: (event) => openMailtoLink(event, inquiryLink)
             },
             "Send Inquiry"
+          ),
+          React.createElement(
+            "button",
+            {
+              type: "button",
+              className: "secondary-action",
+              onClick: (event) => navigateToHash(event, S3000_LANDING_HASH)
+            },
+            "View S-3000 Landing Page"
           )
         )
       ),
@@ -348,45 +459,7 @@ export function App() {
         loading: status.loading,
         error: status.error
       }),
-      React.createElement(
-        "footer",
-        { className: "site-footer" },
-        React.createElement(
-          "div",
-          { className: "site-footer-brand" },
-          React.createElement("strong", null, "Southern Machinery"),
-          React.createElement(
-            "p",
-            null,
-            "Product asset records are generated from public file samples and require final sales review before customer use."
-          ),
-          React.createElement(
-            "p",
-            { className: "site-footer-note" },
-            "Visibility labels are for internal sales and marketing review. Final customer-facing use should be confirmed by the Southern Machinery team."
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "site-footer-links" },
-          React.createElement(
-            "a",
-            {
-              href: "https://www.smthelp.com",
-              target: "_blank",
-              rel: "noreferrer"
-            },
-            "Website: www.smthelp.com"
-          ),
-          React.createElement(
-            "a",
-            {
-              href: "mailto:info@smthelp.com"
-            },
-            "Email: info@smthelp.com"
-          )
-        )
-      )
+      footer
     )
   );
 }
