@@ -1,0 +1,232 @@
+[
+  {
+    "review_id": "MR-001",
+    "current_product_model": "unknown_model",
+    "current_product_name": "THT Knowledge Chatbots",
+    "current_category": "root",
+    "file_name": "tool_THT Knowledge Chatbots.html",
+    "file_type": "document",
+    "source_url": "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html",
+    "current_remarks": "Sample collected from public directory /; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=tool_THT Knowledge Chatbots.html | Needs manual confirmation",
+    "suggested_issue_type": [
+      "unknown_model",
+      "needs_manual_review",
+      "category_unclear",
+      "generic_html_asset"
+    ],
+    "suggested_action": "确认该 HTML 是否属于内部工具页而非客户展示资产；如果只是内部 chatbot 工具，建议保持 unknown_model，并后续加入隐藏内部资料规则。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "tool_THT Knowledge Chatbots.html",
+      "product_model": "unknown_model",
+      "product_name": "THT Knowledge Chatbots",
+      "category": "internal_tooling",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-002",
+    "current_product_model": "unknown_model",
+    "current_product_name": "0.8M Conveyor with Cooling Fan 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "0.8M conveyor w cooling fan 3D.PDF",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/0.8M%20conveyor%20w%20cooling%20fan%203D.PDF",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=0.8M conveyor w cooling fan 3D.PDF | Needs manual confirmation",
+    "suggested_issue_type": [
+      "unknown_model",
+      "needs_manual_review",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "查看源文件或业务上下文，确认这是否对应具体 conveyor 型号；如果没有稳定型号线索，保持 unknown_model，并仅规范产品名称。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "0.8M conveyor w cooling fan 3D.PDF",
+      "product_model": "unknown_model",
+      "product_name": "0.8M Conveyor with Cooling Fan 3D",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-003",
+    "current_product_model": "unknown_model",
+    "current_product_name": "2 Side Dual Table and Head Screw Drive 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "2 Side Dual Table & Head Screw Drive 3D .pdf",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/2%20Side%20Dual%20Table%20%26%20Head%20Screw%20Drive%203D%20.pdf",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=2 Side Dual Table & Head Screw Drive 3D .pdf | Needs manual confirmation",
+    "suggested_issue_type": [
+      "unknown_model",
+      "needs_manual_review",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认该 3D 文件是否对应具体设备型号或仅是结构方案；如果只是结构方案，建议保持 unknown_model，并考虑不进入客户展示页。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "2 Side Dual Table & Head Screw Drive 3D .pdf",
+      "product_model": "unknown_model",
+      "product_name": "2 Side Dual Table and Head Screw Drive 3D",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-004",
+    "current_product_model": "ALD700",
+    "current_product_name": "SMT AOI 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "SMT AOI ALD700 3D.PDF",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20AOI%20ALD700%203D.PDF",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认客户展示名称是否应去掉“3D”后缀，例如保留为 SMT AOI 或 ALD700 SMT AOI。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "SMT AOI ALD700 3D.PDF",
+      "product_model": "ALD700",
+      "product_name": "SMT AOI",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "high",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-005",
+    "current_product_model": "CN2617-03",
+    "current_product_name": "SMT JUKI Vacuum nozzle 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "SMT JUKI Vacuum nozzle CN2617-03 3D.PDF",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20JUKI%20Vacuum%20nozzle%20CN2617-03%203D.PDF",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认客户展示名称是否应规范为 SMT JUKI Vacuum Nozzle，并决定是否保留型号 CN2617-03 作为主型号。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "SMT JUKI Vacuum nozzle CN2617-03 3D.PDF",
+      "product_model": "CN2617-03",
+      "product_name": "SMT JUKI Vacuum Nozzle",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "high",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-006",
+    "current_product_model": "S350C",
+    "current_product_name": "SMThelp 1M Conveyor 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "S350C SMThelp 1M Conveyor 3D.PDF",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S350C%20SMThelp%201M%20Conveyor%203D.PDF",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认名称是否应规范为 1M Conveyor，并确认型号应保留为 S350C 还是 S-350C。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "S350C SMThelp 1M Conveyor 3D.PDF",
+      "product_model": "S350C",
+      "product_name": "1M Conveyor",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-007",
+    "current_product_model": "SH460D",
+    "current_product_name": "High end Conveyor 1M nolight 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "SH460D High end Conveyor 1M nolight 3D.pdf",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SH460D%20High%20end%20Conveyor%201M%20nolight%203D.pdf",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing. | Grouped 2 sample files under the same product_model + category",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认客户展示名称是否应整理为 High-End 1M Conveyor (No Light) 或类似标准名称。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "SH460D High end Conveyor 1M nolight 3D.pdf",
+      "product_model": "SH460D",
+      "product_name": "High-End 1M Conveyor (No Light)",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-008",
+    "current_product_model": "SM-UV106CM",
+    "current_product_name": "UV1.6M Curing Oven 3D",
+    "current_category": "smt_machine_3d_drawing",
+    "file_name": "SM-UV106CM  UV1.6M Curing Oven 3D.pdf",
+    "file_type": "pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SM-UV106CM%20%20UV1.6M%20Curing%20Oven%203D.pdf",
+    "current_remarks": "Sample collected from public directory /SMT machine 3D drawing. | Mapping applied: exact_file_name=SM-UV106CM  UV1.6M Curing Oven 3D.pdf | High-confidence cleanup from exact file name",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "3d_demo_asset"
+    ],
+    "suggested_action": "确认客户展示名称是否应去掉“3D”后缀，仅保留 UV1.6M Curing Oven。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "SM-UV106CM  UV1.6M Curing Oven 3D.pdf",
+      "product_model": "SM-UV106CM",
+      "product_name": "UV1.6M Curing Oven",
+      "category": "smt_machine_3d_drawing",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "high",
+    "human_decision": ""
+  },
+  {
+    "review_id": "MR-009",
+    "current_product_model": "S-350C",
+    "current_product_name": "S-350C",
+    "current_category": "smthelp_poster",
+    "file_name": "S-350C.png",
+    "file_type": "image",
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/S-350C.png",
+    "current_remarks": "Sample collected from public directory /SMThelp Poster.",
+    "suggested_issue_type": [
+      "product_name_not_normalized",
+      "poster_asset",
+      "customer_facing_suitability_review"
+    ],
+    "suggested_action": "确认这张 poster 是否适合进入客户展示页；如果适合，建议补充正式产品名；如果只是营销海报，可考虑后续加入隐藏内部资料规则。",
+    "suggested_mapping_rule": {
+      "match_type": "exact_file_name",
+      "match_value": "S-350C.png",
+      "product_model": "S-350C",
+      "product_name": "To be confirmed",
+      "category": "smthelp_poster",
+      "remarks": "Needs manual confirmation"
+    },
+    "confidence": "medium",
+    "human_decision": ""
+  }
+]
