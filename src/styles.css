@@ -603,6 +603,13 @@ input {
   background: rgba(255, 255, 255, 0.84);
 }
 
+.resource-link-button {
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
 .resource-link:hover {
   border-color: rgba(217, 111, 33, 0.34);
   background: rgba(255, 249, 243, 0.96);

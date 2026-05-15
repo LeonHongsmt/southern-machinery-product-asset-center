@@ -32,19 +32,20 @@ function getPrimaryImage(asset) {
     : "";
 }
 
-function buildInquiryLink(asset, intent) {
+function buildMailtoLink(asset, type) {
   const model = asset?.product_model || "unknown_model";
   const name = asset?.product_name || "To be confirmed";
-  const subject = encodeURIComponent(
-    `${intent}: ${model} - ${name}`
-  );
+  const subjectText =
+    type === "quotation"
+      ? `Quotation Request for ${model} - ${name}`
+      : `Inquiry about ${model} - ${name}`;
+  const subject = encodeURIComponent(subjectText);
   const body = encodeURIComponent(
     [
       "Hello Southern Machinery team,",
       "",
       `I would like to discuss this product asset: ${model} - ${name}.`,
       `Category: ${asset?.category || "To be confirmed"}`,
-      `Source URL: ${asset?.source_url || "To be confirmed"}`,
       "",
       "Please share the next step."
     ].join("\n")
@@ -52,7 +53,7 @@ function buildInquiryLink(asset, intent) {
   return `mailto:info@smthelp.com?subject=${subject}&body=${body}`;
 }
 
-function handleMailtoAction(event, mailtoLink) {
+function openMailtoLink(event, mailtoLink) {
   if (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -200,8 +201,8 @@ export function App() {
     ["Image Assets", stats.imageAssets],
     ["Manual / Document Assets", stats.manualAssets]
   ];
-  const inquiryLink = buildInquiryLink(selectedAsset, "Send Inquiry");
-  const quotationLink = buildInquiryLink(selectedAsset, "Request Quotation");
+  const inquiryLink = buildMailtoLink(selectedAsset, "inquiry");
+  const quotationLink = buildMailtoLink(selectedAsset, "quotation");
 
   return React.createElement(
     "div",
@@ -231,20 +232,20 @@ export function App() {
           "div",
           { className: "hero-actions" },
           React.createElement(
-            "a",
+            "button",
             {
+              type: "button",
               className: "primary-action",
-              href: quotationLink,
-              onClick: (event) => handleMailtoAction(event, quotationLink)
+              onClick: (event) => openMailtoLink(event, quotationLink)
             },
             "Request Quotation"
           ),
           React.createElement(
-            "a",
+            "button",
             {
+              type: "button",
               className: "secondary-action",
-              href: inquiryLink,
-              onClick: (event) => handleMailtoAction(event, inquiryLink)
+              onClick: (event) => openMailtoLink(event, inquiryLink)
             },
             "Send Inquiry"
           )
@@ -285,9 +286,6 @@ export function App() {
       React.createElement(ProductDetail, {
         asset: selectedAsset,
         relatedImageByModel,
-        inquiryLink,
-        quotationLink,
-        onMailtoAction: handleMailtoAction,
         loading: status.loading,
         error: status.error
       }),

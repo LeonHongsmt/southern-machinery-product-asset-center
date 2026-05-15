@@ -62,12 +62,39 @@ function getPreviewPlaceholder(asset) {
   return "Image to be confirmed";
 }
 
+function buildMailtoLink(asset, type) {
+  const model = asset?.product_model || "unknown_model";
+  const name = asset?.product_name || "To be confirmed";
+  const subjectText =
+    type === "quotation"
+      ? `Quotation Request for ${model} - ${name}`
+      : `Inquiry about ${model} - ${name}`;
+  const subject = encodeURIComponent(subjectText);
+  const body = encodeURIComponent(
+    [
+      "Hello Southern Machinery team,",
+      "",
+      `I would like to discuss this product asset: ${model} - ${name}.`,
+      `Category: ${asset?.category || "To be confirmed"}`,
+      "",
+      "Please share the next step."
+    ].join("\n")
+  );
+
+  return `mailto:info@smthelp.com?subject=${subject}&body=${body}`;
+}
+
+function openSourceUrl(asset) {
+  if (!asset?.source_url || typeof window === "undefined") {
+    return;
+  }
+
+  window.open(asset.source_url, "_blank", "noopener,noreferrer");
+}
+
 export function ProductDetail({
   asset,
   relatedImageByModel,
-  inquiryLink,
-  quotationLink,
-  onMailtoAction,
   loading,
   error
 }) {
@@ -121,6 +148,26 @@ export function ProductDetail({
       : "";
   const previewImage = primaryImage || relatedImage;
   const placeholderLabel = getPreviewPlaceholder(asset);
+  const inquiryLink = buildMailtoLink(asset, "inquiry");
+  const quotationLink = buildMailtoLink(asset, "quotation");
+
+  function handleSendInquiry(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.href = inquiryLink;
+  }
+
+  function handleRequestQuotation(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.href = quotationLink;
+  }
+
+  function handleOpenSourceUrl(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    openSourceUrl(asset);
+  }
 
   return h(
     "aside",
@@ -166,20 +213,20 @@ export function ProductDetail({
         "div",
         { className: "detail-actions" },
         h(
-          "a",
+          "button",
           {
+            type: "button",
             className: "primary-action",
-            href: inquiryLink,
-            onClick: (event) => onMailtoAction(event, inquiryLink)
+            onClick: handleSendInquiry
           },
           "Send Inquiry"
         ),
         h(
-          "a",
+          "button",
           {
+            type: "button",
             className: "secondary-action",
-            href: quotationLink,
-            onClick: (event) => onMailtoAction(event, quotationLink)
+            onClick: handleRequestQuotation
           },
           "Request Quotation"
         )
@@ -233,12 +280,11 @@ export function ProductDetail({
       { className: "detail-section" },
       h("div", { className: "detail-section-head" }, h("h3", null, "Source URL")),
       h(
-        "a",
+        "button",
         {
-          href: asset.source_url,
-          target: "_blank",
-          rel: "noreferrer",
-          className: "resource-link"
+          type: "button",
+          className: "resource-link resource-link-button",
+          onClick: handleOpenSourceUrl
         },
         h("span", { className: "resource-link-label" }, "Open Source URL"),
         h("span", { className: "resource-link-url" }, asset.source_url)
