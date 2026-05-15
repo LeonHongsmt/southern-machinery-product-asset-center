@@ -66,7 +66,11 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
         { className: "product-card-topline" },
         h("span", { className: "product-card-model" }, asset.product_model),
         needsManualReview
-          ? h("span", { className: "review-flag" }, "Needs Manual Review")
+          ? h(
+              "span",
+              { className: "review-flag" },
+              "Needs Manual Review"
+            )
           : null
       ),
       h(
@@ -85,6 +89,13 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
             "p",
             { className: "related-image-note" },
             "Related image from same product model"
+          )
+        : null,
+      needsManualReview
+        ? h(
+            "p",
+            { className: "review-note" },
+            "Internal review required before customer use"
           )
         : null,
       h(

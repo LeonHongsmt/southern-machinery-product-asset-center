@@ -32,6 +32,37 @@ function getPrimaryImage(asset) {
     : "";
 }
 
+function buildInquiryLink(asset, intent) {
+  const model = asset?.product_model || "unknown_model";
+  const name = asset?.product_name || "To be confirmed";
+  const subject = encodeURIComponent(
+    `${intent}: ${model} - ${name}`
+  );
+  const body = encodeURIComponent(
+    [
+      "Hello Southern Machinery team,",
+      "",
+      `I would like to discuss this product asset: ${model} - ${name}.`,
+      `Category: ${asset?.category || "To be confirmed"}`,
+      `Source URL: ${asset?.source_url || "To be confirmed"}`,
+      "",
+      "Please share the next step."
+    ].join("\n")
+  );
+  return `mailto:info@smthelp.com?subject=${subject}&body=${body}`;
+}
+
+function handleMailtoAction(event, mailtoLink) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  if (typeof window !== "undefined") {
+    window.location.href = mailtoLink;
+  }
+}
+
 export function App() {
   const [assets, setAssets] = useState([]);
   const [search, setSearch] = useState("");
@@ -169,6 +200,8 @@ export function App() {
     ["Image Assets", stats.imageAssets],
     ["Manual / Document Assets", stats.manualAssets]
   ];
+  const inquiryLink = buildInquiryLink(selectedAsset, "Send Inquiry");
+  const quotationLink = buildInquiryLink(selectedAsset, "Request Quotation");
 
   return React.createElement(
     "div",
@@ -201,9 +234,8 @@ export function App() {
             "a",
             {
               className: "primary-action",
-              href: selectedAsset ? selectedAsset.source_url : "#details",
-              target: "_blank",
-              rel: "noreferrer"
+              href: quotationLink,
+              onClick: (event) => handleMailtoAction(event, quotationLink)
             },
             "Request Quotation"
           ),
@@ -211,9 +243,8 @@ export function App() {
             "a",
             {
               className: "secondary-action",
-              href: selectedAsset ? selectedAsset.source_url : "#details",
-              target: "_blank",
-              rel: "noreferrer"
+              href: inquiryLink,
+              onClick: (event) => handleMailtoAction(event, inquiryLink)
             },
             "Send Inquiry"
           )
@@ -254,9 +285,46 @@ export function App() {
       React.createElement(ProductDetail, {
         asset: selectedAsset,
         relatedImageByModel,
+        inquiryLink,
+        quotationLink,
+        onMailtoAction: handleMailtoAction,
         loading: status.loading,
         error: status.error
-      })
+      }),
+      React.createElement(
+        "footer",
+        { className: "site-footer" },
+        React.createElement(
+          "div",
+          { className: "site-footer-brand" },
+          React.createElement("strong", null, "Southern Machinery"),
+          React.createElement(
+            "p",
+            null,
+            "Product asset records are generated from public file samples and require final sales review before customer use."
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "site-footer-links" },
+          React.createElement(
+            "a",
+            {
+              href: "https://www.smthelp.com",
+              target: "_blank",
+              rel: "noreferrer"
+            },
+            "Website: www.smthelp.com"
+          ),
+          React.createElement(
+            "a",
+            {
+              href: "mailto:info@smthelp.com"
+            },
+            "Email: info@smthelp.com"
+          )
+        )
+      )
     )
   );
 }

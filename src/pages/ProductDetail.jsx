@@ -62,7 +62,15 @@ function getPreviewPlaceholder(asset) {
   return "Image to be confirmed";
 }
 
-export function ProductDetail({ asset, relatedImageByModel, loading, error }) {
+export function ProductDetail({
+  asset,
+  relatedImageByModel,
+  inquiryLink,
+  quotationLink,
+  onMailtoAction,
+  loading,
+  error
+}) {
   const h = React.createElement;
 
   if (loading) {
@@ -142,6 +150,13 @@ export function ProductDetail({ asset, relatedImageByModel, loading, error }) {
             "Needs Manual Review: product model was not detected from filename or path."
           )
         : null,
+      needsReview
+        ? h(
+            "p",
+            { className: "review-note detail-review-note" },
+            "Internal review required before customer use"
+          )
+        : null,
       h(
         "p",
         { className: "detail-summary" },
@@ -154,9 +169,8 @@ export function ProductDetail({ asset, relatedImageByModel, loading, error }) {
           "a",
           {
             className: "primary-action",
-            href: asset.source_url,
-            target: "_blank",
-            rel: "noreferrer"
+            href: inquiryLink,
+            onClick: (event) => onMailtoAction(event, inquiryLink)
           },
           "Send Inquiry"
         ),
@@ -164,9 +178,8 @@ export function ProductDetail({ asset, relatedImageByModel, loading, error }) {
           "a",
           {
             className: "secondary-action",
-            href: asset.source_url,
-            target: "_blank",
-            rel: "noreferrer"
+            href: quotationLink,
+            onClick: (event) => onMailtoAction(event, quotationLink)
           },
           "Request Quotation"
         )
