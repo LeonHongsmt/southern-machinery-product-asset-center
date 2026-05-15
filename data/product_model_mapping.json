@@ -1,0 +1,42 @@
+[
+  {
+    "match_type": "exact_file_name",
+    "match_value": "tool_THT Knowledge Chatbots.html",
+    "product_model": "unknown_model",
+    "product_name": "THT Knowledge Chatbots",
+    "category": "root",
+    "remarks": "Needs manual confirmation"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "0.8M conveyor w cooling fan 3D.PDF",
+    "product_model": "unknown_model",
+    "product_name": "0.8M Conveyor with Cooling Fan 3D",
+    "category": "smt_machine_3d_drawing",
+    "remarks": "Needs manual confirmation"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "2 Side Dual Table & Head Screw Drive 3D .pdf",
+    "product_model": "unknown_model",
+    "product_name": "2 Side Dual Table and Head Screw Drive 3D",
+    "category": "smt_machine_3d_drawing",
+    "remarks": "Needs manual confirmation"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "SM-UV106CM  UV1.6M Curing Oven 3D.pdf",
+    "product_model": "SM-UV106CM",
+    "product_name": "UV1.6M Curing Oven 3D",
+    "category": "smt_machine_3d_drawing",
+    "remarks": "High-confidence cleanup from exact file name"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "SM-UV106CM_Automatic_UV_Curing.pdf.pdf",
+    "product_model": "SM-UV106CM",
+    "product_name": "Automatic UV Curing",
+    "category": "smthelp_machine_presentation",
+    "remarks": "High-confidence cleanup from exact file name"
+  }
+]

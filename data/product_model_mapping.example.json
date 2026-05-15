@@ -1,0 +1,18 @@
+[
+  {
+    "match_type": "filename_contains",
+    "match_value": "SME-350MB",
+    "product_model": "SME-350MB",
+    "product_name": "PCBA Inline Cleaning Machine",
+    "category": "southern_machinery_product",
+    "remarks": "Example mapping by model keyword"
+  },
+  {
+    "match_type": "filename_contains",
+    "match_value": "ADL100",
+    "product_model": "ADL100",
+    "product_name": "X Ray SMD Counter",
+    "category": "southern_machinery_product",
+    "remarks": "Example mapping by model keyword"
+  }
+]

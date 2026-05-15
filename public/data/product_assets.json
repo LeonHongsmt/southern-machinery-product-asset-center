@@ -385,8 +385,8 @@
     "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "UV106CM",
-    "product_name": "SM UV1.6M Curing Oven 3D",
+    "product_model": "SM-UV106CM",
+    "product_name": "UV1.6M Curing Oven 3D",
     "category": "smt_machine_3d_drawing",
     "file_name": "SM-UV106CM  UV1.6M Curing Oven 3D.pdf",
     "file_type": "pdf",
@@ -397,9 +397,9 @@
     "manual_links": [],
     "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SM-UV106CM%20%20UV1.6M%20Curing%20Oven%203D.pdf",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing. | Mapping applied: exact_file_name=SM-UV106CM  UV1.6M Curing Oven 3D.pdf | High-confidence cleanup from exact file name",
     "created_at": "2026-05-15T03:40:57.036Z",
-    "updated_at": "2026-05-15T03:40:57.036Z"
+    "updated_at": "2026-05-15T03:50:26.542Z"
   },
   {
     "product_model": "S-460FL",
@@ -617,8 +617,8 @@
     "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "UV106CM",
-    "product_name": "SM Automatic UV Curing.pdf",
+    "product_model": "SM-UV106CM",
+    "product_name": "Automatic UV Curing",
     "category": "smthelp_machine_presentation",
     "file_name": "SM-UV106CM_Automatic_UV_Curing.pdf.pdf",
     "file_type": "pdf",
@@ -629,9 +629,9 @@
     "manual_links": [],
     "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SM-UV106CM_Automatic_UV_Curing.pdf.pdf",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation. | Mapping applied: exact_file_name=SM-UV106CM_Automatic_UV_Curing.pdf.pdf | High-confidence cleanup from exact file name",
     "created_at": "2026-05-15T03:40:57.036Z",
-    "updated_at": "2026-05-15T03:40:57.036Z"
+    "updated_at": "2026-05-15T03:50:26.542Z"
   },
   {
     "product_model": "S-350C",
@@ -1187,7 +1187,7 @@
   },
   {
     "product_model": "unknown_model",
-    "product_name": "tool THT Knowledge Chatbots",
+    "product_name": "THT Knowledge Chatbots",
     "category": "root",
     "file_name": "tool_THT Knowledge Chatbots.html",
     "file_type": "document",
@@ -1198,13 +1198,13 @@
     ],
     "source_url": "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /; product model not confidently detected. | Needs manual review: product model not detected",
+    "remarks": "Sample collected from public directory /; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=tool_THT Knowledge Chatbots.html | Needs manual confirmation",
     "created_at": "2026-05-15T03:40:57.036Z",
-    "updated_at": "2026-05-15T03:40:57.036Z"
+    "updated_at": "2026-05-15T03:50:26.542Z"
   },
   {
     "product_model": "unknown_model",
-    "product_name": "0.8M conveyor w cooling fan 3D",
+    "product_name": "0.8M Conveyor with Cooling Fan 3D",
     "category": "smt_machine_3d_drawing",
     "file_name": "0.8M conveyor w cooling fan 3D.PDF",
     "file_type": "pdf",
@@ -1215,13 +1215,13 @@
     "manual_links": [],
     "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/0.8M%20conveyor%20w%20cooling%20fan%203D.PDF",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=0.8M conveyor w cooling fan 3D.PDF | Needs manual confirmation",
     "created_at": "2026-05-15T03:40:57.036Z",
-    "updated_at": "2026-05-15T03:40:57.036Z"
+    "updated_at": "2026-05-15T03:50:26.542Z"
   },
   {
     "product_model": "unknown_model",
-    "product_name": "2 Side Dual Table & Head Screw Drive 3D",
+    "product_name": "2 Side Dual Table and Head Screw Drive 3D",
     "category": "smt_machine_3d_drawing",
     "file_name": "2 Side Dual Table & Head Screw Drive 3D .pdf",
     "file_type": "pdf",
@@ -1232,8 +1232,8 @@
     "manual_links": [],
     "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/2%20Side%20Dual%20Table%20%26%20Head%20Screw%20Drive%203D%20.pdf",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected | Mapping applied: exact_file_name=2 Side Dual Table & Head Screw Drive 3D .pdf | Needs manual confirmation",
     "created_at": "2026-05-15T03:40:57.036Z",
-    "updated_at": "2026-05-15T03:40:57.036Z"
+    "updated_at": "2026-05-15T03:50:26.542Z"
   }
 ]
