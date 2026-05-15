@@ -1,0 +1,92 @@
+[
+  {
+    "product_model": "SME-350MB",
+    "product_name": "PCBA Inline Cleaning Machine",
+    "category": "cleaning_machine",
+    "file_name": "SME-350MB_PCBA_Inline_Cleaning_Machine_Southern_Machinery_Final_Client_Ready_ROI_Enhanced.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/SME-350MB_PCBA_Inline_Cleaning_Machine_Southern_Machinery_Final_Client_Ready_ROI_Enhanced.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/#/",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample PDF asset from public file site",
+    "created_at": "2026-05-14T00:00:00.000Z",
+    "updated_at": "2026-05-14T00:00:00.000Z"
+  },
+  {
+    "product_model": "S-350C",
+    "product_name": "SMThelp Poster Image Sample",
+    "category": "poster_image",
+    "file_name": "S-350C.png",
+    "file_type": "image",
+    "pdf_links": [],
+    "image_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S-350C.png"
+    ],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/#/",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample image asset from public file site",
+    "created_at": "2026-05-14T00:00:00.000Z",
+    "updated_at": "2026-05-14T00:00:00.000Z"
+  },
+  {
+    "product_model": "S-WS350B",
+    "product_name": "Lead-Free Dual Wave Soldering Machine",
+    "category": "wave_soldering_machine",
+    "file_name": "S-WS350B_operation_manual.pdf",
+    "file_type": "manual",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/#/"
+    ],
+    "source_url": "https://file.autoinsertion.com/#/",
+    "description": "To be confirmed from official document",
+    "remarks": "Manual link placeholder for schema demonstration; actual official document path to be confirmed",
+    "created_at": "2026-05-14T00:00:00.000Z",
+    "updated_at": "2026-05-14T00:00:00.000Z"
+  },
+  {
+    "product_model": "unknown_model",
+    "product_name": "Radial Tape Feeder Generic Asset",
+    "category": "generic_accessory",
+    "file_name": "Radial tape feeder.pdf",
+    "file_type": "document",
+    "pdf_links": [
+      "https://file.autoinsertion.com/#/"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/#/",
+    "description": "To be confirmed from official document",
+    "remarks": "Original file name does not expose a confirmed product model",
+    "created_at": "2026-05-14T00:00:00.000Z",
+    "updated_at": "2026-05-14T00:00:00.000Z"
+  },
+  {
+    "product_model": "S7020",
+    "product_name": "PIN Eyelet Terminal Insertion Machine",
+    "category": "terminal_insertion_machine",
+    "file_name": "S7020_product_asset_bundle",
+    "file_type": "other",
+    "pdf_links": [
+      "https://file.autoinsertion.com/#/",
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Southern%20Machinery%20Customized%20Feeder%20Nozzle%20Catalog%20V03.pdf"
+    ],
+    "image_links": [
+      "https://file.autoinsertion.com/#/"
+    ],
+    "manual_links": [
+      "https://file.autoinsertion.com/#/"
+    ],
+    "source_url": "https://file.autoinsertion.com/#/",
+    "description": "To be confirmed from official document",
+    "remarks": "Example record showing one product with multiple resource links",
+    "created_at": "2026-05-14T00:00:00.000Z",
+    "updated_at": "2026-05-14T00:00:00.000Z"
+  }
+]
