@@ -7,6 +7,7 @@ import {
   normalizeModel
 } from "../utils/modelNormalize.js";
 import { getProductLandingContent } from "../utils/productLandingContent.js";
+import { generateProductMarketingCopy } from "../utils/productMarketingCopy.js";
 
 function uniqueStrings(values) {
   return Array.from(
@@ -161,6 +162,19 @@ export function ProductLandingPage({
     productName: primaryProductName
   });
   const displayProductName = landingContent.productName || primaryProductName;
+  const marketingCopy = generateProductMarketingCopy(
+    {
+      productModel: displayModel,
+      productName: displayProductName,
+      category: categories.join(", "),
+      fileName:
+        displayAssets.find((asset) => asset?.file_name)?.file_name ||
+        allMatchingAssets.find((asset) => asset?.file_name)?.file_name ||
+        "",
+      title: landingContent.title
+    },
+    displayAssets
+  );
   const assetSummary = [
     { label: "Public assets", value: displayAssets.length },
     { label: "Image links", value: imageLinks.length },
@@ -246,7 +260,7 @@ export function ProductLandingPage({
     h(LandingHero, {
       model: displayModel,
       title: landingContent.title,
-      subtitle: landingContent.subtitle,
+      subtitle: marketingCopy.subtitle,
       introduction: landingContent.introduction,
       previewImage,
       assetSummary,
@@ -261,8 +275,8 @@ export function ProductLandingPage({
         LandingSection,
         {
           eyebrow: "Product Overview",
-          title: landingContent.overviewTitle,
-          description: landingContent.overviewText
+          title: "Product overview from available public assets",
+          description: marketingCopy.overview
         },
         h(
           "div",
@@ -298,7 +312,7 @@ export function ProductLandingPage({
         h(
           "div",
           { className: "landing-list-grid" },
-          ...landingContent.keyBenefits.map((item) =>
+          ...marketingCopy.keyBenefits.map((item) =>
             h(
               "div",
               { className: "landing-list-card", key: item },
@@ -318,7 +332,7 @@ export function ProductLandingPage({
         h(
           "div",
           { className: "landing-list-grid" },
-          ...landingContent.applications.map((item) =>
+          ...marketingCopy.applications.map((item) =>
             h(
               "div",
               { className: "landing-list-card", key: item },
@@ -366,8 +380,29 @@ export function ProductLandingPage({
               "p",
               { className: "landing-internal-note" },
               "Additional internal review assets may exist but are excluded from this customer-facing page."
-            )
+          )
           : null
+      ),
+      h(
+        LandingSection,
+        {
+          eyebrow: "FAQ",
+          title: "Frequently asked questions",
+          description:
+            "These answers are intentionally conservative and should be confirmed with Southern Machinery before customer-facing use."
+        },
+        h(
+          "div",
+          { className: "landing-faq-grid" },
+          ...marketingCopy.faq.map((item) =>
+            h(
+              "article",
+              { className: "landing-faq-card", key: item.question },
+              h("h3", { className: "landing-faq-question" }, item.question),
+              h("p", { className: "landing-faq-answer" }, item.answer)
+            )
+          )
+        )
       ),
       h(
         LandingSection,
@@ -389,7 +424,7 @@ export function ProductLandingPage({
           h(
             "p",
             null,
-            `Use the contact actions below to request quotation guidance or ask for the latest official document set for ${displayModel}.`
+            marketingCopy.ctaNote
           )
         ),
         h(
