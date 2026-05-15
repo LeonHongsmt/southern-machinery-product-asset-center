@@ -1,37 +1,39 @@
 ﻿# Product Assets Report
 
-生成时间：2026-05-15T03:40:57.036Z
+Generated at: 2026-05-15T06:04:44.683Z
 
-## 汇总
+## Summary
 
-- 输入样本数量：100
-- 输出产品资产数量：71
-- PDF 链接数量：47
-- 图片链接数量：12
-- Manual / Document 链接数量：41
-- unknown_model 数量：3
-- 校验失败记录数量：0
+- Input sample count: 100
+- Output product asset count: 71
+- PDF link count: 47
+- Image link count: 12
+- Manual / Document / Audio link count: 41
+- unknown_model count: 3
+- Validation failure count: 0
 
-## 输出资产 file_type 统计
+## Output file_type counts
 
-- pdf：40
-- image：7
-- manual：2
-- document：22
-- other：0
+- pdf: 40
+- image: 7
+- manual: 2
+- audio: 10
+- document: 12
+- other: 0
 
-## invalid_records
+## Invalid records
 
-- 无
+- None
 
-## 待人工复核项
+## Manual review items
 
 - root / tool_THT Knowledge Chatbots.html
 - smt_machine_3d_drawing / 0.8M conveyor w cooling fan 3D.PDF
 - smt_machine_3d_drawing / 2 Side Dual Table & Head Screw Drive 3D .pdf
 
-## 下一步建议
+## Next-step notes
 
-- 当前更适合先做产品型号人工修正表，而不是继续无差别扩样本。
-- 对 unknown_model、品牌资料、3D 演示资料和音频类资料，建议建立更明确的归类规则。
-- 当人工修正规则稳定后，再继续扩大公开样本，收益会更高。
+- Keep unknown_model records for manual review instead of forcing a guessed model.
+- Audio files are now classified as audio and can be governed by visibility rules without deleting them.
+- Use product_model_mapping.json for high-confidence model normalization and naming cleanup.
+

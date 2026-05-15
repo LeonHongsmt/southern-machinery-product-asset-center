@@ -38,5 +38,55 @@
     "product_name": "Automatic UV Curing",
     "category": "smthelp_machine_presentation",
     "remarks": "High-confidence cleanup from exact file name"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "SBI330 Aotumatic Flipping Machine.pdf",
+    "product_model": "SBI330",
+    "product_name": "Automatic Flipping Machine",
+    "category": "southern_machinery_manual",
+    "remarks": "Standardized product name"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "S-4000 Axial Insertion Machine works for Smart EMS THT PCB Assembly Factory -cl.html",
+    "product_model": "S-4000",
+    "product_name": "Axial Insertion Machine",
+    "category": "product_landing_page",
+    "remarks": "Standardized product name; Landing page suffix variants cl / g / g3 / g5 retained in source files"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "Southern BG03.pdf",
+    "product_model": "BG03",
+    "product_name": "Southern",
+    "category": "smt_machine_3d_drawing",
+    "remarks": "Product name too short; needs manual confirmation"
+  },
+  {
+    "match_type": "exact_file_name",
+    "match_value": "High-Precision Low-Stress PCB Depaneling Southern Machinery SQX350 PCB Rou.wav",
+    "product_model": "SQX350",
+    "product_name": "High Precision Low Stress PCB Depaneling Router",
+    "category": "smt_audio",
+    "remarks": "Standardized product name; Name cleaned from truncated filename; needs sales review"
+  },
+  {
+    "match_type": "filename_contains",
+    "match_value": "S3000",
+    "product_model": "S-3000",
+    "remarks": "Standardized model format"
+  },
+  {
+    "match_type": "filename_contains",
+    "match_value": "S4000",
+    "product_model": "S-4000",
+    "remarks": "Standardized model format"
+  },
+  {
+    "match_type": "filename_contains",
+    "match_value": "S350C",
+    "product_model": "S-350C",
+    "remarks": "Standardized model format"
   }
 ]

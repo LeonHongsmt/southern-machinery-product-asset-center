@@ -35,6 +35,11 @@ function normalizeText(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function getRulePriority(rule) {
+  const value = Number(rule?.priority);
+  return Number.isFinite(value) ? value : 0;
+}
+
 function isValidRule(rule) {
   return (
     rule &&
@@ -89,23 +94,38 @@ function pickFinalVisibility(matchedRules) {
   }
 
   const sorted = matchedRules.slice().sort((a, b) => {
-    const byPriority =
-      VISIBILITY_PRIORITY[b.visibility] - VISIBILITY_PRIORITY[a.visibility];
+    const byRulePriority = getRulePriority(b) - getRulePriority(a);
+    if (byRulePriority !== 0) {
+      return byRulePriority;
+    }
 
-    if (byPriority !== 0) {
-      return byPriority;
+    const byVisibility =
+      VISIBILITY_PRIORITY[b.visibility] - VISIBILITY_PRIORITY[a.visibility];
+    if (byVisibility !== 0) {
+      return byVisibility;
     }
 
     return String(a.rule_id).localeCompare(String(b.rule_id));
   });
 
-  const highest = VISIBILITY_PRIORITY[sorted[0].visibility];
-  const chosenRules = sorted.filter(
-    (rule) => VISIBILITY_PRIORITY[rule.visibility] === highest
+  const highestRulePriority = getRulePriority(sorted[0]);
+  const topRules = sorted.filter(
+    (rule) => getRulePriority(rule) === highestRulePriority
   );
+  const chosenVisibility = topRules.slice().sort((a, b) => {
+    const byVisibility =
+      VISIBILITY_PRIORITY[b.visibility] - VISIBILITY_PRIORITY[a.visibility];
+    if (byVisibility !== 0) {
+      return byVisibility;
+    }
+
+    return String(a.rule_id).localeCompare(String(b.rule_id));
+  })[0].visibility;
+
+  const chosenRules = topRules.filter((rule) => rule.visibility === chosenVisibility);
 
   return {
-    visibility: sorted[0].visibility,
+    visibility: chosenVisibility,
     chosenRules,
   };
 }
@@ -116,7 +136,7 @@ function createVisibilityReason(visibility, chosenRules) {
   }
 
   const details = chosenRules.map((rule) => {
-    return `${rule.rule_id} (${rule.reason})`;
+    return `${rule.rule_id} [priority=${getRulePriority(rule)}] (${rule.reason})`;
   });
 
   return `${visibility}: ${details.join("; ")}`;
@@ -133,56 +153,59 @@ function createReport(params) {
     internalReviewAssets,
   } = params;
 
-  const ruleLines = Object.entries(hitsByRule).map(([ruleId, files]) => {
-    const fileLines = files.length
-      ? files.map((fileName) => `  - ${fileName}`).join("\n")
-      : "  - 无";
-    return `- ${ruleId}\n${fileLines}`;
+  const ruleLines = Object.entries(hitsByRule).map(([ruleId, assets]) => {
+    if (!assets.length) {
+      return `- ${ruleId}\n  - None`;
+    }
+
+    return `- ${ruleId}\n${assets
+      .map((item) => `  - ${item.file_name} | ${item.visibility}`)
+      .join("\n")}`;
   });
 
   const hiddenLines = hiddenAssets.length
     ? hiddenAssets.map((asset) => {
         return `- ${asset.file_name} | ${asset.category} | ${asset.visibility_reason}`;
       })
-    : ["- 无"];
+    : ["- None"];
 
   const reviewLines = internalReviewAssets.length
     ? internalReviewAssets.map((asset) => {
         return `- ${asset.file_name} | ${asset.category} | ${asset.visibility_reason}`;
       })
-    : ["- 无"];
+    : ["- None"];
 
   return [
     "# Asset Visibility Report",
     "",
-    `执行时间：${generatedAt}`,
+    `Generated at: ${generatedAt}`,
     "",
-    "## 汇总",
+    "## Summary",
     "",
-    `- 规则数量：${ruleCount}`,
-    `- 总资产数量：${totalAssets}`,
-    `- public 数量：${counts.public}`,
-    `- internal_review 数量：${counts.internal_review}`,
-    `- hidden 数量：${counts.hidden}`,
-    `- 命中规则数量：${Object.values(hitsByRule).reduce((sum, files) => sum + files.length, 0)}`,
+    `- Rule count: ${ruleCount}`,
+    `- Total asset count: ${totalAssets}`,
+    `- public count: ${counts.public}`,
+    `- internal_review count: ${counts.internal_review}`,
+    `- hidden count: ${counts.hidden}`,
+    `- Matched rule hits: ${Object.values(hitsByRule).reduce((sum, assets) => sum + assets.length, 0)}`,
     "",
-    "## 每条规则命中的文件",
+    "## Rule hits",
     "",
     ...ruleLines,
     "",
-    "## Hidden 文件列表",
+    "## Hidden assets",
     "",
     ...hiddenLines,
     "",
-    "## Internal Review 文件列表",
+    "## Internal review assets",
     "",
     ...reviewLines,
     "",
-    "## 下一步建议",
+    "## Notes",
     "",
-    "- 建议下一步修改前端，让 visibility=hidden 的记录默认不显示。",
-    "- 对 visibility=internal_review 的记录，可以先保留在 JSON 中，但在前端增加内部复核标识或默认过滤。",
-    "- 规则稳定后，可以把 visibility 纳入后续的数据整理和人工复核工作流。",
+    "- Specific exact-file rules can override broad file_type or category rules through rule priority.",
+    "- Audio assets remain hidden by default unless a more specific review rule is intentionally applied.",
+    "- Keep hidden assets in the dataset; front-end filtering should decide whether to show them.",
     "",
   ].join("\n");
 }
@@ -213,11 +236,14 @@ async function main() {
 
   const nextAssets = assets.map((asset) => {
     const matchedRules = validRules.filter((rule) => matchesRule(asset, rule));
-    for (const rule of matchedRules) {
-      hitsByRule[rule.rule_id].push(asset.file_name);
-    }
-
     const { visibility, chosenRules } = pickFinalVisibility(matchedRules);
+
+    for (const rule of matchedRules) {
+      hitsByRule[rule.rule_id].push({
+        file_name: asset.file_name,
+        visibility: rule.visibility,
+      });
+    }
 
     return {
       ...asset,
@@ -262,7 +288,7 @@ async function main() {
     internalReviewAssets,
   });
 
-  await fs.writeFile(REPORT_OUTPUT_PATH, `\ufeff${report}`, "utf8");
+  await fs.writeFile(REPORT_OUTPUT_PATH, `\uFEFF${report}\n`, "utf8");
 
   console.log(`Rule count: ${validRules.length}`);
   console.log(`Total assets: ${nextAssets.length}`);

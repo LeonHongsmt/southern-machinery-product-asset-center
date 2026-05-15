@@ -4,13 +4,15 @@
     "match_type": "exact_file_name",
     "match_value": "tool_THT Knowledge Chatbots.html",
     "visibility": "hidden",
+    "priority": 100,
     "reason": "Internal chatbot or tooling page should not be shown in the customer-facing asset center"
   },
   {
     "rule_id": "VIS-002",
-    "match_type": "category_equals",
-    "match_value": "smt_audio",
+    "match_type": "file_type_equals",
+    "match_value": "audio",
     "visibility": "hidden",
+    "priority": 10,
     "reason": "Audio assets should be kept in data but hidden from the customer-facing asset center by default"
   },
   {
@@ -18,6 +20,7 @@
     "match_type": "category_equals",
     "match_value": "smt_machine_3d_drawing",
     "visibility": "internal_review",
+    "priority": 20,
     "reason": "3D drawing or proposal files require internal review before customer-facing publication"
   },
   {
@@ -25,6 +28,7 @@
     "match_type": "category_equals",
     "match_value": "smt_machine_3d_drawing_in_html",
     "visibility": "internal_review",
+    "priority": 20,
     "reason": "3D HTML demo pages require internal review before customer-facing publication"
   },
   {
@@ -32,6 +36,7 @@
     "match_type": "category_equals",
     "match_value": "smthelp_poster",
     "visibility": "internal_review",
+    "priority": 20,
     "reason": "Poster or marketing image assets should be reviewed before customer-facing display"
   },
   {
@@ -39,6 +44,7 @@
     "match_type": "file_name_contains",
     "match_value": "TEACH DOCUMENTS",
     "visibility": "internal_review",
+    "priority": 30,
     "reason": "Teach documents may be internal support material and should be reviewed before customer-facing display"
   },
   {
@@ -46,6 +52,23 @@
     "match_type": "file_name_contains",
     "match_value": "Performance_Validation_Report",
     "visibility": "internal_review",
+    "priority": 30,
     "reason": "Validation reports are supporting documents and should be reviewed before customer-facing display"
+  },
+  {
+    "rule_id": "VIS-008",
+    "match_type": "exact_file_name",
+    "match_value": "Southern BG03.pdf",
+    "visibility": "internal_review",
+    "priority": 100,
+    "reason": "BG03 record name is too short and should remain under internal review until confirmed"
+  },
+  {
+    "rule_id": "VIS-009",
+    "match_type": "exact_file_name",
+    "match_value": "High-Precision Low-Stress PCB Depaneling Southern Machinery SQX350 PCB Rou.wav",
+    "visibility": "internal_review",
+    "priority": 100,
+    "reason": "SQX350 record title appears truncated and requires manual confirmation before customer-facing use"
   }
 ]

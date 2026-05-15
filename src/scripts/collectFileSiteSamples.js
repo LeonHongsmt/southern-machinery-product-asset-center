@@ -29,8 +29,9 @@ const FILE_TYPE_PRIORITY = {
   pdf: 0,
   image: 1,
   manual: 2,
-  document: 3,
-  other: 4,
+  audio: 3,
+  document: 4,
+  other: 5,
 };
 
 function ensureFetch() {
@@ -50,6 +51,7 @@ function createTypeCounts() {
     pdf: 0,
     image: 0,
     manual: 0,
+    audio: 0,
     document: 0,
     other: 0,
   };
@@ -104,49 +106,32 @@ function detectFileType(fileName) {
     "avif",
     "bmp",
   ]);
-  const documentExts = new Set([
-    "doc",
-    "docx",
-    "xls",
-    "xlsx",
-    "ppt",
-    "pptx",
-    "txt",
-    "csv",
-    "html",
-    "htm",
-    "zip",
-    "rar",
-    "7z",
-    "wav",
-    "mp3",
-    "m4a",
-    "step",
-    "stp",
-  ]);
+  const audioExts = new Set(["wav", "mp3", "m4a", "aac", "flac", "ogg"]);
 
   if (imageExts.has(ext)) {
     return "image";
   }
 
-  if (
-    lowerName.includes("manual") ||
-    lowerName.includes("guide") ||
-    lowerName.includes("instruction") ||
-    lowerName.includes("operation") ||
-    lowerName.includes("user") ||
-    lowerName.includes("datasheet") ||
-    lowerName.includes("spec") ||
-    lowerName.includes("diagram")
-  ) {
-    return "manual";
+  if (audioExts.has(ext)) {
+    return "audio";
   }
 
   if (ext === "pdf") {
+    if (
+      lowerName.includes("manual") ||
+      lowerName.includes("product manual") ||
+      lowerName.includes("guide") ||
+      lowerName.includes("instruction") ||
+      lowerName.includes("operation") ||
+      lowerName.includes("user")
+    ) {
+      return "manual";
+    }
+
     return "pdf";
   }
 
-  if (documentExts.has(ext)) {
+  if (ext === "html" || ext === "htm") {
     return "document";
   }
 
@@ -240,7 +225,8 @@ function buildAssetRecord(item, requestedPath, generatedAt) {
   const productModel = extractProductModel(`${fileName} ${item.fpath || ""}`);
   const publicUrl = buildPublicUrl(item.fpath || `/${fileName}`);
   const normalizedTime = normalizeTimestamp(item.mtime, generatedAt);
-  const isManualLike = fileType === "manual" || fileType === "document";
+  const isManualLike =
+    fileType === "manual" || fileType === "document" || fileType === "audio";
 
   return {
     product_model: productModel,
@@ -399,6 +385,7 @@ function createReport(params) {
     `- PDF 数量：${typeCounts.pdf}`,
     `- Image 数量：${typeCounts.image}`,
     `- Manual 数量：${typeCounts.manual}`,
+    `- Audio 数量：${typeCounts.audio}`,
     `- Document 数量：${typeCounts.document}`,
     `- Other 数量：${typeCounts.other}`,
     "",
@@ -612,7 +599,11 @@ async function main() {
   console.log(`Collected file records: ${assets.length}`);
   console.log(`pdf count: ${typeCounts.pdf}`);
   console.log(`image count: ${typeCounts.image}`);
-  console.log(`document/manual count: ${typeCounts.document + typeCounts.manual}`);
+  console.log(
+    `document/manual/audio count: ${
+      typeCounts.document + typeCounts.manual + typeCounts.audio
+    }`
+  );
   console.log(`other count: ${typeCounts.other}`);
   console.log(`unknown_model count: ${unknownModelCount}`);
   console.log(`validation failure count: ${invalidRecords.length}`);

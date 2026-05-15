@@ -9,7 +9,10 @@ const OUTPUT_PUBLIC_JSON_PATH = path.resolve(
   __dirname,
   "../../public/data/product_assets.json"
 );
-const OUTPUT_REPORT_PATH = path.resolve(__dirname, "../../data/product_assets_report.md");
+const OUTPUT_REPORT_PATH = path.resolve(
+  __dirname,
+  "../../data/product_assets_report.md"
+);
 
 function uniqueStrings(values) {
   return Array.from(
@@ -17,6 +20,58 @@ function uniqueStrings(values) {
       values.filter((value) => typeof value === "string" && value.trim().length > 0)
     )
   );
+}
+
+function getExtension(fileName) {
+  const normalized = String(fileName || "").toLowerCase();
+  const index = normalized.lastIndexOf(".");
+  return index >= 0 ? normalized.slice(index + 1) : "";
+}
+
+function detectFileTypeFromName(fileName) {
+  const lowerName = String(fileName || "").toLowerCase();
+  const ext = getExtension(fileName);
+
+  const imageExts = new Set([
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "webp",
+    "svg",
+    "avif",
+    "bmp",
+  ]);
+  const audioExts = new Set(["wav", "mp3", "m4a", "aac", "flac", "ogg"]);
+
+  if (imageExts.has(ext)) {
+    return "image";
+  }
+
+  if (audioExts.has(ext)) {
+    return "audio";
+  }
+
+  if (ext === "pdf") {
+    if (
+      lowerName.includes("manual") ||
+      lowerName.includes("product manual") ||
+      lowerName.includes("guide") ||
+      lowerName.includes("instruction") ||
+      lowerName.includes("operation") ||
+      lowerName.includes("user")
+    ) {
+      return "manual";
+    }
+
+    return "pdf";
+  }
+
+  if (ext === "html" || ext === "htm") {
+    return "document";
+  }
+
+  return "other";
 }
 
 function buildGroupKey(sample) {
@@ -46,20 +101,13 @@ function selectProductName(samples) {
 }
 
 function selectPrimaryFileType(samples) {
-  if (samples.some((sample) => sample.file_type === "image")) {
-    return "image";
-  }
+  const detectedTypes = samples.map((sample) => detectFileTypeFromName(sample.file_name));
+  const priority = ["image", "pdf", "manual", "audio", "document", "other"];
 
-  if (samples.some((sample) => sample.file_type === "pdf")) {
-    return "pdf";
-  }
-
-  if (samples.some((sample) => sample.file_type === "manual")) {
-    return "manual";
-  }
-
-  if (samples.some((sample) => sample.file_type === "document")) {
-    return "document";
+  for (const fileType of priority) {
+    if (detectedTypes.includes(fileType)) {
+      return fileType;
+    }
   }
 
   return "other";
@@ -125,13 +173,15 @@ function createAggregatedAsset(samples, generatedAt) {
 function createAssetTypeCounts(assets) {
   return assets.reduce(
     (counts, asset) => {
-      counts[asset.file_type] = (counts[asset.file_type] || 0) + 1;
+      const fileType = asset.file_type || "other";
+      counts[fileType] = (counts[fileType] || 0) + 1;
       return counts;
     },
     {
       pdf: 0,
       image: 0,
       manual: 0,
+      audio: 0,
       document: 0,
       other: 0,
     }
@@ -156,48 +206,49 @@ function createReport(params) {
     ? invalidRecords.map((record) => {
         return `- ${record.product_model} / ${record.category}: ${record.errors.join("; ")}`;
       })
-    : ["- 无"];
+    : ["- None"];
 
   const reviewLines = manualReviewItems.length
     ? manualReviewItems.map((item) => `- ${item}`)
-    : ["- 无"];
+    : ["- None"];
 
   return [
     "# Product Assets Report",
     "",
-    `生成时间：${generatedAt}`,
+    `Generated at: ${generatedAt}`,
     "",
-    "## 汇总",
+    "## Summary",
     "",
-    `- 输入样本数量：${inputSamplesCount}`,
-    `- 输出产品资产数量：${outputAssetsCount}`,
-    `- PDF 链接数量：${totalPdfLinks}`,
-    `- 图片链接数量：${totalImageLinks}`,
-    `- Manual / Document 链接数量：${totalManualLinks}`,
-    `- unknown_model 数量：${unknownModelCount}`,
-    `- 校验失败记录数量：${invalidRecords.length}`,
+    `- Input sample count: ${inputSamplesCount}`,
+    `- Output product asset count: ${outputAssetsCount}`,
+    `- PDF link count: ${totalPdfLinks}`,
+    `- Image link count: ${totalImageLinks}`,
+    `- Manual / Document / Audio link count: ${totalManualLinks}`,
+    `- unknown_model count: ${unknownModelCount}`,
+    `- Validation failure count: ${invalidRecords.length}`,
     "",
-    "## 输出资产 file_type 统计",
+    "## Output file_type counts",
     "",
-    `- pdf：${assetTypeCounts.pdf}`,
-    `- image：${assetTypeCounts.image}`,
-    `- manual：${assetTypeCounts.manual}`,
-    `- document：${assetTypeCounts.document}`,
-    `- other：${assetTypeCounts.other}`,
+    `- pdf: ${assetTypeCounts.pdf}`,
+    `- image: ${assetTypeCounts.image}`,
+    `- manual: ${assetTypeCounts.manual}`,
+    `- audio: ${assetTypeCounts.audio}`,
+    `- document: ${assetTypeCounts.document}`,
+    `- other: ${assetTypeCounts.other}`,
     "",
-    "## invalid_records",
+    "## Invalid records",
     "",
     ...invalidLines,
     "",
-    "## 待人工复核项",
+    "## Manual review items",
     "",
     ...reviewLines,
     "",
-    "## 下一步建议",
+    "## Next-step notes",
     "",
-    "- 当前更适合先做产品型号人工修正表，而不是继续无差别扩样本。",
-    "- 对 unknown_model、品牌资料、3D 演示资料和音频类资料，建议建立更明确的归类规则。",
-    "- 当人工修正规则稳定后，再继续扩大公开样本，收益会更高。",
+    "- Keep unknown_model records for manual review instead of forcing a guessed model.",
+    "- Audio files are now classified as audio and can be governed by visibility rules without deleting them.",
+    "- Use product_model_mapping.json for high-confidence model normalization and naming cleanup.",
     "",
   ].join("\n");
 }
@@ -208,7 +259,7 @@ async function main() {
   const samples = JSON.parse(raw);
 
   if (!Array.isArray(samples)) {
-    throw new Error("data/file_site_samples.json 必须是数组。");
+    throw new Error("data/file_site_samples.json must be an array.");
   }
 
   const groups = new Map();
@@ -254,8 +305,14 @@ async function main() {
   });
 
   const totalPdfLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.pdf_links.length, 0);
-  const totalImageLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.image_links.length, 0);
-  const totalManualLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.manual_links.length, 0);
+  const totalImageLinks = aggregatedAssets.reduce(
+    (sum, asset) => sum + asset.image_links.length,
+    0
+  );
+  const totalManualLinks = aggregatedAssets.reduce(
+    (sum, asset) => sum + asset.manual_links.length,
+    0
+  );
   const unknownModelAssets = aggregatedAssets.filter(
     (asset) => asset.product_model === "unknown_model"
   );
@@ -265,8 +322,10 @@ async function main() {
   const assetTypeCounts = createAssetTypeCounts(aggregatedAssets);
   const outputJson = `${JSON.stringify(aggregatedAssets, null, 2)}\n`;
 
-  await fs.writeFile(OUTPUT_JSON_PATH, outputJson, "utf8");
-  await fs.writeFile(OUTPUT_PUBLIC_JSON_PATH, outputJson, "utf8");
+  await Promise.all([
+    fs.writeFile(OUTPUT_JSON_PATH, outputJson, "utf8"),
+    fs.writeFile(OUTPUT_PUBLIC_JSON_PATH, outputJson, "utf8"),
+  ]);
 
   const report = createReport({
     generatedAt,
@@ -281,13 +340,13 @@ async function main() {
     manualReviewItems,
   });
 
-  await fs.writeFile(OUTPUT_REPORT_PATH, `\ufeff${report}`, "utf8");
+  await fs.writeFile(OUTPUT_REPORT_PATH, `\uFEFF${report}\n`, "utf8");
 
   console.log(`Input sample count: ${samples.length}`);
   console.log(`Output product asset count: ${aggregatedAssets.length}`);
   console.log(`PDF link count: ${totalPdfLinks}`);
   console.log(`Image link count: ${totalImageLinks}`);
-  console.log(`Manual/document link count: ${totalManualLinks}`);
+  console.log(`Manual/document/audio link count: ${totalManualLinks}`);
   console.log(`unknown_model count: ${unknownModelAssets.length}`);
   console.log(`Invalid record count: ${invalidRecords.length}`);
   console.log(`Data output: ${OUTPUT_JSON_PATH}`);
