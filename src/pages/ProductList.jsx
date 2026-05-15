@@ -15,6 +15,8 @@ export function ProductList({
   onFileTypeFilterChange,
   reviewFilter,
   onReviewFilterChange,
+  visibilityFilter,
+  onVisibilityFilterChange,
   categoryFilter,
   onCategoryFilterChange,
   categoryOptions,
@@ -29,6 +31,13 @@ export function ProductList({
     ["needs-review", "Needs review"],
     ["confirmed-model", "Confirmed model"]
   ];
+  const visibilityOptions = [
+    ["customer-visible", "Customer-visible"],
+    ["public-only", "Public only"],
+    ["internal-review", "Internal review"],
+    ["hidden", "Hidden"],
+    ["all-records", "All records"]
+  ];
 
   return h(
     "section",
@@ -41,7 +50,7 @@ export function ProductList({
       h(
         "p",
         { className: "section-text" },
-        `Search across ${totalAssets} current records by model, product name, file name, or category.`
+        `Search across ${totalAssets} current records by model, product name, file name, or category. Visibility rules keep hidden assets out of the default customer-facing list.`
       )
     ),
     h(
@@ -98,6 +107,22 @@ export function ProductList({
       h(
         "div",
         { className: "filter-box" },
+        h("label", { className: "search-label", htmlFor: "visibility-filter" }, "Visibility"),
+        h(
+          "select",
+          {
+            id: "visibility-filter",
+            value: visibilityFilter,
+            onChange: (event) => onVisibilityFilterChange(event.target.value)
+          },
+          ...visibilityOptions.map(([value, label]) =>
+            h("option", { key: value, value }, label)
+          )
+        )
+      ),
+      h(
+        "div",
+        { className: "filter-box" },
         h("label", { className: "search-label", htmlFor: "category-filter" }, "Category"),
         h(
           "select",
@@ -117,7 +142,13 @@ export function ProductList({
       "div",
       { className: "results-line" },
       h("span", null, `${assets.length} result${assets.length === 1 ? "" : "s"}`),
-      h("span", null, "Click a card to inspect details")
+      h(
+        "span",
+        null,
+        visibilityFilter === "customer-visible"
+          ? "Hidden assets are excluded from the default customer-facing view"
+          : "Click a card to inspect details"
+      )
     ),
     assets.length
       ? h(

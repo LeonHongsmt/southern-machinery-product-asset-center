@@ -26,6 +26,13 @@ function countLinks(assets, key) {
   }, 0);
 }
 
+function getVisibilityStatus(asset) {
+  const visibility = String(asset?.visibility || "public").trim().toLowerCase();
+  return ["public", "internal_review", "hidden"].includes(visibility)
+    ? visibility
+    : "public";
+}
+
 function getPrimaryImage(asset) {
   return Array.isArray(asset.image_links) && asset.image_links.length
     ? asset.image_links[0]
@@ -70,6 +77,7 @@ export function App() {
   const [selectedKey, setSelectedKey] = useState("");
   const [fileTypeFilter, setFileTypeFilter] = useState("all");
   const [reviewFilter, setReviewFilter] = useState("all");
+  const [visibilityFilter, setVisibilityFilter] = useState("customer-visible");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [status, setStatus] = useState({
     loading: true,
@@ -127,6 +135,17 @@ export function App() {
           : reviewFilter === "needs-review"
             ? needsReview
             : !needsReview;
+      const visibility = getVisibilityStatus(asset);
+      const matchesVisibility =
+        visibilityFilter === "customer-visible"
+          ? visibility !== "hidden"
+          : visibilityFilter === "public-only"
+            ? visibility === "public"
+            : visibilityFilter === "internal-review"
+              ? visibility === "internal_review"
+              : visibilityFilter === "hidden"
+                ? visibility === "hidden"
+                : true;
       const matchesCategory =
         categoryFilter === "all" ? true : asset.category === categoryFilter;
 
@@ -134,10 +153,11 @@ export function App() {
         matchesSearch &&
         matchesFileType &&
         matchesReview &&
+        matchesVisibility &&
         matchesCategory
       );
     });
-  }, [assets, search, fileTypeFilter, reviewFilter, categoryFilter]);
+  }, [assets, search, fileTypeFilter, reviewFilter, visibilityFilter, categoryFilter]);
 
   const selectedAsset = useMemo(() => {
     return (
@@ -162,6 +182,20 @@ export function App() {
   const unknownCount = assets.filter(
     (asset) => asset.product_model === "unknown_model"
   ).length;
+  const visibilityCounts = useMemo(() => {
+    return assets.reduce(
+      (counts, asset) => {
+        const visibility = getVisibilityStatus(asset);
+        counts[visibility] += 1;
+        return counts;
+      },
+      {
+        public: 0,
+        internal_review: 0,
+        hidden: 0
+      }
+    );
+  }, [assets]);
   const categoryOptions = useMemo(() => {
     return Array.from(
       new Set(assets.map((asset) => asset.category).filter(Boolean))
@@ -174,7 +208,13 @@ export function App() {
       const model = String(asset.product_model || "").trim();
       const primaryImage = getPrimaryImage(asset);
 
-      if (!model || model === "unknown_model" || !primaryImage || map[model]) {
+      if (
+        !model ||
+        model === "unknown_model" ||
+        !primaryImage ||
+        map[model] ||
+        getVisibilityStatus(asset) === "hidden"
+      ) {
         continue;
       }
 
@@ -186,20 +226,20 @@ export function App() {
   const stats = useMemo(() => {
     return {
       assetsLoaded: assets.length,
-      needsManualReview: unknownCount,
+      publicAssets: visibilityCounts.public,
+      internalReviewAssets: visibilityCounts.internal_review,
+      hiddenAssets: visibilityCounts.hidden,
       visibleResults: filteredAssets.length,
-      pdfAssets: countLinks(assets, "pdf_links"),
-      imageAssets: countLinks(assets, "image_links"),
-      manualAssets: countLinks(assets, "manual_links")
+      needsManualReview: unknownCount
     };
-  }, [assets, filteredAssets.length, unknownCount]);
+  }, [assets.length, filteredAssets.length, unknownCount, visibilityCounts]);
   const statCards = [
     ["Assets Loaded", stats.assetsLoaded],
-    ["Needs Manual Review", stats.needsManualReview],
+    ["Public Assets", stats.publicAssets],
+    ["Internal Review", stats.internalReviewAssets],
+    ["Hidden Assets", stats.hiddenAssets],
     ["Visible Results", stats.visibleResults],
-    ["PDF Assets", stats.pdfAssets],
-    ["Image Assets", stats.imageAssets],
-    ["Manual / Document Assets", stats.manualAssets]
+    ["Needs Manual Review", stats.needsManualReview]
   ];
   const inquiryLink = buildMailtoLink(selectedAsset, "inquiry");
   const quotationLink = buildMailtoLink(selectedAsset, "quotation");
@@ -276,6 +316,8 @@ export function App() {
         onFileTypeFilterChange: setFileTypeFilter,
         reviewFilter,
         onReviewFilterChange: setReviewFilter,
+        visibilityFilter,
+        onVisibilityFilterChange: setVisibilityFilter,
         categoryFilter,
         onCategoryFilterChange: setCategoryFilter,
         categoryOptions,

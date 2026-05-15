@@ -140,6 +140,7 @@ export function ProductDetail({
 
   const primaryImage = getPrimaryImage(asset);
   const needsReview = asset.product_model === "unknown_model";
+  const visibility = String(asset.visibility || "public").trim().toLowerCase();
   const relatedImage =
     !primaryImage &&
     asset.file_type !== "image" &&
@@ -180,6 +181,12 @@ export function ProductDetail({
         "div",
         { className: "detail-badges" },
         h("span", { className: "detail-badge muted" }, asset.category || "uncategorized"),
+        visibility === "internal_review"
+          ? h("span", { className: "detail-badge visibility-badge-review" }, "Internal Review")
+          : null,
+        visibility === "hidden"
+          ? h("span", { className: "detail-badge visibility-badge-hidden" }, "Hidden from Customer View")
+          : null,
         needsReview
           ? h("span", { className: "detail-badge warning" }, "Needs Manual Review")
           : h("span", { className: "detail-badge" }, asset.file_type || "other")
@@ -195,6 +202,20 @@ export function ProductDetail({
             "div",
             { className: "review-banner" },
             "Needs Manual Review: product model was not detected from filename or path."
+          )
+        : null,
+      visibility === "internal_review"
+        ? h(
+            "div",
+            { className: "visibility-banner visibility-banner-review" },
+            "Internal Review: this asset should be reviewed before customer-facing publication."
+          )
+        : null,
+      visibility === "hidden"
+        ? h(
+            "div",
+            { className: "visibility-banner visibility-banner-hidden" },
+            "This asset is hidden by visibility rules and should not be published to customers without review."
           )
         : null,
       needsReview
@@ -266,10 +287,12 @@ export function ProductDetail({
         h("div", null, h("dt", null, "Product Model"), h("dd", null, asset.product_model || "To be confirmed")),
         h("div", null, h("dt", null, "Product Name"), h("dd", null, asset.product_name || "To be confirmed")),
         h("div", null, h("dt", null, "Category"), h("dd", null, asset.category || "To be confirmed")),
+        h("div", null, h("dt", null, "Visibility"), h("dd", null, visibility || "public")),
         h("div", null, h("dt", null, "File Type"), h("dd", null, asset.file_type || "other")),
         h("div", null, h("dt", null, "File Name"), h("dd", null, asset.file_name || "To be confirmed")),
         h("div", null, h("dt", null, "Description"), h("dd", null, asset.description || "To be confirmed from official document")),
-        h("div", null, h("dt", null, "Remarks"), h("dd", null, asset.remarks || "To be confirmed from official document"))
+        h("div", null, h("dt", null, "Remarks"), h("dd", null, asset.remarks || "To be confirmed from official document")),
+        h("div", null, h("dt", null, "Visibility Reason"), h("dd", null, asset.visibility_reason || "To be confirmed"))
       )
     ),
     linkList("PDF Links", asset.pdf_links, "Download PDF"),

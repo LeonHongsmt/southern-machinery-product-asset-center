@@ -15,6 +15,10 @@
   --steel-soft: #2d4a61;
   --warning-bg: #fff2d8;
   --warning-text: #9b5c10;
+  --review-bg: #eaf3ff;
+  --review-text: #2f5f97;
+  --hidden-bg: #fde8eb;
+  --hidden-text: #a63a4b;
   --shadow: 0 20px 50px rgba(17, 34, 49, 0.12);
   --radius: 18px;
 }
@@ -170,7 +174,7 @@ input {
 .hero-stats {
   padding: 18px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 14px;
   align-content: stretch;
 }
@@ -253,7 +257,7 @@ input {
 
 .filter-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 14px;
 }
@@ -383,6 +387,13 @@ input {
   margin-bottom: 10px;
 }
 
+.product-card-flags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .product-card-model,
 .detail-model {
   font-family: "Rajdhani", sans-serif;
@@ -450,6 +461,21 @@ input {
   line-height: 1.45;
 }
 
+.visibility-note {
+  margin: 10px 0 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.visibility-note-review {
+  color: var(--review-text);
+}
+
+.visibility-note-hidden {
+  color: var(--hidden-text);
+}
+
 .related-image-note {
   margin: 10px 0 0;
   color: var(--accent-deep);
@@ -458,7 +484,8 @@ input {
 }
 
 .review-flag,
-.detail-badge {
+.detail-badge,
+.visibility-flag {
   display: inline-flex;
   align-items: center;
   min-height: 30px;
@@ -472,6 +499,18 @@ input {
 .detail-badge.warning {
   background: var(--warning-bg);
   color: var(--warning-text);
+}
+
+.visibility-flag-review,
+.visibility-badge-review {
+  background: var(--review-bg);
+  color: var(--review-text);
+}
+
+.visibility-flag-hidden,
+.visibility-badge-hidden {
+  background: var(--hidden-bg);
+  color: var(--hidden-text);
 }
 
 .detail-badge {
@@ -517,6 +556,24 @@ input {
   color: var(--warning-text);
   font-weight: 700;
   line-height: 1.5;
+}
+
+.visibility-banner {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.visibility-banner-review {
+  background: var(--review-bg);
+  color: var(--review-text);
+}
+
+.visibility-banner-hidden {
+  background: var(--hidden-bg);
+  color: var(--hidden-text);
 }
 
 .detail-review-note {
@@ -690,6 +747,10 @@ input {
   .workspace,
   .site-footer {
     grid-template-columns: 1fr;
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .detail-panel {

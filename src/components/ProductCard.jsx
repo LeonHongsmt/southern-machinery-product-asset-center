@@ -26,6 +26,7 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
   const h = React.createElement;
   const primaryImage = getPrimaryImage(asset);
   const needsManualReview = asset.product_model === "unknown_model";
+  const visibility = String(asset.visibility || "public").trim().toLowerCase();
   const canUseRelatedImage =
     !primaryImage &&
     asset.file_type !== "image" &&
@@ -65,13 +66,31 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
         "div",
         { className: "product-card-topline" },
         h("span", { className: "product-card-model" }, asset.product_model),
-        needsManualReview
-          ? h(
-              "span",
-              { className: "review-flag" },
-              "Needs Manual Review"
-            )
-          : null
+        h(
+          "div",
+          { className: "product-card-flags" },
+          visibility === "internal_review"
+            ? h(
+                "span",
+                { className: "visibility-flag visibility-flag-review" },
+                "Internal Review"
+              )
+            : null,
+          visibility === "hidden"
+            ? h(
+                "span",
+                { className: "visibility-flag visibility-flag-hidden" },
+                "Hidden from Customer View"
+              )
+            : null,
+          needsManualReview
+            ? h(
+                "span",
+                { className: "review-flag" },
+                "Needs Manual Review"
+              )
+            : null
+        )
       ),
       h(
         "h3",
@@ -89,6 +108,20 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
             "p",
             { className: "related-image-note" },
             "Related image from same product model"
+          )
+        : null,
+      visibility === "internal_review"
+        ? h(
+            "p",
+            { className: "visibility-note visibility-note-review" },
+            "This asset requires internal review before customer-facing publication."
+          )
+        : null,
+      visibility === "hidden"
+        ? h(
+            "p",
+            { className: "visibility-note visibility-note-hidden" },
+            "This asset is hidden by visibility rules and should not be published to customers without review."
           )
         : null,
       needsManualReview
@@ -115,9 +148,13 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
       h(
         "p",
         { className: "product-card-file" },
-        needsManualReview
+        visibility === "hidden"
+          ? "Hidden asset shown only because the current visibility filter includes hidden records."
+          : needsManualReview
           ? "Record requires manual confirmation before customer-facing publication."
-          : "Sample asset is available for detail review."
+          : visibility === "internal_review"
+            ? "Asset is available for internal review before customer-facing publication."
+            : "Sample asset is available for detail review."
       )
     )
   );
