@@ -18,6 +18,7 @@ export const FEATURED_LANDING_PAGES = [
   {
     slug: "s-3000",
     model: "S-3000",
+    categoryLabel: "THT Radial Insertion",
     title: "S-3000 Radial Insertion Machine",
     subtitle:
       "Automated THT radial component insertion solution for EMS and PCB assembly production."
@@ -25,6 +26,7 @@ export const FEATURED_LANDING_PAGES = [
   {
     slug: "s-4000",
     model: "S-4000",
+    categoryLabel: "THT Axial Insertion",
     title: "S-4000 Axial Insertion Machine",
     subtitle:
       "Automated axial component insertion support for THT PCB assembly workflows."
@@ -32,6 +34,7 @@ export const FEATURED_LANDING_PAGES = [
   {
     slug: "s7900",
     model: "S7900",
+    categoryLabel: "Odd Form Insertion",
     title: "S7900 Odd Form Insertion Solution",
     subtitle:
       "Flexible odd form insertion solution for complex THT assembly requirements."
@@ -39,6 +42,7 @@ export const FEATURED_LANDING_PAGES = [
   {
     slug: "s-680a",
     model: "S-680A",
+    categoryLabel: "SMT Production Support",
     title: "S-680A SMT Reel Scrap Tape Cutter",
     subtitle:
       "SMT reel scrap tape cutting solution for cleaner material handling and production support."

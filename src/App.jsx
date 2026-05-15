@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ProductList } from "./pages/ProductList.jsx";
 import { ProductDetail } from "./pages/ProductDetail.jsx";
 import { ProductLandingPage } from "./pages/ProductLandingPage.jsx";
+import { ProductLandingIndex } from "./pages/ProductLandingIndex.jsx";
 import {
   buildProductHash,
   buildProductSlug,
@@ -15,6 +16,7 @@ import {
 
 const ASSET_CENTER_HASH = "#/";
 const ASSET_CENTER_ALT_HASH = "#/asset-center";
+const PRODUCT_INDEX_HASH = "#/products";
 const PRODUCT_ROUTE_PREFIX = "#/products/";
 const S3000_LANDING_HASH = "#/products/s-3000";
 
@@ -66,6 +68,16 @@ function parseHashRoute() {
     };
   }
 
+  if (
+    normalizedHash === PRODUCT_INDEX_HASH ||
+    normalizedHash === `${PRODUCT_INDEX_HASH}/`
+  ) {
+    return {
+      view: "product-index",
+      productSlug: ""
+    };
+  }
+
   if (normalizedHash.startsWith(PRODUCT_ROUTE_PREFIX)) {
     const slug = normalizedHash
       .slice(PRODUCT_ROUTE_PREFIX.length)
@@ -73,7 +85,7 @@ function parseHashRoute() {
       .replace(/^\/+|\/+$/g, "");
 
     return {
-      view: slug ? "product-landing" : "asset-center",
+      view: slug ? "product-landing" : "product-index",
       productSlug: slug
     };
   }
@@ -82,13 +94,6 @@ function parseHashRoute() {
     view: "asset-center",
     productSlug: ""
   };
-}
-
-function countLinks(assets, key) {
-  return assets.reduce((sum, asset) => {
-    const links = Array.isArray(asset[key]) ? asset[key] : [];
-    return sum + links.length;
-  }, 0);
 }
 
 function getVisibilityStatus(asset) {
@@ -122,6 +127,7 @@ function buildMailtoLink(asset, type) {
       "Please share the next step."
     ].join("\n")
   );
+
   return `mailto:info@smthelp.com?subject=${subject}&body=${body}`;
 }
 
@@ -156,6 +162,7 @@ export function App() {
   const [visibilityFilter, setVisibilityFilter] = useState("customer-visible");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [route, setRoute] = useState(parseHashRoute);
+  const [assetReloadToken, setAssetReloadToken] = useState(0);
   const [status, setStatus] = useState({
     loading: true,
     error: ""
@@ -183,7 +190,9 @@ export function App() {
     document.title =
       route.view === "product-landing"
         ? `${featuredLandingPage?.title || formatModelFromSlug(route.productSlug)} | Southern Machinery`
-        : "Southern Machinery Product Asset Center";
+        : route.view === "product-index"
+          ? "Southern Machinery Product Landing Pages"
+          : "Southern Machinery Product Asset Center";
   }, [route]);
 
   useEffect(() => {
@@ -196,10 +205,12 @@ export function App() {
         if (!response.ok) {
           throw new Error(`Failed to load data: HTTP ${response.status}`);
         }
+
         const payload = await response.json();
         if (!active) {
           return;
         }
+
         const nextAssets = Array.isArray(payload) ? payload : [];
         setAssets(nextAssets);
         setSelectedKey(nextAssets[0] ? assetKey(nextAssets[0]) : "");
@@ -208,6 +219,7 @@ export function App() {
         if (!active) {
           return;
         }
+
         setStatus({
           loading: false,
           error: error.message || "Failed to load product assets."
@@ -220,7 +232,7 @@ export function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [assetReloadToken]);
 
   const filteredAssets = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -233,9 +245,8 @@ export function App() {
       const matchesNormalizedQuery = normalizedQuery
         ? normalizedIndex.includes(normalizedQuery)
         : true;
-      const matchesSearch = query || normalizedQuery
-        ? matchesRawQuery || matchesNormalizedQuery
-        : true;
+      const matchesSearch =
+        query || normalizedQuery ? matchesRawQuery || matchesNormalizedQuery : true;
       const matchesFileType =
         fileTypeFilter === "all" ? true : asset.file_type === fileTypeFilter;
       const needsReview = asset.product_model === "unknown_model";
@@ -281,6 +292,7 @@ export function App() {
     if (!filteredAssets.length) {
       return;
     }
+
     const currentExists = filteredAssets.some(
       (asset) => assetKey(asset) === selectedKey
     );
@@ -367,6 +379,11 @@ export function App() {
       };
     });
   }, [assets]);
+
+  function reloadAssets() {
+    setAssetReloadToken((value) => value + 1);
+  }
+
   const footer = React.createElement(
     "footer",
     { className: "site-footer" },
@@ -417,6 +434,22 @@ export function App() {
         loading: status.loading,
         error: status.error,
         onBackToAssetCenter: (event) => navigateToHash(event, ASSET_CENTER_HASH)
+      }),
+      footer
+    );
+  }
+
+  if (route.view === "product-index") {
+    return React.createElement(
+      "div",
+      { className: "app-shell" },
+      React.createElement(ProductLandingIndex, {
+        assets,
+        loading: status.loading,
+        error: status.error,
+        onBackToAssetCenter: (event) => navigateToHash(event, ASSET_CENTER_HASH),
+        onReloadAssets: reloadAssets,
+        onOpenLandingPage: (model) => navigateToHash(null, buildProductHash(model))
       }),
       footer
     );
@@ -475,6 +508,15 @@ export function App() {
               onClick: (event) => navigateToHash(event, S3000_LANDING_HASH)
             },
             "View S-3000 Landing Page"
+          ),
+          React.createElement(
+            "button",
+            {
+              type: "button",
+              className: "secondary-action",
+              onClick: (event) => navigateToHash(event, PRODUCT_INDEX_HASH)
+            },
+            "View All Product Landing Pages"
           )
         )
       ),
@@ -498,11 +540,33 @@ export function App() {
         "section",
         { className: "featured-landing-panel" },
         React.createElement("p", { className: "section-label" }, "Featured Landing Pages"),
-        React.createElement("h2", { className: "section-title" }, "Customer-facing product page templates"),
+        React.createElement(
+          "h2",
+          { className: "section-title" },
+          "Customer-facing product page templates"
+        ),
         React.createElement(
           "p",
           { className: "section-text" },
           "Use these entry points to preview customer-visible landing pages generated from public Southern Machinery assets."
+        ),
+        React.createElement(
+          "div",
+          { className: "featured-landing-header" },
+          React.createElement(
+            "p",
+            { className: "featured-landing-helper" },
+            "Browse the highlighted customer-facing landing pages or open the full landing page index."
+          ),
+          React.createElement(
+            "button",
+            {
+              type: "button",
+              className: "secondary-action featured-landing-index-action",
+              onClick: (event) => navigateToHash(event, PRODUCT_INDEX_HASH)
+            },
+            "View All Product Landing Pages"
+          )
         ),
         React.createElement(
           "div",
@@ -524,7 +588,13 @@ export function App() {
               React.createElement(
                 "div",
                 { className: "featured-landing-meta" },
-                React.createElement("span", null, `${entry.publicAssetCount} public asset${entry.publicAssetCount === 1 ? "" : "s"}`),
+                React.createElement(
+                  "span",
+                  null,
+                  `${entry.publicAssetCount} public asset${
+                    entry.publicAssetCount === 1 ? "" : "s"
+                  }`
+                ),
                 React.createElement("span", null, entry.slug)
               ),
               React.createElement(
@@ -543,32 +613,32 @@ export function App() {
       React.createElement(
         "div",
         { className: "workspace" },
-      React.createElement(ProductList, {
-        assets: filteredAssets,
-        totalAssets: assets.length,
-        search,
-        onSearchChange: setSearch,
-        fileTypeFilter,
-        onFileTypeFilterChange: setFileTypeFilter,
-        reviewFilter,
-        onReviewFilterChange: setReviewFilter,
-        visibilityFilter,
-        onVisibilityFilterChange: setVisibilityFilter,
-        categoryFilter,
-        onCategoryFilterChange: setCategoryFilter,
-        categoryOptions,
-        relatedImageByModel,
-        onSelect: (asset) => setSelectedKey(assetKey(asset)),
-        onOpenLandingPage: (asset) =>
-          navigateToHash(null, buildProductHash(asset?.product_model)),
-        selectedKey
-      }),
-      React.createElement(ProductDetail, {
-        asset: selectedAsset,
-        relatedImageByModel,
-        loading: status.loading,
-        error: status.error
-      }),
+        React.createElement(ProductList, {
+          assets: filteredAssets,
+          totalAssets: assets.length,
+          search,
+          onSearchChange: setSearch,
+          fileTypeFilter,
+          onFileTypeFilterChange: setFileTypeFilter,
+          reviewFilter,
+          onReviewFilterChange: setReviewFilter,
+          visibilityFilter,
+          onVisibilityFilterChange: setVisibilityFilter,
+          categoryFilter,
+          onCategoryFilterChange: setCategoryFilter,
+          categoryOptions,
+          relatedImageByModel,
+          onSelect: (asset) => setSelectedKey(assetKey(asset)),
+          onOpenLandingPage: (asset) =>
+            navigateToHash(null, buildProductHash(asset?.product_model)),
+          selectedKey
+        }),
+        React.createElement(ProductDetail, {
+          asset: selectedAsset,
+          relatedImageByModel,
+          loading: status.loading,
+          error: status.error
+        })
       ),
       footer
     )
