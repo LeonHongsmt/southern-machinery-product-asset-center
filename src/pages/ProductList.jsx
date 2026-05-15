@@ -50,7 +50,7 @@ export function ProductList({
       h(
         "p",
         { className: "section-text" },
-        `Search across ${totalAssets} current records by model, product name, file name, or category. Visibility rules keep hidden assets out of the default customer-facing list.`
+        `Search across ${totalAssets} current records by model, product name, file name, category, or source URL. Model search also supports normalized formats such as S3000 and S-3000.`
       ),
       h(
         "p",
@@ -66,7 +66,7 @@ export function ProductList({
         id: "product-search",
         type: "search",
         value: search,
-        placeholder: "Search by model, product name, file name, or category",
+        placeholder: "Search by model, product name, file name, category, or source URL",
         onInput: (event) => onSearchChange(event.target.value)
       })
     ),

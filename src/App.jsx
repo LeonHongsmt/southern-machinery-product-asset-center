@@ -7,12 +7,21 @@ function assetKey(asset) {
   return `${asset.product_model}::${asset.category}::${asset.file_name}::${asset.source_url}`;
 }
 
+function normalizeSearchText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/[^a-z0-9]/g, "");
+}
+
 function buildSearchIndex(asset) {
   return [
     asset.product_model,
     asset.product_name,
     asset.file_name,
-    asset.category
+    asset.category,
+    asset.source_url
   ]
     .filter(Boolean)
     .join(" ")
@@ -122,9 +131,17 @@ export function App() {
 
   const filteredAssets = useMemo(() => {
     const query = search.trim().toLowerCase();
+    const normalizedQuery = normalizeSearchText(search);
+
     return assets.filter((asset) => {
-      const matchesSearch = query
-        ? buildSearchIndex(asset).includes(query)
+      const rawIndex = buildSearchIndex(asset);
+      const normalizedIndex = normalizeSearchText(rawIndex);
+      const matchesRawQuery = query ? rawIndex.includes(query) : true;
+      const matchesNormalizedQuery = normalizedQuery
+        ? normalizedIndex.includes(normalizedQuery)
+        : true;
+      const matchesSearch = query || normalizedQuery
+        ? matchesRawQuery || matchesNormalizedQuery
         : true;
       const matchesFileType =
         fileTypeFilter === "all" ? true : asset.file_type === fileTypeFilter;
