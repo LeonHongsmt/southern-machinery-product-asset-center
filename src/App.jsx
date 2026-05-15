@@ -234,12 +234,12 @@ export function App() {
     };
   }, [assets.length, filteredAssets.length, unknownCount, visibilityCounts]);
   const statCards = [
-    ["Assets Loaded", stats.assetsLoaded],
+    ["Total Assets", stats.assetsLoaded],
     ["Public Assets", stats.publicAssets],
     ["Internal Review", stats.internalReviewAssets],
-    ["Hidden Assets", stats.hiddenAssets],
-    ["Visible Results", stats.visibleResults],
-    ["Needs Manual Review", stats.needsManualReview]
+    ["Hidden by Rules", stats.hiddenAssets],
+    ["Current View", stats.visibleResults],
+    ["Manual Review Required", stats.needsManualReview]
   ];
   const inquiryLink = buildMailtoLink(selectedAsset, "inquiry");
   const quotationLink = buildMailtoLink(selectedAsset, "quotation");
@@ -266,7 +266,7 @@ export function App() {
         React.createElement(
           "p",
           { className: "hero-text" },
-          "Browse verified sample assets from Southern Machinery's public file station. Records marked as manual review need confirmation before customer-facing publication."
+          "Review Southern Machinery product assets collected from the public file station. Customer-visible records are shown by default, while hidden records remain available for internal audit."
         ),
         React.createElement(
           "div",
@@ -342,6 +342,11 @@ export function App() {
             "p",
             null,
             "Product asset records are generated from public file samples and require final sales review before customer use."
+          ),
+          React.createElement(
+            "p",
+            { className: "site-footer-note" },
+            "Visibility labels are for internal sales and marketing review. Final customer-facing use should be confirmed by the Southern Machinery team."
           )
         ),
         React.createElement(

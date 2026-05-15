@@ -69,6 +69,13 @@ export function ProductCard({ asset, active, onSelect, relatedImageUrl }) {
         h(
           "div",
           { className: "product-card-flags" },
+          visibility === "public"
+            ? h(
+                "span",
+                { className: "visibility-flag visibility-flag-public" },
+                "Public"
+              )
+            : null,
           visibility === "internal_review"
             ? h(
                 "span",

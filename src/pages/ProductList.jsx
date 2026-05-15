@@ -51,6 +51,11 @@ export function ProductList({
         "p",
         { className: "section-text" },
         `Search across ${totalAssets} current records by model, product name, file name, or category. Visibility rules keep hidden assets out of the default customer-facing list.`
+      ),
+      h(
+        "p",
+        { className: "filter-note" },
+        "Customer-visible includes public and internal review records. Hidden records are retained in the dataset but excluded from the default view."
       )
     ),
     h(

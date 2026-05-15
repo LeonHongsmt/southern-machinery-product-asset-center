@@ -208,7 +208,7 @@ export function ProductDetail({
         ? h(
             "div",
             { className: "visibility-banner visibility-banner-review" },
-            "Internal Review: this asset should be reviewed before customer-facing publication."
+            "This asset requires internal review before customer-facing use."
           )
         : null,
       visibility === "hidden"

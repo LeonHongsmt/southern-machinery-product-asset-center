@@ -15,6 +15,8 @@
   --steel-soft: #2d4a61;
   --warning-bg: #fff2d8;
   --warning-text: #9b5c10;
+  --public-bg: #e7f6ec;
+  --public-text: #28724a;
   --review-bg: #eaf3ff;
   --review-text: #2f5f97;
   --hidden-bg: #fde8eb;
@@ -225,6 +227,13 @@ input {
 .section-text {
   margin: 10px 0 0;
   line-height: 1.65;
+}
+
+.filter-note {
+  margin: 12px 0 0;
+  color: var(--steel-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .search-box {
@@ -507,6 +516,11 @@ input {
   color: var(--review-text);
 }
 
+.visibility-flag-public {
+  background: var(--public-bg);
+  color: var(--public-text);
+}
+
 .visibility-flag-hidden,
 .visibility-badge-hidden {
   background: var(--hidden-bg);
@@ -729,6 +743,10 @@ input {
   margin: 0;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.72);
+}
+
+.site-footer-note {
+  margin-top: 10px;
 }
 
 .site-footer-links {
