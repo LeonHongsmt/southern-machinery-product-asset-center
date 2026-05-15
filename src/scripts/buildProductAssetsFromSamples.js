@@ -5,6 +5,10 @@ const { validateProductAsset } = require("../schema/productAssetSchema.js");
 
 const INPUT_PATH = path.resolve(__dirname, "../../data/file_site_samples.json");
 const OUTPUT_JSON_PATH = path.resolve(__dirname, "../../data/product_assets.json");
+const OUTPUT_PUBLIC_JSON_PATH = path.resolve(
+  __dirname,
+  "../../public/data/product_assets.json"
+);
 const OUTPUT_REPORT_PATH = path.resolve(__dirname, "../../data/product_assets_report.md");
 
 function uniqueStrings(values) {
@@ -17,7 +21,7 @@ function uniqueStrings(values) {
 
 function buildGroupKey(sample) {
   if (sample.product_model === "unknown_model") {
-    return `${sample.product_model}::${sample.category}::${sample.file_name}`;
+    return `${sample.product_model}::${sample.category}::${sample.file_name}::${sample.source_url}`;
   }
 
   return `${sample.product_model}::${sample.category}`;
@@ -41,19 +45,21 @@ function selectProductName(samples) {
   return "To be confirmed";
 }
 
-function selectPrimaryFileType(typeCounts) {
-  const entries = Object.entries(typeCounts).filter(([, count]) => count > 0);
-  if (entries.length === 0) {
-    return "other";
+function selectPrimaryFileType(samples) {
+  if (samples.some((sample) => sample.file_type === "image")) {
+    return "image";
   }
 
-  if (entries.length === 1) {
-    return entries[0][0];
+  if (samples.some((sample) => sample.file_type === "pdf")) {
+    return "pdf";
   }
 
-  const onlyManualAndDocument = entries.every(([type]) => type === "manual" || type === "document");
-  if (onlyManualAndDocument) {
+  if (samples.some((sample) => sample.file_type === "manual")) {
     return "manual";
+  }
+
+  if (samples.some((sample) => sample.file_type === "document")) {
+    return "document";
   }
 
   return "other";
@@ -61,25 +67,14 @@ function selectPrimaryFileType(typeCounts) {
 
 function createAggregatedAsset(samples, generatedAt) {
   const first = samples[0];
-  const typeCounts = {
-    pdf: 0,
-    image: 0,
-    manual: 0,
-    document: 0,
-    other: 0,
-  };
-
   const pdfLinks = [];
   const imageLinks = [];
   const manualLinks = [];
-  const sourceUrls = [];
   const fileNames = [];
   const remarks = [];
 
   for (const sample of samples) {
-    typeCounts[sample.file_type] = (typeCounts[sample.file_type] || 0) + 1;
     fileNames.push(sample.file_name);
-    sourceUrls.push(sample.source_url);
 
     if (Array.isArray(sample.pdf_links)) {
       pdfLinks.push(...sample.pdf_links);
@@ -91,16 +86,12 @@ function createAggregatedAsset(samples, generatedAt) {
       manualLinks.push(...sample.manual_links);
     }
 
-    // document 类型没有独立字段，沿用 manual_links 作为文档入口集合。
-    if (sample.file_type === "document" && sample.source_url) {
-      manualLinks.push(sample.source_url);
-    }
-
     if (sample.remarks) {
       remarks.push(sample.remarks);
     }
   }
 
+  const distinctFileNames = uniqueStrings(fileNames);
   const productModel = first.product_model || "unknown_model";
   const aggregatedRemarks = uniqueStrings(remarks);
 
@@ -108,9 +99,9 @@ function createAggregatedAsset(samples, generatedAt) {
     aggregatedRemarks.push("Needs manual review: product model not detected");
   }
 
-  if (uniqueStrings(fileNames).length > 1) {
+  if (distinctFileNames.length > 1) {
     aggregatedRemarks.push(
-      `Grouped ${uniqueStrings(fileNames).length} sample files under the same product_model + category`
+      `Grouped ${distinctFileNames.length} sample files under the same product_model + category`
     );
   }
 
@@ -119,7 +110,7 @@ function createAggregatedAsset(samples, generatedAt) {
     product_name: selectProductName(samples),
     category: first.category || "uncategorized",
     file_name: first.file_name || "To be confirmed",
-    file_type: selectPrimaryFileType(typeCounts),
+    file_type: selectPrimaryFileType(samples),
     pdf_links: uniqueStrings(pdfLinks),
     image_links: uniqueStrings(imageLinks),
     manual_links: uniqueStrings(manualLinks),
@@ -131,11 +122,28 @@ function createAggregatedAsset(samples, generatedAt) {
   };
 }
 
+function createAssetTypeCounts(assets) {
+  return assets.reduce(
+    (counts, asset) => {
+      counts[asset.file_type] = (counts[asset.file_type] || 0) + 1;
+      return counts;
+    },
+    {
+      pdf: 0,
+      image: 0,
+      manual: 0,
+      document: 0,
+      other: 0,
+    }
+  );
+}
+
 function createReport(params) {
   const {
     generatedAt,
     inputSamplesCount,
     outputAssetsCount,
+    assetTypeCounts,
     totalPdfLinks,
     totalImageLinks,
     totalManualLinks,
@@ -146,7 +154,7 @@ function createReport(params) {
 
   const invalidLines = invalidRecords.length
     ? invalidRecords.map((record) => {
-        return `- ${record.product_model} / ${record.category}：${record.errors.join("; ")}`;
+        return `- ${record.product_model} / ${record.category}: ${record.errors.join("; ")}`;
       })
     : ["- 无"];
 
@@ -169,6 +177,14 @@ function createReport(params) {
     `- unknown_model 数量：${unknownModelCount}`,
     `- 校验失败记录数量：${invalidRecords.length}`,
     "",
+    "## 输出资产 file_type 统计",
+    "",
+    `- pdf：${assetTypeCounts.pdf}`,
+    `- image：${assetTypeCounts.image}`,
+    `- manual：${assetTypeCounts.manual}`,
+    `- document：${assetTypeCounts.document}`,
+    `- other：${assetTypeCounts.other}`,
+    "",
     "## invalid_records",
     "",
     ...invalidLines,
@@ -179,9 +195,9 @@ function createReport(params) {
     "",
     "## 下一步建议",
     "",
-    "- 先人工复核 unknown_model 和被聚合的多文件产品，确认是否需要补充正式产品名称。",
-    "- 如果当前 20 条样本的聚合方式满足预期，可以在不下载文件内容的前提下继续扩大公开样本。",
-    "- 在字段和聚合规则稳定后，再把 product_assets.json 接到前端静态模板读取。",
+    "- 当前更适合先做产品型号人工修正表，而不是继续无差别扩样本。",
+    "- 对 unknown_model、品牌资料、3D 演示资料和音频类资料，建议建立更明确的归类规则。",
+    "- 当人工修正规则稳定后，再继续扩大公开样本，收益会更高。",
     "",
   ].join("\n");
 }
@@ -192,7 +208,7 @@ async function main() {
   const samples = JSON.parse(raw);
 
   if (!Array.isArray(samples)) {
-    throw new Error("data/file_site_samples.json 必须是数组");
+    throw new Error("data/file_site_samples.json 必须是数组。");
   }
 
   const groups = new Map();
@@ -221,27 +237,42 @@ async function main() {
     aggregatedAssets.push(asset);
   }
 
+  aggregatedAssets.sort((a, b) => {
+    const aUnknown = a.product_model === "unknown_model" ? 1 : 0;
+    const bUnknown = b.product_model === "unknown_model" ? 1 : 0;
+
+    if (aUnknown !== bUnknown) {
+      return aUnknown - bUnknown;
+    }
+
+    const categoryCompare = String(a.category || "").localeCompare(String(b.category || ""));
+    if (categoryCompare !== 0) {
+      return categoryCompare;
+    }
+
+    return String(a.product_model || "").localeCompare(String(b.product_model || ""));
+  });
+
   const totalPdfLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.pdf_links.length, 0);
   const totalImageLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.image_links.length, 0);
   const totalManualLinks = aggregatedAssets.reduce((sum, asset) => sum + asset.manual_links.length, 0);
   const unknownModelAssets = aggregatedAssets.filter(
     (asset) => asset.product_model === "unknown_model"
   );
-
   const manualReviewItems = unknownModelAssets.map((asset) => {
     return `${asset.category} / ${asset.file_name}`;
   });
+  const assetTypeCounts = createAssetTypeCounts(aggregatedAssets);
+  const outputJson = `${JSON.stringify(aggregatedAssets, null, 2)}\n`;
 
-  await fs.writeFile(
-    OUTPUT_JSON_PATH,
-    `${JSON.stringify(aggregatedAssets, null, 2)}\n`,
-    "utf8"
-  );
+  await fs.writeFile(OUTPUT_JSON_PATH, outputJson, "utf8");
+  await fs.writeFile(OUTPUT_PUBLIC_JSON_PATH, outputJson, "utf8");
 
   const report = createReport({
     generatedAt,
     inputSamplesCount: samples.length,
     outputAssetsCount: aggregatedAssets.length,
+    assetTypeCounts,
     totalPdfLinks,
     totalImageLinks,
     totalManualLinks,
@@ -250,7 +281,7 @@ async function main() {
     manualReviewItems,
   });
 
-  await fs.writeFile(OUTPUT_REPORT_PATH, report, "utf8");
+  await fs.writeFile(OUTPUT_REPORT_PATH, `\ufeff${report}`, "utf8");
 
   console.log(`Input sample count: ${samples.length}`);
   console.log(`Output product asset count: ${aggregatedAssets.length}`);
@@ -259,6 +290,9 @@ async function main() {
   console.log(`Manual/document link count: ${totalManualLinks}`);
   console.log(`unknown_model count: ${unknownModelAssets.length}`);
   console.log(`Invalid record count: ${invalidRecords.length}`);
+  console.log(`Data output: ${OUTPUT_JSON_PATH}`);
+  console.log(`Public output: ${OUTPUT_PUBLIC_JSON_PATH}`);
+  console.log(`Report output: ${OUTPUT_REPORT_PATH}`);
 }
 
 main().catch((error) => {

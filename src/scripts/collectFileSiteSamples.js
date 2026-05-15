@@ -8,24 +8,29 @@ const PUBLIC_BASE_URL = "https://file.autoinsertion.com/public";
 const OUTPUT_JSON_PATH = path.resolve(__dirname, "../../data/file_site_samples.json");
 const OUTPUT_REPORT_PATH = path.resolve(__dirname, "../../data/file_site_samples_report.md");
 
-const MAX_DIRECTORY_REQUESTS = 5;
-const MAX_TOTAL_FILES = 20;
-const MAX_FILES_PER_DIRECTORY = 5;
+const MAX_FILES = 100;
+const MAX_DIRECTORY_REQUESTS = 20;
+const MAX_DIRECTORY_DEPTH = 3;
+const MAX_FILES_PER_DIRECTORY = 15;
+const REQUEST_DELAY_MS = 200;
 
 const DIRECTORY_PRIORITY = [
   "southern machinery product",
   "southern machinery manual",
-  "smthelp poster",
   "smthelp machine presentation",
+  "smthelp poster",
   "product landing page",
+  "smt machine 3d drawing in html",
+  "smt machine 3d drawing",
+  "smt audio",
 ];
 
-const FILE_TYPE_COUNTS = {
+const FILE_TYPE_PRIORITY = {
   pdf: 0,
-  image: 0,
-  manual: 0,
-  document: 0,
-  other: 0,
+  image: 1,
+  manual: 2,
+  document: 3,
+  other: 4,
 };
 
 function ensureFetch() {
@@ -34,8 +39,42 @@ function ensureFetch() {
   }
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+function createTypeCounts() {
+  return {
+    pdf: 0,
+    image: 0,
+    manual: 0,
+    document: 0,
+    other: 0,
+  };
+}
+
+function normalizeDirectoryPath(inputPath) {
+  const normalized = String(inputPath || "/").trim().replace(/\\/g, "/");
+
+  if (!normalized || normalized === "/") {
+    return "/";
+  }
+
+  return `/${normalized.replace(/^\/+/, "").replace(/\/+$/, "")}`;
+}
+
+function getPathDepth(directoryPath) {
+  if (directoryPath === "/") {
+    return 0;
+  }
+
+  return directoryPath.split("/").filter(Boolean).length;
+}
+
 function encodeFpathForPublicUrl(fpath) {
-  return fpath
+  return String(fpath || "")
     .split("/")
     .map((segment) => encodeURIComponent(segment))
     .join("/");
@@ -55,8 +94,36 @@ function detectFileType(fileName) {
   const lowerName = String(fileName || "").toLowerCase();
   const ext = getExtension(fileName);
 
-  const imageExts = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg", "avif", "bmp"]);
-  const documentExts = new Set(["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "csv", "html", "htm", "zip", "rar", "7z"]);
+  const imageExts = new Set([
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "webp",
+    "svg",
+    "avif",
+    "bmp",
+  ]);
+  const documentExts = new Set([
+    "doc",
+    "docx",
+    "xls",
+    "xlsx",
+    "ppt",
+    "pptx",
+    "txt",
+    "csv",
+    "html",
+    "htm",
+    "zip",
+    "rar",
+    "7z",
+    "wav",
+    "mp3",
+    "m4a",
+    "step",
+    "stp",
+  ]);
 
   if (imageExts.has(ext)) {
     return "image";
@@ -66,12 +133,13 @@ function detectFileType(fileName) {
     lowerName.includes("manual") ||
     lowerName.includes("guide") ||
     lowerName.includes("instruction") ||
-    lowerName.includes("spec") ||
+    lowerName.includes("operation") ||
+    lowerName.includes("user") ||
     lowerName.includes("datasheet") ||
-    lowerName.includes("说明") ||
-    lowerName.includes("手册")
+    lowerName.includes("spec") ||
+    lowerName.includes("diagram")
   ) {
-    return ext === "pdf" || documentExts.has(ext) ? "manual" : "manual";
+    return "manual";
   }
 
   if (ext === "pdf") {
@@ -89,15 +157,18 @@ function extractProductModel(input) {
   const normalized = String(input || "")
     .replace(/%20/g, " ")
     .replace(/[_/]+/g, " ")
+    .replace(/\s+/g, " ")
     .toUpperCase();
   const patterns = [
-    /(?:^|[^A-Z0-9])(SME-\d{2,5}[A-Z]{0,3})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])(SIS\d{3,5}[A-Z]{0,2})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])(SP-\d{2,5}[A-Z]{0,2})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])(S-\d{2,5}[A-Z]{0,3})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])(S\d{3,5}[A-Z]{0,3})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])(ADL\d{2,5}[A-Z]{0,2})(?=$|[^A-Z0-9])/,
-    /(?:^|[^A-Z0-9])([A-Z]{2,5}\d{2,5}[A-Z]{0,2})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(SME-\d{2,5}[A-Z0-9]{0,4})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(SIS\d{3,5}[A-Z0-9]{0,3})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(ADL\d{2,5}[A-Z0-9]{0,3})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(S-[A-Z]{0,3}\d{2,5}[A-Z0-9]{0,4})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(ST[PFRJL]\d{4}[A-Z0-9]{0,2})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(SSPC\d{3,5}[A-Z0-9]{0,2})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(SCN\d{3,5}[A-Z0-9]{0,2})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])(S\d{3,5}[A-Z0-9-]{0,4})(?=$|[^A-Z0-9])/,
+    /(?:^|[^A-Z0-9])([A-Z]{2,5}\d{2,5}[A-Z0-9-]{0,3})(?=$|[^A-Z0-9])/,
   ];
 
   for (const pattern of patterns) {
@@ -119,11 +190,13 @@ function toCategory(fpath) {
     return "root";
   }
 
-  return segments[0]
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "") || "uncategorized";
+  return (
+    segments[0]
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "") || "uncategorized"
+  );
 }
 
 function toProductName(fileName, productModel) {
@@ -136,7 +209,10 @@ function toProductName(fileName, productModel) {
     cleaned = cleaned.replace(new RegExp(escaped, "ig"), "");
   }
 
-  cleaned = cleaned.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+  cleaned = cleaned
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
   return cleaned || withoutExt || raw || "Unnamed asset";
 }
@@ -163,8 +239,8 @@ function buildAssetRecord(item, requestedPath, generatedAt) {
   const fileType = detectFileType(fileName);
   const productModel = extractProductModel(`${fileName} ${item.fpath || ""}`);
   const publicUrl = buildPublicUrl(item.fpath || `/${fileName}`);
-  const description = "To be confirmed from official document";
   const normalizedTime = normalizeTimestamp(item.mtime, generatedAt);
+  const isManualLike = fileType === "manual" || fileType === "document";
 
   return {
     product_model: productModel,
@@ -174,16 +250,16 @@ function buildAssetRecord(item, requestedPath, generatedAt) {
     file_type: fileType,
     pdf_links: fileType === "pdf" ? [publicUrl] : [],
     image_links: fileType === "image" ? [publicUrl] : [],
-    manual_links: fileType === "manual" ? [publicUrl] : [],
+    manual_links: isManualLike ? [publicUrl] : [],
     source_url: publicUrl,
-    description,
+    description: "To be confirmed from official document",
     remarks:
       productModel === "unknown_model"
         ? `Sample collected from public directory ${requestedPath}; product model not confidently detected.`
         : `Sample collected from public directory ${requestedPath}.`,
     created_at: normalizedTime,
     updated_at: normalizedTime,
-    // 以下字段保留接口原始元信息，便于后续人工核对。
+    // 保留接口原始字段，便于后续人工复核。
     name: item.name || "",
     path: requestedPath,
     fpath: item.fpath || "",
@@ -202,7 +278,36 @@ function sortFolders(items) {
     const bIndex = DIRECTORY_PRIORITY.findIndex((keyword) => bName.includes(keyword));
     const normalizedA = aIndex === -1 ? DIRECTORY_PRIORITY.length : aIndex;
     const normalizedB = bIndex === -1 ? DIRECTORY_PRIORITY.length : bIndex;
-    return normalizedA - normalizedB;
+
+    if (normalizedA !== normalizedB) {
+      return normalizedA - normalizedB;
+    }
+
+    return aName.localeCompare(bName);
+  });
+}
+
+function sortFiles(items) {
+  return items.slice().sort((a, b) => {
+    const aModel = extractProductModel(`${a.name || ""} ${a.fpath || ""}`);
+    const bModel = extractProductModel(`${b.name || ""} ${b.fpath || ""}`);
+    const aKnown = aModel === "unknown_model" ? 1 : 0;
+    const bKnown = bModel === "unknown_model" ? 1 : 0;
+
+    if (aKnown !== bKnown) {
+      return aKnown - bKnown;
+    }
+
+    const aType = detectFileType(a.name || "");
+    const bType = detectFileType(b.name || "");
+    const aTypeRank = FILE_TYPE_PRIORITY[aType] ?? 99;
+    const bTypeRank = FILE_TYPE_PRIORITY[bType] ?? 99;
+
+    if (aTypeRank !== bTypeRank) {
+      return aTypeRank - bTypeRank;
+    }
+
+    return String(a.name || "").localeCompare(String(b.name || ""));
   });
 }
 
@@ -247,129 +352,137 @@ function createReport(params) {
   const {
     generatedAt,
     requestedDirectories,
+    skippedDirectories,
     assets,
     typeCounts,
     unknownModelCount,
-    recognizedModelCount,
+    invalidRecords,
     failures,
   } = params;
 
-  const directoryLines = requestedDirectories.map(
-    (entry) => `- ${entry.path}：HTTP ${entry.status}，返回 ${entry.itemCount} 个条目`
-  );
+  const requestedLines = requestedDirectories.length
+    ? requestedDirectories.map((entry) => {
+        return `- ${entry.path} | HTTP ${entry.status} | files ${entry.fileCount} | folders ${entry.folderCount} | items ${entry.itemCount}`;
+      })
+    : ["- 无"];
 
-  const failureLines = failures.length
-    ? failures.map((entry) => `- ${entry.path}：${entry.error}`)
+  const invalidLines = invalidRecords.length
+    ? invalidRecords.map((entry) => {
+        return `- ${entry.path}: ${entry.errors.join("; ")}`;
+      })
+    : ["- 无"];
+
+  const skippedLines = [...failures, ...skippedDirectories].length
+    ? [...failures, ...skippedDirectories].map((entry) => {
+        return `- ${entry.path}: ${entry.error || entry.reason}`;
+      })
     : ["- 无"];
 
   return [
     "# File Site Samples Report",
     "",
-    `验证时间：${generatedAt}`,
+    `生成时间：${generatedAt}`,
+    `目标样本数量：${MAX_FILES}`,
     "",
-    "## 请求目录",
+    "## 目录请求概况",
     "",
-    ...directoryLines,
+    `- 实际请求目录数：${requestedDirectories.length}`,
+    `- 实际采集文件数：${assets.length}`,
+    `- 校验失败数：${invalidRecords.length}`,
     "",
-    "## 采集结果",
+    "## 已请求目录",
     "",
-    `- 成功采集条数：${assets.length}`,
-    `- 请求目录数：${requestedDirectories.length}`,
+    ...requestedLines,
     "",
     "## 文件类型统计",
     "",
-    `- pdf：${typeCounts.pdf}`,
-    `- image：${typeCounts.image}`,
-    `- manual：${typeCounts.manual}`,
-    `- document：${typeCounts.document}`,
-    `- other：${typeCounts.other}`,
+    `- PDF 数量：${typeCounts.pdf}`,
+    `- Image 数量：${typeCounts.image}`,
+    `- Manual 数量：${typeCounts.manual}`,
+    `- Document 数量：${typeCounts.document}`,
+    `- Other 数量：${typeCounts.other}`,
     "",
     "## 型号识别情况",
     "",
-    `- 已识别型号条数：${recognizedModelCount}`,
-    `- unknown_model 条数：${unknownModelCount}`,
+    `- 已识别 product_model 数量：${assets.length - unknownModelCount}`,
+    `- unknown_model 数量：${unknownModelCount}`,
     "",
-    "## 失败或异常情况",
+    "## 校验失败记录",
     "",
-    ...failureLines,
+    ...invalidLines,
+    "",
+    "## 请求失败或跳过的目录",
+    "",
+    ...skippedLines,
     "",
     "## 下一步建议",
     "",
-    "- 可以先把这批真实样本人工复核，确认 product_model 识别规则是否足够稳定。",
-    "- 如果 PDF、图片、manual 的分类结果符合预期，再扩大到更多公开目录，但仍保持限量采样。",
-    "- 样本确认稳定后，再整理为正式 product_assets.json，而不是直接进入完整全站抓取。",
+    "- 先对 unknown_model 和被聚合概率较高的样本做人工复核，确认产品型号识别规则是否需要补充。",
+    "- 当前仍属于扩大公开样本验证，不建议直接切换为全站递归抓取。",
+    "- 当样本覆盖度稳定后，优先建立产品型号人工修正表，再继续扩样本。",
     "",
   ].join("\n");
 }
 
-async function main() {
-  ensureFetch();
-
-  const generatedAt = new Date().toISOString();
+async function collectDirectoryData() {
   const requestedDirectories = [];
+  const skippedDirectories = [];
   const failures = [];
-  const assets = [];
-  const seenFpaths = new Set();
+  const directories = [];
 
   const queue = ["/"];
   const queued = new Set(queue);
 
-  while (
-    queue.length > 0 &&
-    requestedDirectories.length < MAX_DIRECTORY_REQUESTS &&
-    assets.length < MAX_TOTAL_FILES
-  ) {
-    const currentPath = queue.shift();
+  while (queue.length > 0 && requestedDirectories.length < MAX_DIRECTORY_REQUESTS) {
+    const currentPath = normalizeDirectoryPath(queue.shift());
+
+    if (requestedDirectories.length > 0) {
+      await sleep(REQUEST_DELAY_MS);
+    }
 
     try {
       const result = await fetchDirectory(currentPath);
+      const folders = sortFolders(
+        result.items.filter((item) => item && item.ftype === "folder")
+      );
+      const files = sortFiles(
+        result.items.filter((item) => item && item.ftype === "file")
+      );
+
       requestedDirectories.push({
         path: currentPath,
         status: result.status,
         itemCount: result.items.length,
+        fileCount: files.length,
+        folderCount: folders.length,
       });
 
-      const folders = sortFolders(
-        result.items.filter((item) => item && item.ftype === "folder")
-      );
+      directories.push({
+        path: currentPath,
+        files,
+      });
 
-      for (const folder of folders) {
-        if (requestedDirectories.length + queue.length >= MAX_DIRECTORY_REQUESTS) {
-          break;
+      if (getPathDepth(currentPath) >= MAX_DIRECTORY_DEPTH) {
+        if (folders.length > 0) {
+          skippedDirectories.push({
+            path: currentPath,
+            reason: `Skipped deeper folders because MAX_DIRECTORY_DEPTH=${MAX_DIRECTORY_DEPTH}`,
+          });
         }
-        const nextPath = folder.fpath || `${currentPath.replace(/\/$/, "")}/${folder.name}`;
-        if (!queued.has(nextPath)) {
-          queue.push(nextPath);
-          queued.add(nextPath);
-        }
+        continue;
       }
 
-      const files = result.items.filter((item) => item && item.ftype === "file");
-      let localCount = 0;
+      for (const folder of folders) {
+        const nextPath = normalizeDirectoryPath(
+          folder.fpath || `${currentPath}/${folder.name}`
+        );
 
-      for (const item of files) {
-        if (assets.length >= MAX_TOTAL_FILES || localCount >= MAX_FILES_PER_DIRECTORY) {
-          break;
-        }
-        if (!item.fpath || seenFpaths.has(item.fpath)) {
+        if (queued.has(nextPath)) {
           continue;
         }
 
-        const asset = buildAssetRecord(item, currentPath, generatedAt);
-        const validation = validateProductAsset(asset);
-
-        if (!validation.valid) {
-          failures.push({
-            path: item.fpath || currentPath,
-            error: `Schema validation failed: ${validation.errors.join("; ")}`,
-          });
-          continue;
-        }
-
-        assets.push(asset);
-        seenFpaths.add(item.fpath);
-        FILE_TYPE_COUNTS[asset.file_type] += 1;
-        localCount += 1;
+        queue.push(nextPath);
+        queued.add(nextPath);
       }
     } catch (error) {
       failures.push({
@@ -379,30 +492,130 @@ async function main() {
     }
   }
 
+  for (const pathToSkip of queue) {
+    skippedDirectories.push({
+      path: pathToSkip,
+      reason: `Skipped because MAX_DIRECTORY_REQUESTS=${MAX_DIRECTORY_REQUESTS} was reached`,
+    });
+  }
+
+  return {
+    requestedDirectories,
+    skippedDirectories,
+    failures,
+    directories,
+  };
+}
+
+function sampleAssetsFromDirectories(directories, generatedAt) {
+  const assets = [];
+  const invalidRecords = [];
+  const typeCounts = createTypeCounts();
+  const seenFpaths = new Set();
+
+  const workingDirectories = directories.map((directory) => {
+    return {
+      path: directory.path,
+      files: directory.files,
+      index: 0,
+      selected: 0,
+    };
+  });
+
+  while (assets.length < MAX_FILES) {
+    let progressed = false;
+
+    for (const directory of workingDirectories) {
+      if (assets.length >= MAX_FILES) {
+        break;
+      }
+
+      if (directory.selected >= MAX_FILES_PER_DIRECTORY) {
+        continue;
+      }
+
+      while (directory.index < directory.files.length) {
+        const item = directory.files[directory.index];
+        directory.index += 1;
+
+        if (!item || !item.fpath || seenFpaths.has(item.fpath)) {
+          continue;
+        }
+
+        const asset = buildAssetRecord(item, directory.path, generatedAt);
+        const validation = validateProductAsset(asset);
+
+        if (!validation.valid) {
+          invalidRecords.push({
+            path: item.fpath || directory.path,
+            errors: validation.errors,
+          });
+          continue;
+        }
+
+        assets.push(asset);
+        seenFpaths.add(item.fpath);
+        typeCounts[asset.file_type] = (typeCounts[asset.file_type] || 0) + 1;
+        directory.selected += 1;
+        progressed = true;
+        break;
+      }
+    }
+
+    if (!progressed) {
+      break;
+    }
+  }
+
+  return {
+    assets,
+    invalidRecords,
+    typeCounts,
+  };
+}
+
+async function main() {
+  ensureFetch();
+
+  const generatedAt = new Date().toISOString();
+  const {
+    requestedDirectories,
+    skippedDirectories,
+    failures,
+    directories,
+  } = await collectDirectoryData();
+  const {
+    assets,
+    invalidRecords,
+    typeCounts,
+  } = sampleAssetsFromDirectories(directories, generatedAt);
+
   const unknownModelCount = assets.filter(
     (asset) => asset.product_model === "unknown_model"
   ).length;
-  const recognizedModelCount = assets.length - unknownModelCount;
 
   await fs.writeFile(OUTPUT_JSON_PATH, `${JSON.stringify(assets, null, 2)}\n`, "utf8");
 
   const report = createReport({
     generatedAt,
     requestedDirectories,
+    skippedDirectories,
     assets,
-    typeCounts: FILE_TYPE_COUNTS,
+    typeCounts,
     unknownModelCount,
-    recognizedModelCount,
+    invalidRecords,
     failures,
   });
-  await fs.writeFile(OUTPUT_REPORT_PATH, report, "utf8");
+  await fs.writeFile(OUTPUT_REPORT_PATH, `\ufeff${report}`, "utf8");
 
   console.log(`Requested directories: ${requestedDirectories.length}`);
   console.log(`Collected file records: ${assets.length}`);
-  console.log(`pdf count: ${FILE_TYPE_COUNTS.pdf}`);
-  console.log(`image count: ${FILE_TYPE_COUNTS.image}`);
-  console.log(`document/manual count: ${FILE_TYPE_COUNTS.document + FILE_TYPE_COUNTS.manual}`);
+  console.log(`pdf count: ${typeCounts.pdf}`);
+  console.log(`image count: ${typeCounts.image}`);
+  console.log(`document/manual count: ${typeCounts.document + typeCounts.manual}`);
+  console.log(`other count: ${typeCounts.other}`);
   console.log(`unknown_model count: ${unknownModelCount}`);
+  console.log(`validation failure count: ${invalidRecords.length}`);
   console.log(`JSON output: ${OUTPUT_JSON_PATH}`);
   console.log(`Report output: ${OUTPUT_REPORT_PATH}`);
 }

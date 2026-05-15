@@ -1,39 +1,50 @@
-# File Site Samples Report
+﻿# File Site Samples Report
 
-验证时间：2026-05-15T01:03:19.996Z
+生成时间：2026-05-15T03:40:44.200Z
+目标样本数量：100
 
-## 请求目录
+## 目录请求概况
 
-- /：HTTP 200，返回 9 个条目
-- /Southern Machinery Product：HTTP 200，返回 288 个条目
-- /Southern Machinery Manual：HTTP 200，返回 94 个条目
-- /SMThelp Poster：HTTP 200，返回 41 个条目
-- /SMThelp Machine Presentation：HTTP 200，返回 40 个条目
+- 实际请求目录数：10
+- 实际采集文件数：100
+- 校验失败数：0
 
-## 采集结果
+## 已请求目录
 
-- 成功采集条数：20
-- 请求目录数：5
+- / | HTTP 200 | files 1 | folders 8 | items 9
+- /Southern Machinery Product | HTTP 200 | files 287 | folders 1 | items 288
+- /Southern Machinery Manual | HTTP 200 | files 94 | folders 0 | items 94
+- /SMThelp Machine Presentation | HTTP 200 | files 40 | folders 0 | items 40
+- /SMThelp Poster | HTTP 200 | files 41 | folders 0 | items 41
+- /Product landing Page | HTTP 200 | files 67 | folders 0 | items 67
+- /SMT machine 3D Drawing in Html | HTTP 200 | files 197 | folders 0 | items 197
+- /SMT machine 3D drawing | HTTP 200 | files 155 | folders 0 | items 155
+- /SMT Audio | HTTP 200 | files 49 | folders 0 | items 49
+- /Southern Machinery Product/S-3516 computer wire stripping machine | HTTP 200 | files 2 | folders 0 | items 2
 
 ## 文件类型统计
 
-- pdf：5
-- image：10
-- manual：3
-- document：2
-- other：0
+- PDF 数量：47
+- Image 数量：12
+- Manual 数量：4
+- Document 数量：37
+- Other 数量：0
 
 ## 型号识别情况
 
-- 已识别型号条数：15
-- unknown_model 条数：5
+- 已识别 product_model 数量：97
+- unknown_model 数量：3
 
-## 失败或异常情况
+## 校验失败记录
+
+- 无
+
+## 请求失败或跳过的目录
 
 - 无
 
 ## 下一步建议
 
-- 可以先把这批真实样本人工复核，确认 product_model 识别规则是否足够稳定。
-- 如果 PDF、图片、manual 的分类结果符合预期，再扩大到更多公开目录，但仍保持限量采样。
-- 样本确认稳定后，再整理为正式 product_assets.json，而不是直接进入完整全站抓取。
+- 先对 unknown_model 和被聚合概率较高的样本做人工复核，确认产品型号识别规则是否需要补充。
+- 当前仍属于扩大公开样本验证，不建议直接切换为全站递归抓取。
+- 当样本覆盖度稳定后，优先建立产品型号人工修正表，再继续扩样本。

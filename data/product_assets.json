@@ -1,258 +1,637 @@
 [
   {
-    "product_model": "unknown_model",
-    "product_name": "tool THT Knowledge Chatbots",
-    "category": "root",
-    "file_name": "tool_THT Knowledge Chatbots.html",
+    "product_model": "S-3000",
+    "product_name": "Radial Insertion Machine works for Smart EMS THT PCB Assembly Factory 1",
+    "category": "product_landing_page",
+    "file_name": "S-3000 Radial Insertion Machine works for Smart EMS THT PCB Assembly Factory 1.html",
     "file_type": "document",
     "pdf_links": [],
     "image_links": [],
     "manual_links": [
-      "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html"
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-3000%20Radial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%201.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-3000%20Radial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%202.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-3000%20Radial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%203.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-3000%20Radial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory.html"
     ],
-    "source_url": "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html",
+    "source_url": "https://file.autoinsertion.com/public/Product%20landing%20Page/S-3000%20Radial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%201.html",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /; product model not confidently detected. | Needs manual review: product model not detected",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /Product landing Page. | Grouped 4 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SME-350MB",
-    "product_name": "PCBA Inline Cleaning Machine Southern Machinery Final Client Ready ROI Enhanced",
-    "category": "southern_machinery_product",
-    "file_name": "SME-350MB_PCBA_Inline_Cleaning_Machine_Southern_Machinery_Final_Client_Ready_ROI_Enhanced.pdf",
-    "file_type": "pdf",
-    "pdf_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/SME-350MB_PCBA_Inline_Cleaning_Machine_Southern_Machinery_Final_Client_Ready_ROI_Enhanced.pdf"
-    ],
-    "image_links": [],
-    "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/SME-350MB_PCBA_Inline_Cleaning_Machine_Southern_Machinery_Final_Client_Ready_ROI_Enhanced.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Product.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "ADL100",
-    "product_name": "X Ray SMD Counter",
-    "category": "southern_machinery_product",
-    "file_name": "ADL100_X-Ray_SMD_Counter.pdf",
-    "file_type": "pdf",
-    "pdf_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/ADL100_X-Ray_SMD_Counter.pdf"
-    ],
-    "image_links": [],
-    "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/ADL100_X-Ray_SMD_Counter.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Product.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "S460C",
-    "product_name": "Converyor",
-    "category": "southern_machinery_product",
-    "file_name": "S460C Converyor.png",
-    "file_type": "image",
-    "pdf_links": [],
-    "image_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S460C%20Converyor.png"
-    ],
-    "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S460C%20Converyor.png",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Product.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "S-4000H",
-    "product_name": "Jumper Wire Axial Inserter",
-    "category": "southern_machinery_product",
-    "file_name": "S-4000H Jumper Wire Axial Inserter.pdf",
-    "file_type": "pdf",
-    "pdf_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S-4000H%20Jumper%20Wire%20Axial%20Inserter.pdf"
-    ],
-    "image_links": [],
-    "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S-4000H%20Jumper%20Wire%20Axial%20Inserter.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Product.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "unknown_model",
-    "product_name": "Southern Machinery Brand Book 2025",
-    "category": "southern_machinery_product",
-    "file_name": "Southern Machinery Brand Book 2025.pdf",
-    "file_type": "pdf",
-    "pdf_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Southern%20Machinery%20Brand%20Book%202025.pdf"
-    ],
-    "image_links": [],
-    "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Southern%20Machinery%20Brand%20Book%202025.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Product; product model not confidently detected. | Needs manual review: product model not detected",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "S380A",
-    "product_name": "PCB Separator machine operation manual 2023",
-    "category": "southern_machinery_manual",
-    "file_name": "S380A PCB Separator machine operation manual 2023.pdf",
-    "file_type": "manual",
-    "pdf_links": [],
-    "image_links": [],
-    "manual_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S380A%20PCB%20Separator%20machine%20operation%20manual%202023.pdf"
-    ],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S380A%20PCB%20Separator%20machine%20operation%20manual%202023.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "unknown_model",
-    "product_name": "Southern Machinery Smart Storage Rack Operation Manual",
-    "category": "southern_machinery_manual",
-    "file_name": "Southern Machinery Smart Storage Rack Operation Manual.pdf",
-    "file_type": "manual",
-    "pdf_links": [],
-    "image_links": [],
-    "manual_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Southern%20Machinery%20Smart%20Storage%20Rack%20Operation%20Manual.pdf"
-    ],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Southern%20Machinery%20Smart%20Storage%20Rack%20Operation%20Manual.pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Manual; product model not confidently detected. | Needs manual review: product model not detected",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "SIS7000A",
-    "product_name": "Smart Reels Storage Rack Manual (2025 Version)",
-    "category": "southern_machinery_manual",
-    "file_name": "SIS7000A Smart Reels Storage Rack Manual (2025 Version).pdf",
-    "file_type": "manual",
-    "pdf_links": [],
-    "image_links": [],
-    "manual_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SIS7000A%20Smart%20Reels%20Storage%20Rack%20Manual%20(2025%20Version).pdf"
-    ],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SIS7000A%20Smart%20Reels%20Storage%20Rack%20Manual%20(2025%20Version).pdf",
-    "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
-  },
-  {
-    "product_model": "unknown_model",
-    "product_name": "Part list and Electrical diagram",
-    "category": "southern_machinery_manual",
-    "file_name": "Part list and Electrical diagram.pptx",
+    "product_model": "S-4000",
+    "product_name": "Axial Insertion Machine works for Smart EMS THT PCB Assembly Factory cl",
+    "category": "product_landing_page",
+    "file_name": "S-4000 Axial Insertion Machine works for Smart EMS THT PCB Assembly Factory -cl.html",
     "file_type": "document",
     "pdf_links": [],
     "image_links": [],
     "manual_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Part%20list%20and%20Electrical%20diagram.pptx"
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-4000%20Axial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%20-cl.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-4000%20Axial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%20-g.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-4000%20Axial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%20-g3.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-4000%20Axial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%20-g5.html"
     ],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Part%20list%20and%20Electrical%20diagram.pptx",
+    "source_url": "https://file.autoinsertion.com/public/Product%20landing%20Page/S-4000%20Axial%20Insertion%20Machine%20works%20for%20Smart%20EMS%20THT%20PCB%20Assembly%20Factory%20-cl.html",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Manual; product model not confidently detected. | Needs manual review: product model not detected",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /Product landing Page. | Grouped 4 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "unknown_model",
-    "product_name": "dawing2",
-    "category": "southern_machinery_manual",
-    "file_name": "dawing2.pdf",
+    "product_model": "S-680A",
+    "product_name": "SMT Reel Scrap Tape Cutter",
+    "category": "product_landing_page",
+    "file_name": "S-680A SMT Reel Scrap Tape Cutter.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S-680A%20SMT%20Reel%20Scrap%20Tape%20Cutter.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Product%20landing%20Page/S-680A%20SMT%20Reel%20Scrap%20Tape%20Cutter.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Product landing Page.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3010A",
+    "product_name": "Radial Insertion Machine",
+    "category": "product_landing_page",
+    "file_name": "S3010A Radial Insertion  Machine.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S3010A%20Radial%20Insertion%20%20Machine.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Product%20landing%20Page/S3010A%20Radial%20Insertion%20%20Machine.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Product landing Page.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S7900",
+    "product_name": "Odd Form Insertion Solution",
+    "category": "product_landing_page",
+    "file_name": "S7900 Odd Form Insertion Solution.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S7900%20Odd%20Form%20Insertion%20Solution.html",
+      "https://file.autoinsertion.com/public/Product%20landing%20Page/S7900%20Oddform%20Insertion%20machine.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Product%20landing%20Page/S7900%20Odd%20Form%20Insertion%20Solution.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Product landing Page. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-680A",
+    "product_name": "automatic scrap tape cutting machine",
+    "category": "smt_audio",
+    "file_name": "S-680A automatic scrap tape cutting machine.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S-680A%20automatic%20scrap%20tape%20cutting%20machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S-680A%20automatic%20scrap%20tape%20cutting%20machine.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-JVF02",
+    "product_name": "Vibration Stick Feeder RS 1",
+    "category": "smt_audio",
+    "file_name": "S-JVF02 Vibration Stick Feeder RS-1.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S-JVF02%20Vibration%20Stick%20Feeder%20RS-1.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S-JVF02%20Vibration%20Stick%20Feeder%20RS-1.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-WS450",
+    "product_name": "PC Wave Solder machine",
+    "category": "smt_audio",
+    "file_name": "S-WS450 PC Wave Solder machine.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S-WS450%20PC%20Wave%20Solder%20machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S-WS450%20PC%20Wave%20Solder%20machine.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3000",
+    "product_name": "Radial insertion machine",
+    "category": "smt_audio",
+    "file_name": "Radial insertion machine S3000.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/Radial%20insertion%20machine%20S3000.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/Radial%20insertion%20machine%20S3000.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3010A",
+    "product_name": "Radial Insertion Machine",
+    "category": "smt_audio",
+    "file_name": "S3010A Radial Insertion Machine.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S3010A%20Radial%20Insertion%20Machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S3010A%20Radial%20Insertion%20Machine.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3010B",
+    "product_name": "Radial Insertion Machine",
+    "category": "smt_audio",
+    "file_name": "S3010B Radial Insertion Machine.mp3",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S3010B%20Radial%20Insertion%20Machine.mp3"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S3010B%20Radial%20Insertion%20Machine.mp3",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S4000",
+    "product_name": "Axial Insertion machine SMThelp",
+    "category": "smt_audio",
+    "file_name": "S4000 Axial Insertion machine -SMThelp.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S4000%20Axial%20Insertion%20machine%20-SMThelp.wav",
+      "https://file.autoinsertion.com/public/SMT%20Audio/S4000%20Axial%20Insertion%20machine%205min.wav",
+      "https://file.autoinsertion.com/public/SMT%20Audio/S4000%20Axial%20Insertion%20machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S4000%20Axial%20Insertion%20machine%20-SMThelp.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio. | Grouped 3 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S660S",
+    "product_name": "Full Automatic online PCB Separator with Pallet Storage machine",
+    "category": "smt_audio",
+    "file_name": "S660S Full Automatic online PCB Separator with Pallet Storage machine.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S660S%20Full%20Automatic%20online%20PCB%20Separator%20with%20Pallet%20Storage%20machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S660S%20Full%20Automatic%20online%20PCB%20Separator%20with%20Pallet%20Storage%20machine.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S7000",
+    "product_name": "Odd Form Insertion Machine",
+    "category": "smt_audio",
+    "file_name": "S7000 Odd Form Insertion Machine.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/S7000%20Odd%20Form%20Insertion%20Machine.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/S7000%20Odd%20Form%20Insertion%20Machine.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SQX350",
+    "product_name": "High Precision Low Stress PCB Depaneling Southern Machinery PCB Rou",
+    "category": "smt_audio",
+    "file_name": "High-Precision Low-Stress PCB Depaneling Southern Machinery SQX350 PCB Rou.wav",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20Audio/High-Precision%20Low-Stress%20PCB%20Depaneling%20Southern%20Machinery%20SQX350%20PCB%20Rou.wav"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20Audio/High-Precision%20Low-Stress%20PCB%20Depaneling%20Southern%20Machinery%20SQX350%20PCB%20Rou.wav",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT Audio.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "ALD700",
+    "product_name": "SMT AOI 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "SMT AOI ALD700 3D.PDF",
     "file_type": "pdf",
     "pdf_links": [
-      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/dawing2.pdf"
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20AOI%20ALD700%203D.PDF"
     ],
     "image_links": [],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/dawing2.pdf",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20AOI%20ALD700%203D.PDF",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /Southern Machinery Manual; product model not confidently detected. | Needs manual review: product model not detected",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-830",
-    "product_name": "Full Auto Screen Printer",
-    "category": "smthelp_poster",
-    "file_name": "SP-830 Full-Auto Screen Printer.png",
-    "file_type": "image",
-    "pdf_links": [],
-    "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-830%20Full-Auto%20Screen%20Printer.png"
+    "product_model": "BG03",
+    "product_name": "Southern",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "Southern BG03.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/Southern%20BG03.pdf"
     ],
+    "image_links": [],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-830%20Full-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/Southern%20BG03.pdf",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Poster.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-300",
-    "product_name": "Semi Auto Screen Printer",
-    "category": "smthelp_poster",
-    "file_name": "SP-300 Semi-Auto Screen Printer.png",
-    "file_type": "image",
-    "pdf_links": [],
-    "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-300%20Semi-Auto%20Screen%20Printer.png"
+    "product_model": "CN2617-03",
+    "product_name": "SMT JUKI Vacuum nozzle 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "SMT JUKI Vacuum nozzle CN2617-03 3D.PDF",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20JUKI%20Vacuum%20nozzle%20CN2617-03%203D.PDF"
     ],
+    "image_links": [],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-300%20Semi-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SMT%20JUKI%20Vacuum%20nozzle%20CN2617-03%203D.PDF",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Poster.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-1200",
-    "product_name": "Semi Auto Screen Printer",
-    "category": "smthelp_poster",
-    "file_name": "SP-1200 Semi-Auto Screen Printer.png",
-    "file_type": "image",
-    "pdf_links": [],
-    "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-1200%20Semi-Auto%20Screen%20Printer.png"
+    "product_model": "S3010A",
+    "product_name": "+S3020A Radial Insertion machine inline",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "S3010A +S3020A Radial Insertion machine inline.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S3010A%20%2BS3020A%20Radial%20Insertion%20machine%20inline.pdf",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S3010A%20Radial%20insertion%20head%203D.PDF"
     ],
+    "image_links": [],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-1200%20Semi-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S3010A%20%2BS3020A%20Radial%20Insertion%20machine%20inline.pdf",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Poster.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-1008",
-    "product_name": "Full Auto Screen Printer",
-    "category": "smthelp_poster",
-    "file_name": "SP-1008 Full-Auto Screen Printer.png",
-    "file_type": "image",
-    "pdf_links": [],
-    "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-1008%20Full-Auto%20Screen%20Printer.png"
+    "product_model": "S350C",
+    "product_name": "SMThelp 1M Conveyor 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "S350C SMThelp 1M Conveyor 3D.PDF",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S350C%20SMThelp%201M%20Conveyor%203D.PDF"
     ],
+    "image_links": [],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/SP-1008%20Full-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S350C%20SMThelp%201M%20Conveyor%203D.PDF",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Poster.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S7000",
+    "product_name": "Oddform Radial Axial & Tube feeder",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "S7000 Oddform Radial Axial & Tube feeder.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S7000%20Oddform%20Radial%20Axial%20%26%20Tube%20feeder.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/S7000%20Oddform%20Radial%20Axial%20%26%20Tube%20feeder.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SH460D",
+    "product_name": "High end Conveyor 1M nolight 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "SH460D High end Conveyor 1M nolight 3D.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SH460D%20High%20end%20Conveyor%201M%20nolight%203D.pdf",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SH460D%20High%20end%20Conveyor%201M%20nolight.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SH460D%20High%20end%20Conveyor%201M%20nolight%203D.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "UV106CM",
+    "product_name": "SM UV1.6M Curing Oven 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "SM-UV106CM  UV1.6M Curing Oven 3D.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SM-UV106CM%20%20UV1.6M%20Curing%20Oven%203D.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/SM-UV106CM%20%20UV1.6M%20Curing%20Oven%203D.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-460FL",
+    "product_name": "Conveyor machine",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "S-460FL Conveyor machine.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-460FL%20Conveyor%20machine.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-460FL%20Conveyor%20machine.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-7020T",
+    "product_name": "Terminal insertion",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "S-7020T_Terminal_insertion.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-7020T_Terminal_insertion.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-7020T_Terminal_insertion.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-JVF02",
+    "product_name": "stick feeder JUKI RS 1",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "S-JVF02 stick feeder JUKI RS-1.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-JVF02%20stick%20feeder%20JUKI%20RS-1.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-JVF02%20Stick%20Vibration%20Feeder.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-JVF02%20stick%20feeder%20JUKI%20RS-1.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-MVF01",
+    "product_name": "Bulk Feeder",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "Bulk Feeder S-MVF01.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/Bulk%20Feeder%20S-MVF01.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S-MVF01%20Revolutionary%20Bulk%20Feeder.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/Bulk%20Feeder%20S-MVF01.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3000",
+    "product_name": "Radial + S7900 Odd Form Insertion Machine w PCB Loading & magazine",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "S3000 Radial + S7900 Odd Form Insertion Machine w PCB Loading & magazine.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3000%20Radial%20%2B%20S7900%20Odd%20Form%20Insertion%20Machine%20w%20PCB%20Loading%20%26%20magazine.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3000%20Radial%20%2B%20S7900%20Odd%20Form%20Insertion%20Machine%20w%20PCB%20Loading%20%26%20magazine.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S3010A",
+    "product_name": "Radial + S7020T Bowl Terminal Insertion Machine with PCB Magazine loader inloader",
+    "category": "smt_machine_3d_drawing_in_html",
+    "file_name": "S3010A Radial + S7020T Bowl Terminal Insertion Machine with PCB Magazine loader inloader.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20%2B%20S7020T%20Bowl%20Terminal%20Insertion%20Machine%20with%20PCB%20Magazine%20loader%20inloader.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20Insertion%20%2B%20S7020A%20Odd%20Form%20Insertion%20Machine%20with%20PCB%20Magazine%20loader%20inloader.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20Insertion%20machine%20inline%20PCB%20board%20handling%20System.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20Insertion%20Machine%20w%20PCB%20loader%20inloader%201.html",
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20Insertion%20Machine%20w%20PCB%20loader%20inloader.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20Drawing%20in%20Html/S3010A%20Radial%20%2B%20S7020T%20Bowl%20Terminal%20Insertion%20Machine%20with%20PCB%20Magazine%20loader%20inloader.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D Drawing in Html. | Grouped 5 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-6600",
+    "product_name": "Lead Free Reflow Oven",
+    "category": "smthelp_machine_presentation",
+    "file_name": "S-6600 Lead-Free Reflow Oven.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-6600%20Lead-Free%20Reflow%20Oven.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-6600%20Lead-Free%20Reflow%20Oven.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-MVF01",
+    "product_name": "Belt feeder",
+    "category": "smthelp_machine_presentation",
+    "file_name": "S-MVF01 Belt feeder.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-MVF01%20Belt%20feeder.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-MVF01%20Belt%20feeder.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S7900",
+    "product_name": "Precision odd form insertion machine",
+    "category": "smthelp_machine_presentation",
+    "file_name": "Precision_S7900 odd form insertion machine.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/Precision_S7900%20odd%20form%20insertion%20machine.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/Precision_S7900%20odd%20form%20insertion%20machine.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SAF1001",
+    "product_name": "AXIAL TAPE FEEDER TEACH DOCUMENTS",
+    "category": "smthelp_machine_presentation",
+    "file_name": "SAF1001 AXIAL TAPE FEEDER TEACH DOCUMENTS.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SAF1001%20AXIAL%20TAPE%20FEEDER%20TEACH%20DOCUMENTS.pdf",
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SAF1001%20AXIAL%20TAPE%20FEEDER.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SAF1001%20AXIAL%20TAPE%20FEEDER%20TEACH%20DOCUMENTS.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SFY03",
+    "product_name": "Effortless Flexibility for SMT Lines with AGV",
+    "category": "smthelp_machine_presentation",
+    "file_name": "Effortless Flexibility for SMT Lines with SFY03 AGV.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/Effortless%20Flexibility%20for%20SMT%20Lines%20with%20SFY03%20AGV.pdf",
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SFY03%20AGV%20Effortless%20Flexibility%20for%20EMS%20SMT%20Lines.pdf",
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SFY03_Magnetic_AGV_Technical_Handbook.pdf",
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SFY03_Route_Programming_Masterclass.pdf.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/Effortless%20Flexibility%20for%20SMT%20Lines%20with%20SFY03%20AGV.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation. | Grouped 4 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SME-5200",
+    "product_name": "Pallet (Fixture) Cleaning Machine Performance Validation Report",
+    "category": "smthelp_machine_presentation",
+    "file_name": "SME-5200 Pallet (Fixture) Cleaning Machine_Performance_Validation_Report.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SME-5200%20Pallet%20(Fixture)%20Cleaning%20Machine_Performance_Validation_Report.pdf",
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SME-5200_Pallet%20%EF%BC%88Fixture%EF%BC%89%20Cleaning%20Machine%20Installation_Protocol.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SME-5200%20Pallet%20(Fixture)%20Cleaning%20Machine_Performance_Validation_Report.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "UV106CM",
+    "product_name": "SM Automatic UV Curing.pdf",
+    "category": "smthelp_machine_presentation",
+    "file_name": "SM-UV106CM_Automatic_UV_Curing.pdf.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SM-UV106CM_Automatic_UV_Curing.pdf.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SM-UV106CM_Automatic_UV_Curing.pdf.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
     "product_model": "S-350C",
@@ -268,75 +647,593 @@
     "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/S-350C.png",
     "description": "To be confirmed from official document",
     "remarks": "Sample collected from public directory /SMThelp Poster.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "S-350C",
-    "product_name": "S-350C",
-    "category": "smthelp_machine_presentation",
-    "file_name": "S-350C.png",
+    "product_model": "S-JVF02",
+    "product_name": "Quick Setup Guide",
+    "category": "smthelp_poster",
+    "file_name": "S-JVF02_Quick_Setup_Guide.png",
     "file_type": "image",
     "pdf_links": [],
     "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-350C.png"
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S-JVF02_Quick_Setup_Guide.png"
     ],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/S-350C.png",
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/S-JVF02_Quick_Setup_Guide.png",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMThelp Poster.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-300",
-    "product_name": "Semi Auto Screen Printer",
-    "category": "smthelp_machine_presentation",
-    "file_name": "SP-300 Semi-Auto Screen Printer.png",
+    "product_model": "S-MVF01",
+    "product_name": "Reciprocating Belt Feeder 1",
+    "category": "smthelp_poster",
+    "file_name": "S-MVF01 Reciprocating Belt Feeder 1.png",
     "file_type": "image",
     "pdf_links": [],
     "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-300%20Semi-Auto%20Screen%20Printer.png"
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S-MVF01%20Reciprocating%20Belt%20Feeder%201.png",
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S-MVF01%20Reciprocating%20Belt%20Feeder%202.png",
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S-MVF01%20Reciprocating%20Belt%20Feeder%203.png"
     ],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-300%20Semi-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/S-MVF01%20Reciprocating%20Belt%20Feeder%201.png",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMThelp Poster. | Grouped 3 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-1200",
-    "product_name": "Semi Auto Screen Printer",
-    "category": "smthelp_machine_presentation",
-    "file_name": "SP-1200 Semi-Auto Screen Printer.png",
+    "product_model": "S7900",
+    "product_name": "odd form inserter",
+    "category": "smthelp_poster",
+    "file_name": "S7900 odd form inserter.png",
     "file_type": "image",
     "pdf_links": [],
     "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-1200%20Semi-Auto%20Screen%20Printer.png"
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S7900%20odd%20form%20inserter.png",
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/S7900%20odd%20form%20insertion%20machine.png"
     ],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-1200%20Semi-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/S7900%20odd%20form%20inserter.png",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMThelp Poster. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   },
   {
-    "product_model": "SP-1008",
-    "product_name": "Full Auto Screen Printer",
-    "category": "smthelp_machine_presentation",
-    "file_name": "SP-1008 Full-Auto Screen Printer.png",
+    "product_model": "SFY03",
+    "product_name": "Effortless Flexibility for SMT Lines with AGV",
+    "category": "smthelp_poster",
+    "file_name": "Effortless Flexibility for SMT Lines with SFY03 AGV.png",
     "file_type": "image",
     "pdf_links": [],
     "image_links": [
-      "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-1008%20Full-Auto%20Screen%20Printer.png"
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/Effortless%20Flexibility%20for%20SMT%20Lines%20with%20SFY03%20AGV.png",
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/SFY03%20AGV%20Route%20Programming%20Technician's%20Guide.png"
     ],
     "manual_links": [],
-    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Machine%20Presentation/SP-1008%20Full-Auto%20Screen%20Printer.png",
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/Effortless%20Flexibility%20for%20SMT%20Lines%20with%20SFY03%20AGV.png",
     "description": "To be confirmed from official document",
-    "remarks": "Sample collected from public directory /SMThelp Machine Presentation.",
-    "created_at": "2026-05-15T01:08:08.316Z",
-    "updated_at": "2026-05-15T01:08:08.316Z"
+    "remarks": "Sample collected from public directory /SMThelp Poster. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SME-5200",
+    "product_name": "Installation Guide 00",
+    "category": "smthelp_poster",
+    "file_name": "SME-5200_Installation_Guide_00.png",
+    "file_type": "image",
+    "pdf_links": [],
+    "image_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/SME-5200_Installation_Guide_00.png"
+    ],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/SME-5200_Installation_Guide_00.png",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Poster.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "UV106",
+    "product_name": "High Performance EMS Curing Solution SM",
+    "category": "smthelp_poster",
+    "file_name": "High-Performance EMS Curing Solution SM-UV106.png",
+    "file_type": "image",
+    "pdf_links": [],
+    "image_links": [
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/High-Performance%20EMS%20Curing%20Solution%20SM-UV106.png",
+      "https://file.autoinsertion.com/public/SMThelp%20Poster/SM-UV106%20High-Performance%20EMS%20Curing%20Solution.png"
+    ],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMThelp%20Poster/High-Performance%20EMS%20Curing%20Solution%20SM-UV106.png",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMThelp Poster. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-168",
+    "product_name": "automatic PCBA brush cleaning machine",
+    "category": "southern_machinery_manual",
+    "file_name": "S-168 automatic PCBA brush cleaning machine.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-168%20automatic%20PCBA%20brush%20cleaning%20machine.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-168%20automatic%20PCBA%20brush%20cleaning%20machine.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-300",
+    "product_name": "Screen Printer introductions",
+    "category": "southern_machinery_manual",
+    "file_name": "S-300 Screen Printer introductions.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-300%20Screen%20Printer%20introductions.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-300%20Screen%20Printer%20introductions.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-6600",
+    "product_name": "PC Reflow Oven",
+    "category": "southern_machinery_manual",
+    "file_name": "S-6600-PC Reflow  Oven.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-6600-PC%20Reflow%20%20Oven.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-6600-PC%20Reflow%20%20Oven.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-680A",
+    "product_name": "automatic scrap tape cutting machine",
+    "category": "southern_machinery_manual",
+    "file_name": "S-680A automatic scrap tape cutting machine.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-680A%20automatic%20scrap%20tape%20cutting%20machine.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-680A%20automatic%20scrap%20tape%20cutting%20machine.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-700",
+    "product_name": "Manual outside type vacuum sealing machine",
+    "category": "southern_machinery_manual",
+    "file_name": "Manual -S-700 outside type vacuum sealing machine.pdf",
+    "file_type": "manual",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Manual%20-S-700%20outside%20type%20vacuum%20sealing%20machine.pdf"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Manual%20-S-700%20outside%20type%20vacuum%20sealing%20machine.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-JVF02",
+    "product_name": "Product Manual VIBE feeder",
+    "category": "southern_machinery_manual",
+    "file_name": "Product Manual S-JVF02 VIBE feeder.pdf",
+    "file_type": "manual",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Product%20Manual%20S-JVF02%20VIBE%20feeder.pdf",
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Product-Manual-S-JVF02-VIBE-feeder.pdf"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/Product%20Manual%20S-JVF02%20VIBE%20feeder.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-RF2001",
+    "product_name": "Radial tape feeder Introduction & part list of JM tape feeder",
+    "category": "southern_machinery_manual",
+    "file_name": "S-RF2001 Radial tape feeder Introduction & part list of JM tape feeder.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-RF2001%20Radial%20tape%20feeder%20Introduction%20%26%20part%C2%A0list%C2%A0of%C2%A0JM%C2%A0tape%C2%A0feeder.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-RF2001%20Radial%20tape%20feeder%20Introduction%20%26%20part%C2%A0list%C2%A0of%C2%A0JM%C2%A0tape%C2%A0feeder.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-RO200",
+    "product_name": "Reflow Oven",
+    "category": "southern_machinery_manual",
+    "file_name": "S-RO200 Reflow  Oven.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-RO200%20Reflow%20%20Oven.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-RO200%20Reflow%20%20Oven.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-WS450A",
+    "product_name": "Wave solder installation and adjust using step",
+    "category": "southern_machinery_manual",
+    "file_name": "S-WS450A Wave solder installation and adjust using step.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-WS450A%20Wave%20solder%20installation%20and%20adjust%20using%20step.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/S-WS450A%20Wave%20solder%20installation%20and%20adjust%20using%20step.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SBI330",
+    "product_name": "Aotumatic Flipping Machine",
+    "category": "southern_machinery_manual",
+    "file_name": "SBI330 Aotumatic Flipping Machine.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SBI330%20Aotumatic%20Flipping%20Machine.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SBI330%20Aotumatic%20Flipping%20Machine.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SCN250",
+    "product_name": "90° Turning Conveyor",
+    "category": "southern_machinery_manual",
+    "file_name": "SCN250 90° Turning Conveyor.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SCN250%2090%C2%B0%20Turning%20Conveyor.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Manual/SCN250%2090%C2%B0%20Turning%20Conveyor.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Manual.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "AC510",
+    "product_name": "PCBA Batch Type Cleaning machine Introduction 2023",
+    "category": "southern_machinery_product",
+    "file_name": "AC510 PCBA Batch Type Cleaning machine Introduction--2023.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AC510%20PCBA%20Batch%20Type%20Cleaning%20machine%20Introduction--2023.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AC510%20PCBA%20Batch%20Type%20Cleaning%20machine%20Introduction--2023.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "ADL100",
+    "product_name": "X Ray SMD Counter",
+    "category": "southern_machinery_product",
+    "file_name": "ADL100_X-Ray_SMD_Counter.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/ADL100_X-Ray_SMD_Counter.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/ADL100_X-Ray_SMD_Counter.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "BC320",
+    "product_name": "Stencil Cleaning Machine Introduction 2023",
+    "category": "southern_machinery_product",
+    "file_name": "BC320 Stencil Cleaning Machine Introduction 2023.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/BC320%20Stencil%20Cleaning%20Machine%20Introduction%202023.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/BC320%20Stencil%20Cleaning%20Machine%20Introduction%202023.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "BF200L",
+    "product_name": "LED Lens Vibratory Bowl Feeder",
+    "category": "southern_machinery_product",
+    "file_name": "BF200L LED Lens Vibratory Bowl Feeder.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/BF200L%20LED%20Lens%20Vibratory%20Bowl%20Feeder.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/BF200L%20LED%20Lens%20Vibratory%20Bowl%20Feeder.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-3516",
+    "product_name": "computer wire stripping machine Introduction",
+    "category": "southern_machinery_product",
+    "file_name": "S-3516 computer wire stripping machine Introduction.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S-3516%20computer%20wire%20stripping%20machine/S-3516%20computer%20wire%20stripping%20machine%20Introduction.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S-3516%20computer%20wire%20stripping%20machine/Instructions%20for%20S-3516%20computer%20wire%20stripping%20machine.pdf"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/S-3516%20computer%20wire%20stripping%20machine/S-3516%20computer%20wire%20stripping%20machine%20Introduction.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product/S-3516 computer wire stripping machine. | Grouped 2 sample files under the same product_model + category",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-400T",
+    "product_name": "Automatic Laser Marking Machine",
+    "category": "southern_machinery_product",
+    "file_name": "Automatic Laser Marking Machine S-400T.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Automatic%20Laser%20Marking%20Machine%20S-400T.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Automatic%20Laser%20Marking%20Machine%20S-400T.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-5006",
+    "product_name": "Auto lead cutter machine",
+    "category": "southern_machinery_product",
+    "file_name": "Auto lead cutter machine S-5006.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Auto%C2%A0lead%C2%A0cutter%C2%A0machine%C2%A0S-5006.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Auto%C2%A0lead%C2%A0cutter%C2%A0machine%C2%A0S-5006.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-6600",
+    "product_name": "Lead Free Reflow Oven",
+    "category": "southern_machinery_product",
+    "file_name": "Lead-Free Reflow Oven S-6600.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Lead-Free%20Reflow%20Oven%20S-6600.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Lead-Free%20Reflow%20Oven%20S-6600.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-8800",
+    "product_name": "Lead Free 8 +2 zones Reflow Oven",
+    "category": "southern_machinery_product",
+    "file_name": "Lead-Free 8 +2 zones Reflow Oven S-8800.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Lead-Free%208%20%2B2%20zones%20Reflow%20Oven%20S-8800.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Lead-Free%208%20%2B2%20zones%20Reflow%20Oven%20S-8800.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S-AO600C",
+    "product_name": "AOI machine",
+    "category": "southern_machinery_product",
+    "file_name": "AOI machine S-AO600C.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AOI%20machine%20S-AO600C.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AOI%20machine%20S-AO600C.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S300AS",
+    "product_name": "Horizontal version Desktop PCB Router Separator",
+    "category": "southern_machinery_product",
+    "file_name": "Horizontal version S300AS Desktop PCB Router Separator.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Horizontal%20version%20S300AS%20Desktop%20PCB%20Router%20Separator.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Horizontal%20version%20S300AS%20Desktop%20PCB%20Router%20Separator.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "S4000",
+    "product_name": "AXIAL INSERTER",
+    "category": "southern_machinery_product",
+    "file_name": "AXIAL INSERTER S4000.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AXIAL%20INSERTER%20S4000.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/AXIAL%20INSERTER%20S4000.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SAF1001",
+    "product_name": "Axial tape feeder",
+    "category": "southern_machinery_product",
+    "file_name": "Axial tape feeder SAF1001.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Axial%20tape%20feeder%20SAF1001.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Axial%20tape%20feeder%20SAF1001.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "SLF100X",
+    "product_name": "Label Feeder",
+    "category": "southern_machinery_product",
+    "file_name": "Label Feeder-SLF100X.pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Label%20Feeder-SLF100X.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/Southern%20Machinery%20Product/Label%20Feeder-SLF100X.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /Southern Machinery Product.",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "unknown_model",
+    "product_name": "tool THT Knowledge Chatbots",
+    "category": "root",
+    "file_name": "tool_THT Knowledge Chatbots.html",
+    "file_type": "document",
+    "pdf_links": [],
+    "image_links": [],
+    "manual_links": [
+      "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html"
+    ],
+    "source_url": "https://file.autoinsertion.com/public/tool_THT%20Knowledge%20Chatbots.html",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /; product model not confidently detected. | Needs manual review: product model not detected",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "unknown_model",
+    "product_name": "0.8M conveyor w cooling fan 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "0.8M conveyor w cooling fan 3D.PDF",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/0.8M%20conveyor%20w%20cooling%20fan%203D.PDF"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/0.8M%20conveyor%20w%20cooling%20fan%203D.PDF",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
+  },
+  {
+    "product_model": "unknown_model",
+    "product_name": "2 Side Dual Table & Head Screw Drive 3D",
+    "category": "smt_machine_3d_drawing",
+    "file_name": "2 Side Dual Table & Head Screw Drive 3D .pdf",
+    "file_type": "pdf",
+    "pdf_links": [
+      "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/2%20Side%20Dual%20Table%20%26%20Head%20Screw%20Drive%203D%20.pdf"
+    ],
+    "image_links": [],
+    "manual_links": [],
+    "source_url": "https://file.autoinsertion.com/public/SMT%20machine%203D%20drawing/2%20Side%20Dual%20Table%20%26%20Head%20Screw%20Drive%203D%20.pdf",
+    "description": "To be confirmed from official document",
+    "remarks": "Sample collected from public directory /SMT machine 3D drawing; product model not confidently detected. | Needs manual review: product model not detected",
+    "created_at": "2026-05-15T03:40:57.036Z",
+    "updated_at": "2026-05-15T03:40:57.036Z"
   }
 ]
