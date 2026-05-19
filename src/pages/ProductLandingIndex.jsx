@@ -39,6 +39,8 @@ function buildLandingIndexEntries(assets) {
       pdfCount: flattenUniqueLinks(publicAssets, "pdf_links").length,
       imageCount: flattenUniqueLinks(publicAssets, "image_links").length,
       documentCount: flattenUniqueLinks(publicAssets, "manual_links").length,
+      previewImage: flattenUniqueLinks(publicAssets, "image_links")[0] || "",
+      hasPublicImages: flattenUniqueLinks(publicAssets, "image_links").length > 0,
       internalReviewCount: internalReviewAssets.length,
       hiddenCount: hiddenAssets.length
     };
@@ -151,6 +153,26 @@ export function ProductLandingIndex({
             className: "landing-index-card",
             key: entry.slug
           },
+          entry.hasPublicImages
+            ? h(
+                "div",
+                { className: "landing-index-visual landing-index-visual-ready" },
+                entry.previewImage
+                  ? h("img", {
+                      src: entry.previewImage,
+                      alt: `${entry.title} preview`
+                    })
+                  : null,
+                h("span", { className: "landing-index-visual-kicker" }, "Product visual"),
+                h("strong", null, "Public image available")
+              )
+            : h(
+                "div",
+                { className: "landing-index-visual landing-index-visual-pending" },
+                h("div", { className: "landing-index-visual-frame" }),
+                h("span", { className: "landing-index-visual-kicker" }, "Visual pending"),
+                h("strong", null, "Documents available")
+              ),
           h("p", { className: "landing-index-model" }, entry.model),
           h("h2", { className: "landing-index-card-title" }, entry.title),
           h("p", { className: "landing-index-category" }, entry.categoryLabel),

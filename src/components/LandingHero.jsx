@@ -6,6 +6,10 @@ export function LandingHero({
   subtitle,
   introduction,
   previewImage,
+  previewImages,
+  selectedImage,
+  onSelectPreviewImage,
+  hasDocuments,
   assetSummary,
   onRequestQuotation,
   onSendInquiry,
@@ -65,16 +69,58 @@ export function LandingHero({
       "div",
       { className: "landing-hero-preview" },
       previewImage
-        ? h("img", {
-            src: previewImage,
-            alt: `${title} preview`
-          })
+        ? h(
+            "div",
+            { className: "landing-hero-preview-media" },
+            h("img", {
+              src: previewImage,
+              alt: `${title} preview`
+            })
+          )
         : h(
             "div",
             { className: "landing-image-placeholder" },
-            h("span", { className: "landing-placeholder-kicker" }, "Product Visual"),
-            h("strong", null, "Image to be confirmed")
+            h(
+              "div",
+              { className: "landing-image-placeholder-visual" },
+              h("div", { className: "landing-image-placeholder-frame" }),
+              h("div", { className: "landing-image-placeholder-line line-one" }),
+              h("div", { className: "landing-image-placeholder-line line-two" }),
+              h("div", { className: "landing-image-placeholder-line line-three" })
+            ),
+            h("span", { className: "landing-placeholder-kicker" }, "Product visual pending"),
+            h("strong", null, "Image to be confirmed"),
+            h(
+              "p",
+              { className: "landing-placeholder-note" },
+              hasDocuments
+                ? "Available documents can be reviewed below"
+                : "Available public product visuals are still to be confirmed"
+            )
           ),
+      Array.isArray(previewImages) && previewImages.length > 1
+        ? h(
+            "div",
+            { className: "landing-thumbnail-strip" },
+            ...previewImages.map((imageLink, index) =>
+              h(
+                "button",
+                {
+                  type: "button",
+                  className: `landing-thumbnail-button${
+                    imageLink === selectedImage ? " active" : ""
+                  }`,
+                  key: `${imageLink}-${index}`,
+                  onClick: () => onSelectPreviewImage(imageLink)
+                },
+                h("img", {
+                  src: imageLink,
+                  alt: `${title} thumbnail ${index + 1}`
+                })
+              )
+            )
+          )
+        : null,
       h(
         "div",
         { className: "landing-summary-panel" },

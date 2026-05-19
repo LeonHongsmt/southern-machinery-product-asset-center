@@ -81,7 +81,6 @@ function scrollToAssets(event) {
 
 function renderResourceColumn(title, links, label, type) {
   const h = React.createElement;
-
   return h(
     "div",
     { className: "landing-resource-column", key: title },
@@ -113,6 +112,83 @@ function renderResourceColumn(title, links, label, type) {
           )
         )
       : h("p", { className: "landing-muted" }, "To be confirmed")
+  );
+}
+
+function renderImageGallery(links, selectedImage, onSelectImage) {
+  const h = React.createElement;
+
+  if (!links.length) {
+    return h(
+      "div",
+      { className: "landing-empty-resource-card" },
+      h(
+        "p",
+        { className: "landing-muted" },
+        "Product images are not yet available in the public asset set."
+      ),
+      h(
+        "p",
+        { className: "landing-resource-support" },
+        "Available documents can still be reviewed for product context."
+      )
+    );
+  }
+
+  return h(
+    "div",
+    { className: "landing-image-gallery" },
+    ...links.map((link, index) => {
+      const isActive = link === selectedImage;
+
+      return h(
+        "article",
+        {
+          className: `landing-image-card${isActive ? " active" : ""}`,
+          key: `landing-image-${link}`
+        },
+        h(
+          "button",
+          {
+            type: "button",
+            className: "landing-image-card-preview",
+            onClick: () => onSelectImage(link)
+          },
+          h("img", {
+            src: link,
+            alt: `Product image ${index + 1}`
+          })
+        ),
+        h(
+          "div",
+          { className: "landing-image-card-footer" },
+          h("span", { className: "landing-image-card-label" }, `Image ${index + 1}`),
+          h(
+            "div",
+            { className: "landing-image-card-actions" },
+            h(
+              "button",
+              {
+                type: "button",
+                className: "landing-image-select",
+                onClick: () => onSelectImage(link)
+              },
+              isActive ? "Current Hero Image" : "Set as Hero Image"
+            ),
+            h(
+              "a",
+              {
+                href: link,
+                target: "_blank",
+                rel: "noreferrer",
+                className: "landing-resource-link landing-image-open-link"
+              },
+              "Open Image"
+            )
+          )
+        )
+      );
+    })
   );
 }
 
@@ -156,6 +232,13 @@ export function ProductLandingPage({
   const imageLinks = flattenLinks(displayAssets, "image_links");
   const documentLinks = flattenLinks(displayAssets, "manual_links");
   const sourceUrls = uniqueStrings(displayAssets.map((asset) => asset.source_url));
+  const [selectedImage, setSelectedImage] = React.useState(previewImage);
+  React.useEffect(() => {
+    setSelectedImage(previewImage);
+  }, [previewImage]);
+  const activePreviewImage = selectedImage || previewImage;
+  const hasPreviewImage = Boolean(activePreviewImage);
+  const hasDocuments = pdfLinks.length > 0 || documentLinks.length > 0;
   const landingContent = getProductLandingContent({
     productSlug,
     displayModel,
@@ -262,7 +345,11 @@ export function ProductLandingPage({
       title: landingContent.title,
       subtitle: marketingCopy.subtitle,
       introduction: landingContent.introduction,
-      previewImage,
+      previewImage: activePreviewImage,
+      previewImages: imageLinks,
+      selectedImage: activePreviewImage,
+      onSelectPreviewImage: setSelectedImage,
+      hasDocuments,
       assetSummary,
       onRequestQuotation: (event) => openMailto(event, landingContent.title, "quotation"),
       onSendInquiry: (event) => openMailto(event, landingContent.title, "inquiry"),
@@ -354,7 +441,12 @@ export function ProductLandingPage({
           "div",
           { className: "landing-assets-grid" },
           renderResourceColumn("PDF Links", pdfLinks, "Download PDF", "pdf"),
-          renderResourceColumn("Image Links", imageLinks, "Open Image", "image"),
+          h(
+            "div",
+            { className: "landing-resource-column", key: "Image Links" },
+            h("h3", null, "Image Links"),
+            renderImageGallery(imageLinks, activePreviewImage, setSelectedImage)
+          ),
           renderResourceColumn(
             "Manual / Document Links",
             documentLinks,
@@ -366,8 +458,8 @@ export function ProductLandingPage({
         h(
           "div",
           { className: "landing-asset-visual" },
-          previewImage
-            ? h("img", { src: previewImage, alt: `${displayModel} asset preview` })
+          activePreviewImage
+            ? h("img", { src: activePreviewImage, alt: `${displayModel} asset preview` })
             : h(
                 "div",
                 { className: "landing-image-placeholder compact" },
@@ -375,6 +467,13 @@ export function ProductLandingPage({
                 h("strong", null, "Image to be confirmed")
               )
         ),
+        !hasPreviewImage
+          ? h(
+              "p",
+              { className: "landing-image-status-note" },
+              "Product images are not yet available in the public asset set. Available documents can still be reviewed for product context."
+            )
+          : null,
         excludedAssets.length
           ? h(
               "p",
@@ -425,7 +524,14 @@ export function ProductLandingPage({
             "p",
             null,
             marketingCopy.ctaNote
-          )
+          ),
+          !hasPreviewImage
+            ? h(
+                "p",
+                { className: "landing-cta-support-note" },
+                "Product images and final configuration visuals can be confirmed by the Southern Machinery sales team."
+              )
+            : null
         ),
         h(
           "div",

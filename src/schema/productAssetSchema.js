@@ -1,7 +1,7 @@
 // 产品资料字段定义。
 // 这里描述的是“单条产品资料记录”的最小结构，不依赖任何第三方库。
 
-const ALLOWED_FILE_TYPES = ["pdf", "image", "manual", "document", "other"];
+const ALLOWED_FILE_TYPES = ["pdf", "image", "manual", "document", "audio", "other"];
 
 const productAssetSchema = {
   // 产品型号。允许为 unknown_model，表示当前资料还无法识别准确型号。
